@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppConfig } from './app.config';
 import { DatabaseConfig } from './database.config';
+import { AuthConfig } from './auth.config';
 
 @Injectable()
 export class AppConfigService {
@@ -13,6 +14,10 @@ export class AppConfigService {
 
   get database(): DatabaseConfig {
     return this.configService.get<DatabaseConfig>('database')!;
+  }
+
+  get auth(): AuthConfig {
+    return this.configService.get<AuthConfig>('auth')!;
   }
 
   get isDevelopment(): boolean {
