@@ -4,13 +4,19 @@ export class DatabaseService {
   private static instance: DatabaseService;
   private prisma: PrismaClient;
 
-  private constructor() {
-    this.prisma = new PrismaClient();
+  private constructor(databaseUrl?: string) {
+    this.prisma = new PrismaClient({
+      datasources: {
+        db: {
+          url: databaseUrl || process.env.DATABASE_URL,
+        },
+      },
+    });
   }
 
-  public static getInstance(): DatabaseService {
+  public static getInstance(databaseUrl: string): DatabaseService {
     if (!DatabaseService.instance) {
-      DatabaseService.instance = new DatabaseService();
+      DatabaseService.instance = new DatabaseService(databaseUrl);
     }
     return DatabaseService.instance;
   }
