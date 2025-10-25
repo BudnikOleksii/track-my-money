@@ -1,28 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Configuration } from './configuration.schema';
+import { AppConfig } from './app.config';
+import { DatabaseConfig } from './database.config';
 
 @Injectable()
 export class AppConfigService {
-  constructor(private configService: ConfigService<Configuration>) {}
+  constructor(private configService: ConfigService) {}
 
-  get app() {
-    return this.configService.get('app', { infer: true })!;
+  get app(): AppConfig {
+    return this.configService.get<AppConfig>('app')!;
   }
 
-  get database() {
-    return this.configService.get('database', { infer: true })!;
+  get database(): DatabaseConfig {
+    return this.configService.get<DatabaseConfig>('database')!;
   }
 
-  get isDevelopment() {
+  get isDevelopment(): boolean {
     return this.app.nodeEnv === 'development';
   }
 
-  get isProduction() {
+  get isProduction(): boolean {
     return this.app.nodeEnv === 'production';
   }
 
-  get isTest() {
+  get isTest(): boolean {
     return this.app.nodeEnv === 'test';
   }
 }
