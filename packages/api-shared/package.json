@@ -1,5 +1,5 @@
 {
-  "name": "@repo/api",
+  "name": "@track-my-money/api-shared",
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
@@ -30,11 +30,11 @@
     "@nestjs/mapped-types": "*"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22.10.7",
-    "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.2",
+    "@track-my-money/eslint-config": "workspace:*",
+    "@track-my-money/typescript-config": "workspace:*",
+    "@types/node": "22.18.12",
+    "ts-loader": "9.5.4",
+    "ts-node": "10.9.2",
     "typescript": "5.5.4"
   }
 }
