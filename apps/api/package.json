@@ -12,15 +12,16 @@
     "test:watch": "jest --watch",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
   },
   "dependencies": {
     "@nestjs/common": "11.1.7",
     "@nestjs/core": "11.1.7",
     "@nestjs/platform-express": "11.1.7",
-    "@prisma/client": "^6.18.0",
     "@track-my-money/api-shared": "workspace:*",
-    "prisma": "^6.18.0",
+    "@track-my-money/database": "workspace:*",
+    "@types/bcrypt": "6.0.0",
+    "bcrypt": "6.0.0",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2"
   },

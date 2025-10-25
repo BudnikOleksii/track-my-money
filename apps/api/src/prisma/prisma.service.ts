@@ -1,16 +1,23 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { DatabaseService } from '@track-my-money/database';
 
 @Injectable()
-export class PrismaService
-  extends PrismaClient
-  implements OnModuleInit, OnModuleDestroy
-{
+export class PrismaService implements OnModuleInit, OnModuleDestroy {
+  private databaseService: DatabaseService;
+
+  constructor() {
+    this.databaseService = DatabaseService.getInstance();
+  }
+
+  get client() {
+    return this.databaseService.client;
+  }
+
   async onModuleInit() {
-    await this.$connect();
+    await this.databaseService.connect();
   }
 
   async onModuleDestroy() {
-    await this.$disconnect();
+    await this.databaseService.disconnect();
   }
 }
