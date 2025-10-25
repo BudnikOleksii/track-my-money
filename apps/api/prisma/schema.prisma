@@ -1,0 +1,193 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+  JPY
+  CAD
+  AUD
+  CHF
+  CNY
+  SEK
+  NOK
+  DKK
+  PLN
+  CZK
+  HUF
+  RON
+  BGN
+  HRK
+  RUB
+  BRL
+  MXN
+  INR
+  KRW
+  SGD
+  HKD
+  NZD
+  ZAR
+  TRY
+  ILS
+  AED
+  SAR
+  QAR
+  KWD
+  BHD
+  OMR
+  JOD
+  LBP
+  EGP
+  MAD
+  TND
+  DZD
+  LYD
+  SDG
+  ETB
+  KES
+  UGX
+  TZS
+  ZMW
+  BWP
+  SZL
+  LSL
+  NAD
+  MUR
+  SCR
+  KMF
+  DJF
+  ERN
+  SOS
+  SSP
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String
+  name          String
+  role          UserRole @default(USER)
+  isEmailVerified Boolean @default(false)
+  country       String?
+  ipAddress     String?
+  baseCurrency  Currency @default(USD)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  transactions Transaction[]
+  categories   Category[]
+  refreshTokens RefreshToken[]
+  activationLinks ActivationLink[]
+
+  // Indexes
+  @@index([email])
+  @@map("users")
+}
+
+model Category {
+  id               String       @id @default(uuid())
+  name             String
+  type             TransactionType
+  userId           String
+  parentCategoryId String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  // Relations
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions     Transaction[] @relation("TransactionCategory")
+  subcategoryTransactions Transaction[] @relation("TransactionSubcategory")
+  parentCategory   Category?     @relation("CategoryHierarchy", fields: [parentCategoryId], references: [id])
+  subcategories    Category[]    @relation("CategoryHierarchy")
+
+  // Indexes
+  @@index([userId])
+  @@index([userId, type])
+  @@map("categories")
+}
+
+model Transaction {
+  id            String          @id @default(uuid())
+  amount        Decimal         @db.Decimal(10, 2)
+  date          DateTime
+  description   String
+  note          String?
+  currency      Currency        @default(USD)
+  type          TransactionType
+  userId        String
+  categoryId    String
+  subcategoryId String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category    Category  @relation("TransactionCategory", fields: [categoryId], references: [id])
+  subcategory Category? @relation("TransactionSubcategory", fields: [subcategoryId], references: [id])
+
+  // Indexes
+  @@index([userId])
+  @@index([date])
+  @@index([userId, date])
+  @@map("transactions")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  deviceInfo String?
+  ipAddress String?
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+  @@map("refresh_tokens")
+}
+
+model ActivationLink {
+  id        String   @id @default(uuid())
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("activation_links")
+}
