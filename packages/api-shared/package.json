@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "pnpm build --watch",
     "build": "tsc -b -v",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "type-check": "tsc --noEmit --incremental false"
   },
   "main": "./dist/entry.js",
   "types": "./dist/entry.d.ts",
@@ -28,6 +30,7 @@
   },
   "dependencies": {
     "@nestjs/mapped-types": "*",
+    "@track-my-money/database": "workspace:*",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.2"
   },

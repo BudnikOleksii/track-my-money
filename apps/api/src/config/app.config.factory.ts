@@ -1,4 +1,5 @@
 import { registerAs } from '@nestjs/config';
+
 import { AppConfig, appConfigSchema, Environment } from './app.config';
 
 const configValues: Partial<AppConfig> = {

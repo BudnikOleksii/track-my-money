@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
+
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { AuthRepository } from './auth.repository';
@@ -15,7 +16,11 @@ import { AuthConfig } from '../config/auth.config';
     PassportModule,
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => {
-        const authConfig = configService.get<AuthConfig>('auth')!;
+        const authConfig = configService.get<AuthConfig>('auth');
+        if (!authConfig) {
+          throw new Error('Auth configuration is not available');
+        }
+
         return {
           secret: authConfig.jwtAccessSecret,
           signOptions: { expiresIn: authConfig.jwtAccessExpiresIn },

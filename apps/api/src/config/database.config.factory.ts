@@ -1,4 +1,5 @@
 import { registerAs } from '@nestjs/config';
+
 import { DatabaseConfig, databaseConfigSchema } from './database.config';
 
 const configValues: Partial<DatabaseConfig> = {

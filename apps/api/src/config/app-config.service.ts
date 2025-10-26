@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { AppConfig } from './app.config';
 import { DatabaseConfig } from './database.config';
 import { AuthConfig } from './auth.config';
@@ -9,15 +10,30 @@ export class AppConfigService {
   constructor(private configService: ConfigService) {}
 
   get app(): AppConfig {
-    return this.configService.get<AppConfig>('app')!;
+    const config = this.configService.get<AppConfig>('app');
+    if (!config) {
+      throw new Error('App configuration is not available');
+    }
+
+    return config;
   }
 
   get database(): DatabaseConfig {
-    return this.configService.get<DatabaseConfig>('database')!;
+    const config = this.configService.get<DatabaseConfig>('database');
+    if (!config) {
+      throw new Error('Database configuration is not available');
+    }
+
+    return config;
   }
 
   get auth(): AuthConfig {
-    return this.configService.get<AuthConfig>('auth')!;
+    const config = this.configService.get<AuthConfig>('auth');
+    if (!config) {
+      throw new Error('Auth configuration is not available');
+    }
+
+    return config;
   }
 
   get isDevelopment(): boolean {

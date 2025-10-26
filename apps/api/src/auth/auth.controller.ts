@@ -5,16 +5,11 @@ import {
   Body,
   Param,
   UseGuards,
-  Req,
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
-import { Request } from 'express';
-import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { Public } from './decorators/public.decorator';
-import { CurrentUser } from './decorators/current-user.decorator';
+
 import {
   SignupDto,
   LoginDto,
@@ -22,6 +17,11 @@ import {
   AuthResponseDto,
   UserEntity,
 } from '@track-my-money/api-shared';
+
+import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { Public } from './decorators/public.decorator';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -60,7 +60,8 @@ export class AuthController {
     @Body() refreshTokenDto: RefreshTokenDto,
   ): Promise<{ message: string }> {
     await this.authService.logout(user.id, refreshTokenDto.refreshToken);
-    return { message: 'Logged out successfully' };
+    
+return { message: 'Logged out successfully' };
   }
 
   @UseGuards(JwtAuthGuard)
@@ -70,7 +71,8 @@ export class AuthController {
     @CurrentUser() user: UserEntity,
   ): Promise<{ message: string }> {
     await this.authService.logoutAll(user.id);
-    return { message: 'Logged out from all devices successfully' };
+    
+return { message: 'Logged out from all devices successfully' };
   }
 
   @UseGuards(JwtAuthGuard)
@@ -86,7 +88,8 @@ export class AuthController {
     @Param('activationLinkId') activationLinkId: string,
   ): Promise<{ message: string }> {
     await this.authService.verifyEmail(activationLinkId);
-    return { message: 'Email verified successfully' };
+    
+return { message: 'Email verified successfully' };
   }
 
   @UseGuards(JwtAuthGuard)
@@ -97,6 +100,7 @@ export class AuthController {
     @CurrentUser() user: UserEntity,
   ): Promise<{ message: string }> {
     await this.authService.resendActivationLink(user.id);
-    return { message: 'Activation link sent successfully' };
+    
+return { message: 'Activation link sent successfully' };
   }
 }
