@@ -97,7 +97,7 @@ const TransactionList = ({ transactions }: TransactionListProps) => {
                   )}
                 >
                   {transaction.type === 'INCOME' ? '+' : '-'}$
-                  {transaction.amount.toFixed(2)}
+                  {transaction.amount}
                 </span>
               </TableCell>
               <TableCell className="max-w-xs truncate">

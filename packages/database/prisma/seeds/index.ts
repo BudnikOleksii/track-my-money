@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
 import { createSuperAdminUser } from './user.seed';
 import { createCategories } from './category.seed';
 import { createTransactions } from './transaction.seed';
 import { loadTransactionData } from './data-loader';
+import { PrismaClient } from '../../src';
 
 const prisma = new PrismaClient();
 
