@@ -13,7 +13,6 @@
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:reset": "prisma migrate reset",
     "prisma:studio": "prisma studio",
-    "prisma:seed": "node -r ts-node/register prisma/seeds/index.ts",
     "db:seed": "prisma db seed"
   },
   "dependencies": {
@@ -24,10 +23,10 @@
     "@track-my-money/typescript-config": "workspace:*",
     "@types/bcrypt": "6.0.0",
     "@types/node": "22.18.12",
+    "eslint": "9.38.0",
     "prisma": "6.18.0",
     "ts-node": "10.9.2",
-    "typescript": "5.5.4",
-    "eslint": "9.38.0"
+    "typescript": "5.8.2"
   },
   "prisma": {
     "seed": "ts-node prisma/seeds/index.ts"

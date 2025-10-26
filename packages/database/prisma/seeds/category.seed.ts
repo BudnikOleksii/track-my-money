@@ -1,4 +1,4 @@
-import { PrismaClient, TransactionType } from '@prisma/client';
+import { PrismaClient, TransactionType } from '../../src';
 
 const prisma = new PrismaClient();
 
