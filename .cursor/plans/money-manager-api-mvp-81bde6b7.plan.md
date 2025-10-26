@@ -172,7 +172,7 @@ apps/api/src/
 - [x] Create PrismaModule and PrismaService for database access
 - [x] Install authentication dependencies (JWT, Passport, bcrypt)
 - [x] Implement Auth module with signup, login, JWT strategy and guards
-- [ ] Implement Categories module with CRUD operations and subcategory support
+- [x] Implement Categories module with CRUD operations and subcategory support
 - [ ] Implement Transactions module with CRUD, filtering, and balance calculation
 - [ ] Configure global validation pipe and error handling
 - [ ] Set up environment configuration and ConfigModule
