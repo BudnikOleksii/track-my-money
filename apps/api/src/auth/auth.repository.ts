@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+
 import {
   User,
   RefreshToken,
   ActivationLink,
   Prisma,
 } from '@track-my-money/database';
+
+import { PrismaService } from '../prisma/prisma.service';
 
 // Custom types that omit user connection and add userId parameter
 type RefreshTokenCreateData = Omit<Prisma.RefreshTokenCreateInput, 'user'> & {
@@ -55,7 +57,8 @@ export class AuthRepository {
     data: RefreshTokenCreateData,
   ): Promise<RefreshToken> {
     const { userId, ...restData } = data;
-    return this.prisma.client.refreshToken.create({
+    
+return this.prisma.client.refreshToken.create({
       data: {
         ...restData,
         user: { connect: { id: userId } },
@@ -112,7 +115,8 @@ export class AuthRepository {
     data: ActivationLinkCreateData,
   ): Promise<ActivationLink> {
     const { userId, ...restData } = data;
-    return this.prisma.client.activationLink.create({
+    
+return this.prisma.client.activationLink.create({
       data: {
         ...restData,
         user: { connect: { id: userId } },

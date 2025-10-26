@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+
 import { AppModule } from './app.module';
 import { AppConfigService } from './config';
 
-// @ts-expect-error bootstrap have no usage but it is required
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -25,8 +25,10 @@ async function bootstrap() {
   await app.listen(configService.app.port, configService.app.host);
 
   if (!configService.isProduction) {
-    console.log(
+    console.warn(
       `🚀 Application is running on: http://${configService.app.host}:${configService.app.port}`,
     );
   }
 }
+
+void bootstrap();

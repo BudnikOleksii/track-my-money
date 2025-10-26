@@ -1,5 +1,7 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+
 import { DatabaseService } from '@track-my-money/database';
+
 import { AppConfigService } from '../config';
 
 @Injectable()

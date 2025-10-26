@@ -8,8 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-import { EmailService } from '../email/email.service';
-import { AuthConfig } from '../config/auth.config';
+
 import {
   UserRole,
   User,
@@ -23,6 +22,9 @@ import {
   AuthResponseDto,
   UserEntity,
 } from '@track-my-money/api-shared';
+
+import { EmailService } from '../email/email.service';
+import { AuthConfig } from '../config/auth.config';
 import { AuthRepository } from './auth.repository';
 
 @Injectable()
@@ -34,8 +36,13 @@ export class AuthService {
     private emailService: EmailService,
   ) {}
 
-  private get authConfig() {
-    return this.configService.get<AuthConfig>('auth')!;
+  private get authConfig(): AuthConfig {
+    const config = this.configService.get<AuthConfig>('auth');
+    if (!config) {
+      throw new Error('Auth configuration is not available');
+    }
+
+    return config;
   }
 
   async signup(signupDto: SignupDto): Promise<AuthResponseDto> {
@@ -234,6 +241,7 @@ export class AuthService {
 
   private async hashPassword(password: string): Promise<string> {
     const saltRounds = 10;
+
     return bcrypt.hash(password, saltRounds);
   }
 

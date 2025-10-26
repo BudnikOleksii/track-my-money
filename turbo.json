@@ -1,6 +1,17 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "PORT",
+    "HOST",
+    "JWT_ACCESS_SECRET",
+    "JWT_ACCESS_EXPIRES_IN",
+    "JWT_REFRESH_SECRET",
+    "JWT_REFRESH_EXPIRES_IN",
+    "ACTIVATION_LINK_EXPIRES_IN",
+    "DATABASE_URL"
+  ],
   "tasks": {
     "dev": {
       "cache": false,
@@ -13,7 +24,12 @@
     "type-check": {
       "cache": false
     },
-    "lint": {},
+    "lint": {
+      "cache": false
+    },
+    "lint:fix": {
+      "cache": false
+    },
     "test": {},
     "test:e2e": {}
   }
