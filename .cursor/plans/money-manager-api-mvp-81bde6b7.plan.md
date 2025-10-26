@@ -169,9 +169,9 @@ apps/api/src/
 
 - [x] Install Prisma dependencies and initialize Prisma with PostgreSQL schema
 - [x] Define Prisma schema with User, Category, and Transaction models
-- [ ] Create PrismaModule and PrismaService for database access
-- [ ] Install authentication dependencies (JWT, Passport, bcrypt)
-- [ ] Implement Auth module with signup, login, JWT strategy and guards
+- [x] Create PrismaModule and PrismaService for database access
+- [x] Install authentication dependencies (JWT, Passport, bcrypt)
+- [x] Implement Auth module with signup, login, JWT strategy and guards
 - [ ] Implement Categories module with CRUD operations and subcategory support
 - [ ] Implement Transactions module with CRUD, filtering, and balance calculation
 - [ ] Configure global validation pipe and error handling
