@@ -173,7 +173,7 @@ apps/api/src/
 - [x] Install authentication dependencies (JWT, Passport, bcrypt)
 - [x] Implement Auth module with signup, login, JWT strategy and guards
 - [x] Implement Categories module with CRUD operations and subcategory support
-- [ ] Implement Transactions module with CRUD, filtering, and balance calculation
-- [ ] Configure global validation pipe and error handling
-- [ ] Set up environment configuration and ConfigModule
-- [ ] Create seed data and test all endpoints
+- [x] Implement Transactions module with CRUD, filtering, and balance calculation
+- [x] Configure global validation pipe and error handling
+- [x] Set up environment configuration and ConfigModule
+- [x] Create seed data and test all endpoints
