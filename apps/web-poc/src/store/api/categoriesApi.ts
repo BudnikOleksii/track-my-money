@@ -1,10 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from './baseApi';
+
 import type {
   CategoryResponseDto,
   CreateCategoryDto,
   UpdateCategoryDto,
 } from '@track-my-money/api-shared';
+
+import { baseQuery } from './baseApi';
 
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
@@ -53,7 +55,7 @@ export const categoriesApi = createApi({
         { type: 'Category', id: 'LIST' },
       ],
     }),
-    deleteCategory: builder.mutation<void, string>({
+    deleteCategory: builder.mutation<unknown, string>({
       query: (id) => ({
         url: `/categories/${id}`,
         method: 'DELETE',

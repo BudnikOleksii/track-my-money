@@ -6,8 +6,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix",
-    "type-check": "tsc --noEmit"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "type-check": "tsc --noEmit --incremental false"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
@@ -43,7 +44,6 @@
     "@types/react-dom": "19.2.2",
     "@vitejs/plugin-react": "5.1.0",
     "autoprefixer": "10.4.21",
-    "eslint": "9.38.0",
     "postcss": "8.5.6",
     "tailwindcss": "^3.4.1",
     "typescript": "5.8.2",

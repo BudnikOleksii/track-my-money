@@ -1,8 +1,4 @@
-import base from '@track-my-money/eslint-config/next.js';
+import { config } from '@track-my-money/eslint-config/react-internal';
 
-export default [
-  ...base,
-  {
-    ignores: ['dist/**'],
-  },
-];
+/** @type {import("eslint").Linter.Config} */
+export default config;

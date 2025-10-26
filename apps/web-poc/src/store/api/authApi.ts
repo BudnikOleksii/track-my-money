@@ -1,11 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from './baseApi';
+
 import type {
   SignupDto,
   LoginDto,
   AuthResponseDto,
   UserEntity,
 } from '@track-my-money/api-shared';
+
+import { baseQuery } from './baseApi';
 import { setCredentials, logout } from '../authSlice';
 
 export const authApi = createApi({
@@ -23,7 +25,7 @@ export const authApi = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));
-        } catch (error) {
+        } catch {
           // Handle error
         }
       },
@@ -38,12 +40,12 @@ export const authApi = createApi({
         try {
           const { data } = await queryFulfilled;
           dispatch(setCredentials(data));
-        } catch (error) {
+        } catch {
           // Handle error
         }
       },
     }),
-    logout: builder.mutation<void, void>({
+    logout: builder.mutation<unknown, unknown>({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
@@ -52,7 +54,7 @@ export const authApi = createApi({
         dispatch(logout());
       },
     }),
-    getProfile: builder.query<UserEntity, void>({
+    getProfile: builder.query<UserEntity, unknown>({
       query: () => '/auth/profile',
       providesTags: ['User'],
     }),

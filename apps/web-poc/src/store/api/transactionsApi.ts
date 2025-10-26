@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from './baseApi';
+
 import type {
   TransactionResponseDto,
   CreateTransactionDto,
@@ -8,6 +8,8 @@ import type {
   TransactionListResponseDto,
   BalanceResponseDto,
 } from '@track-my-money/api-shared';
+
+import { baseQuery } from './baseApi';
 
 export const transactionsApi = createApi({
   reducerPath: 'transactionsApi',
@@ -37,7 +39,7 @@ export const transactionsApi = createApi({
       query: (id) => `/transactions/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Transaction', id }],
     }),
-    getBalance: builder.query<BalanceResponseDto, void>({
+    getBalance: builder.query<BalanceResponseDto, unknown>({
       query: () => '/transactions/balance',
       providesTags: [{ type: 'Transaction', id: 'BALANCE' }],
     }),
@@ -70,7 +72,7 @@ export const transactionsApi = createApi({
         { type: 'Transaction', id: 'BALANCE' },
       ],
     }),
-    deleteTransaction: builder.mutation<void, string>({
+    deleteTransaction: builder.mutation<unknown, string>({
       query: (id) => ({
         url: `/transactions/${id}`,
         method: 'DELETE',
