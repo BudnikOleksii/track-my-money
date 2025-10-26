@@ -10,6 +10,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
+    "type-check": {
+      "cache": false
+    },
     "lint": {},
     "test": {},
     "test:e2e": {}

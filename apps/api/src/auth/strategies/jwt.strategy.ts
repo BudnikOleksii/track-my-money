@@ -6,7 +6,7 @@ import { AuthConfig } from '../../config/auth.config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor(private configService: ConfigService) {
+  constructor(configService: ConfigService) {
     const authConfig = configService.get<AuthConfig>('auth')!;
 
     super({

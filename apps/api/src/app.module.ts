@@ -9,7 +9,6 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { AppConfigService } from './config';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { Public } from './auth/decorators/public.decorator';
 import appConfigFactory from './config/app.config.factory';
 import databaseConfigFactory from './config/database.config.factory';
 import authConfigFactory from './config/auth.config.factory';

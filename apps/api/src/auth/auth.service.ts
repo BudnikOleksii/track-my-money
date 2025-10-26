@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { EmailService } from '../email/email.service';
 import { AuthConfig } from '../config/auth.config';
 import {
-  UserRole as DbUserRole,
+  UserRole,
   User,
   RefreshToken,
   ActivationLink,
@@ -22,7 +22,6 @@ import {
   RefreshTokenDto,
   AuthResponseDto,
   UserEntity,
-  UserRole,
 } from '@track-my-money/api-shared';
 import { AuthRepository } from './auth.repository';
 
@@ -54,7 +53,7 @@ export class AuthService {
       email,
       password: hashedPassword,
       name,
-      role: DbUserRole.USER,
+      role: UserRole.USER,
       isEmailVerified: false,
     });
 
@@ -205,10 +204,7 @@ export class AuthService {
     await this.emailService.sendActivationEmail(user.email, activationLink.id);
   }
 
-  async validateUser(
-    email: string,
-    password: string,
-  ) {
+  async validateUser(email: string, password: string) {
     const user = await this.authRepository.findUserByEmail(email);
 
     if (user && (await this.comparePasswords(password, user.password))) {
@@ -221,7 +217,7 @@ export class AuthService {
   private async generateTokens(
     userId: string,
     email: string,
-    role: DbUserRole,
+    role: UserRole,
   ): Promise<{ accessToken: string; refreshToken: string }> {
     const payload = { sub: userId, email, role };
 
@@ -305,9 +301,9 @@ export class AuthService {
       id: user.id,
       email: user.email,
       name: user.name,
-      role: user.role as UserRole,
+      role: user.role,
       isEmailVerified: user.isEmailVerified,
-      country: user.country,
+      country: user.country ?? null,
       baseCurrency: user.baseCurrency,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,

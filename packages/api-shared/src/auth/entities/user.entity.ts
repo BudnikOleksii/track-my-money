@@ -1,13 +1,3 @@
-import { UserRole } from '../enums/user-role.enum';
+import { User } from '@track-my-money/database';
 
-export class UserEntity {
-  id: string;
-  email: string;
-  name: string;
-  role: UserRole;
-  isEmailVerified: boolean;
-  country?: string;
-  baseCurrency: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type UserEntity = Omit<User, 'password' | 'ipAddress'>;

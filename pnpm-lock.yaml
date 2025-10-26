@@ -112,7 +112,7 @@ importers:
         specifier: 9.0.10
         version: 9.0.10
       '@types/ms':
-        specifier: ^2.1.0
+        specifier: 2.1.0
         version: 2.1.0
       '@types/node':
         specifier: 22.18.12
@@ -156,6 +156,9 @@ importers:
       '@nestjs/mapped-types':
         specifier: '*'
         version: 2.1.0(@nestjs/common@11.1.7(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)
+      '@track-my-money/database':
+        specifier: workspace:*
+        version: link:../database
       class-transformer:
         specifier: 0.5.1
         version: 0.5.1
