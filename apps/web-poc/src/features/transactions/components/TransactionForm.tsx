@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from '../../../shared/ui/select';
 import { useToast } from '../../../shared/hooks/useToast';
+import { extractErrorMessage } from '../../../shared/utils/api-error';
 
 const transactionSchema = z.object({
   type: z.enum(['INCOME', 'EXPENSE']),
@@ -82,13 +83,14 @@ const TransactionForm = ({
         });
       }
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description:
-          error?.data?.message ||
+        description: extractErrorMessage(
+          error,
           'Failed to save transaction. Please try again.',
+        ),
       });
     }
   };

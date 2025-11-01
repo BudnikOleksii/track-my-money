@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from '@/shared/ui/select';
 import { useToast } from '@/shared/hooks/useToast';
+import { extractErrorMessage } from '@/shared/utils/api-error';
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -50,13 +51,14 @@ const CategoryForm = ({ onSuccess }: CategoryFormProps) => {
         description: 'Category created successfully!',
       });
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description:
-          error?.data?.message ||
+        description: extractErrorMessage(
+          error,
           'Failed to create category. Please try again.',
+        ),
       });
     }
   };

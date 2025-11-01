@@ -1,5 +1,7 @@
 import { Trash2 } from 'lucide-react';
 
+import type { CategoryEntity } from '@track-my-money/api-shared';
+
 import { useDeleteCategoryMutation } from '@/store/api/categoriesApi';
 import {
   Card,
@@ -12,7 +14,7 @@ import { Button } from '@/shared/ui/button';
 import { cn } from '@/shared/utils/cn';
 
 interface CategoryListProps {
-  categories: any[];
+  categories: CategoryEntity[];
 }
 
 const CategoryList = ({ categories }: CategoryListProps) => {

@@ -8,6 +8,7 @@ import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import { useToast } from '@/shared/hooks/useToast';
+import { extractErrorMessage } from '@/shared/utils/api-error';
 
 const signupSchema = z
   .object({
@@ -48,11 +49,14 @@ const SignupForm = () => {
           'Account created! Please check your email to verify your account.',
       });
       navigate('/login');
-    } catch (error: any) {
+    } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error?.data?.message || 'Signup failed. Please try again.',
+        description: extractErrorMessage(
+          error,
+          'Signup failed. Please try again.',
+        ),
       });
     }
   };

@@ -1,6 +1,8 @@
 import { Edit, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 
+import type { TransactionEntity } from '@track-my-money/api-shared';
+
 import { useDeleteTransactionMutation } from '../../../store/api/transactionsApi';
 import { useGetCategoriesQuery } from '../../../store/api/categoriesApi';
 import {
@@ -21,7 +23,7 @@ import { Button } from '../../../shared/ui/button';
 import { cn } from '../../../shared/utils/cn';
 
 interface TransactionListProps {
-  transactions: any[];
+  transactions: TransactionEntity[];
 }
 
 const TransactionList = ({ transactions }: TransactionListProps) => {
@@ -40,8 +42,8 @@ const TransactionList = ({ transactions }: TransactionListProps) => {
 
   const getCategoryName = (categoryId: string) => {
     const category = categories?.find((c) => c.id === categoryId);
-    
-return category?.name || 'Unknown';
+
+    return category?.name || 'Unknown';
   };
 
   if (transactions.length === 0) {
