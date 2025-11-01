@@ -1,4 +1,4 @@
 /** @type {import('stylelint').Config} */
 module.exports = {
-    extends: ["@docs-ui/stylelint-config"],
+  extends: ['@track-my-money/stylelint-config'],
 };
