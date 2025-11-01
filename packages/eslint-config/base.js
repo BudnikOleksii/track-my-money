@@ -5,7 +5,6 @@ import tseslint from 'typescript-eslint';
 import onlyWarn from 'eslint-plugin-only-warn';
 import importPlugin from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
-import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 
 /**
  * A shared ESLint configuration for the repository.
@@ -18,7 +17,6 @@ export const config = [
   ...tseslint.configs.recommended,
   ...tseslint.configs.strict,
   ...tseslint.configs.stylistic,
-  noBarrelFiles.flat,
   {
     plugins: {
       turbo: turboPlugin,

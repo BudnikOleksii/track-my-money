@@ -1,0 +1,20 @@
+.textField {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.helperText {
+  margin-top: var(--spacing);
+
+  font-family: var(--default-font-family);
+  font-size: var(--font-body-s-size);
+  line-height: var(--font-body-s-line-height);
+  color: var(--on-surface-variant);
+}
+
+.error {
+  color: var(--error);
+}
