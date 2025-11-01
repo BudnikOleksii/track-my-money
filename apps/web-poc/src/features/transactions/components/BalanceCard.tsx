@@ -10,7 +10,7 @@ import {
 } from '../../../shared/ui/card';
 
 const BalanceCard = () => {
-  const { data: balance, isLoading } = useGetBalanceQuery();
+  const { data: balance, isLoading } = useGetBalanceQuery(undefined);
 
   if (isLoading) {
     return (

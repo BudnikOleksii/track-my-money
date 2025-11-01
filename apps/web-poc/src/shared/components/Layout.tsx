@@ -17,7 +17,7 @@ const Layout = () => {
   const [logout] = useLogoutMutation();
 
   const handleLogout = async () => {
-    await logout();
+    await logout(undefined);
     window.location.href = ROUTES.AUTH.LOGIN;
   };
 

@@ -1,3 +1,5 @@
+import { TransactionType } from '@track-my-money/database';
+
 export interface SubcategoryResponse {
   id: string;
   name: string;
@@ -12,7 +14,7 @@ export interface SubcategoryResponse {
 export interface CategoryResponseDto {
   id: string;
   name: string;
-  type: string;
+  type: TransactionType;
   userId: string;
   parentCategoryId: string | null;
   subcategories: SubcategoryResponse[];

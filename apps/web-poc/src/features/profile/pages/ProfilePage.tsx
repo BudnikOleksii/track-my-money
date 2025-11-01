@@ -11,11 +11,11 @@ import {
 import { Button } from '@/shared/ui/button';
 
 const ProfilePage = () => {
-  const { data: user, isLoading } = useGetProfileQuery();
+  const { data: user, isLoading } = useGetProfileQuery(undefined);
   const [logout] = useLogoutMutation();
 
   const handleLogout = async () => {
-    await logout();
+    await logout(undefined);
     window.location.href = '/login';
   };
 

@@ -2,6 +2,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
+import { TransactionType } from '@/shared/constants/transaction-types';
 import { useCreateCategoryMutation } from '@/store/api/categoriesApi';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
@@ -18,7 +19,7 @@ import { extractErrorMessage } from '@/shared/utils/api-error';
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  type: z.enum(['INCOME', 'EXPENSE']),
+  type: z.nativeEnum(TransactionType),
 });
 
 type CategoryFormData = z.infer<typeof categorySchema>;
@@ -39,7 +40,7 @@ const CategoryForm = ({ onSuccess }: CategoryFormProps) => {
   } = useForm<CategoryFormData>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
-      type: 'EXPENSE',
+      type: TransactionType.EXPENSE,
     },
   });
 

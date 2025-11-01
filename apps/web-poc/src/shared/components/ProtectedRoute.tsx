@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await refresh().unwrap();
+        await refresh(undefined).unwrap();
       } catch {
         // Refresh failed, will redirect to login
       } finally {
