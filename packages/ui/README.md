@@ -242,7 +242,133 @@ This allows the color palette to be reusable across different design systems whi
 
 ## Components
 
-Component documentation coming soon...
+### Typography
+
+A flexible typography component with simplified variants and customizable font weights.
+
+#### Features
+
+- **8 Typography Variants**: Clean, simple typography scale
+  - Title (XL, L, M, S, XS)
+  - Body (L, M, S)
+  
+- **Font Weight Control**: Optional `fontWeight` prop to override default weight
+  - `regular` (400)
+  - `medium` (500)
+  - `semibold` (600)
+  - `bold` (700)
+  - `extra-bold` (800)
+
+- **Semantic HTML**: Automatic variant-to-HTML-tag mapping for accessibility
+- **Custom Tags**: Override the default HTML element while maintaining variant styles
+- **Fully Typed**: Complete TypeScript support with proper attribute types
+- **Responsive**: Uses breakpoint mixins for mobile-friendly typography
+- **Customizable**: Accepts `className` and all standard HTML attributes
+
+#### Usage
+
+```tsx
+import { Typography } from '@track-my-money/ui/components/atoms/typography';
+
+const MyComponent = () => (
+  <div>
+    <Typography variant="title-xl">
+      Welcome to Track My Money
+    </Typography>
+    
+    <Typography variant="body-m">
+      This is a paragraph with medium body text.
+    </Typography>
+    
+    <Typography variant="title-s" fontWeight="bold">
+      Bold Title
+    </Typography>
+  </div>
+);
+```
+
+#### With Custom Tags
+
+Override the default HTML element while keeping the variant styles:
+
+```tsx
+<Typography variant="title-l" tag="div">
+  Custom div with title styling
+</Typography>
+
+<Typography variant="body-l" tag="a" href="/about">
+  Link with body text styling
+</Typography>
+```
+
+#### With Font Weight Override
+
+```tsx
+<Typography variant="body-m" fontWeight="semibold">
+  Semi-bold body text
+</Typography>
+
+<Typography variant="title-xs" fontWeight="extra-bold">
+  Extra bold title
+</Typography>
+```
+
+#### With Custom Styling
+
+```tsx
+<Typography 
+  variant="title-m" 
+  className="my-custom-class"
+  style={{ color: 'var(--primary)' }}
+>
+  Customized typography
+</Typography>
+```
+
+#### Variant-to-Tag Mapping
+
+| Variant | Default HTML Tag | Default Font Weight |
+|---------|------------------|---------------------|
+| title-xl | `h1` | 500 (medium) |
+| title-l | `h2` | 500 (medium) |
+| title-m | `h3` | 500 (medium) |
+| title-s | `h4` | 500 (medium) |
+| title-xs | `h5` | 500 (medium) |
+| body-l | `p` | 400 (regular) |
+| body-m | `p` | 400 (regular) |
+| body-s | `p` | 400 (regular) |
+
+#### Typography Tokens
+
+All typography tokens are defined in `src/styles/tokens/fonts.scss` and can be customized:
+
+```scss
+--font-title-xl-size: 32px;
+--font-title-xl-line-height: 40px;
+--font-title-xl-weight: 500;
+--font-title-xl-tracking: 0px;
+```
+
+Font weight tokens:
+```scss
+--font-weight-regular: 400;
+--font-weight-medium: 500;
+--font-weight-semibold: 600;
+--font-weight-bold: 700;
+--font-weight-extra-bold: 800;
+```
+
+Each variant has corresponding tokens for:
+- `size` - Font size
+- `line-height` - Line height
+- `weight` - Default font weight
+- `tracking` - Letter spacing
+
+#### Responsive Behavior
+
+Title variants automatically scale down on smaller screens using the breakpoint mixins:
+
+- On mobile (< 390px): Title XL and L scale to 87.5%
 
 ## Development
 
