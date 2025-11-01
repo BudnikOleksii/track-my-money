@@ -1,3 +1,5 @@
+import { TrendingUp, TrendingDown } from 'lucide-react';
+
 import { useGetBalanceQuery } from '../../../store/api/transactionsApi';
 import {
   Card,
@@ -6,10 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from '../../../shared/ui/card';
-import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const BalanceCard = () => {
-  const { data: balance, isLoading } = useGetBalanceQuery();
+  const { data: balance, isLoading } = useGetBalanceQuery(undefined);
 
   if (isLoading) {
     return (

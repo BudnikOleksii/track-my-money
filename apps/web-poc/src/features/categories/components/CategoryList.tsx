@@ -1,17 +1,21 @@
-import { useDeleteCategoryMutation } from '../../../store/api/categoriesApi';
+import { Trash2 } from 'lucide-react';
+
+import type { CategoryResponseDto } from '@track-my-money/api-shared';
+
+import { TransactionType } from '@/shared/constants/transaction-types';
+import { useDeleteCategoryMutation } from '@/store/api/categoriesApi';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../shared/ui/card';
-import { Button } from '../../../shared/ui/button';
-import { Trash2 } from 'lucide-react';
-import { cn } from '../../../shared/utils/cn';
+} from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
+import { cn } from '@/shared/utils/cn';
 
 interface CategoryListProps {
-  categories: any[];
+  categories: CategoryResponseDto[];
 }
 
 const CategoryList = ({ categories }: CategoryListProps) => {
@@ -27,8 +31,12 @@ const CategoryList = ({ categories }: CategoryListProps) => {
     }
   };
 
-  const incomeCategories = categories.filter((c) => c.type === 'income');
-  const expenseCategories = categories.filter((c) => c.type === 'expense');
+  const incomeCategories = categories.filter(
+    (c) => c.type === TransactionType.INCOME,
+  );
+  const expenseCategories = categories.filter(
+    (c) => c.type === TransactionType.EXPENSE,
+  );
 
   if (categories.length === 0) {
     return (

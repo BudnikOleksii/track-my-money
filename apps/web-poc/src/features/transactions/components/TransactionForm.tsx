@@ -1,6 +1,8 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+
+import { TransactionType } from '../../../shared/constants/transaction-types';
 import {
   useCreateTransactionMutation,
   useUpdateTransactionMutation,
@@ -17,9 +19,10 @@ import {
   SelectValue,
 } from '../../../shared/ui/select';
 import { useToast } from '../../../shared/hooks/useToast';
+import { extractErrorMessage } from '../../../shared/utils/api-error';
 
 const transactionSchema = z.object({
-  type: z.enum(['INCOME', 'EXPENSE']),
+  type: z.nativeEnum(TransactionType),
   amount: z.number().positive('Amount must be positive'),
   categoryId: z.string().min(1, 'Please select a category'),
   description: z.string().optional(),
@@ -54,7 +57,7 @@ const TransactionForm = ({
   } = useForm<TransactionFormData>({
     resolver: zodResolver(transactionSchema),
     defaultValues: {
-      type: 'EXPENSE',
+      type: TransactionType.EXPENSE,
       date: new Date().toISOString().split('T')[0],
       description: '',
     },
@@ -81,20 +84,22 @@ const TransactionForm = ({
         });
       }
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description:
-          error?.data?.message ||
+        description: extractErrorMessage(
+          error,
           'Failed to save transaction. Please try again.',
+        ),
       });
     }
   };
 
-  const incomeCategories = categories?.filter((c) => c.type === 'INCOME') || [];
+  const incomeCategories =
+    categories?.filter((c) => c.type === TransactionType.INCOME) || [];
   const expenseCategories =
-    categories?.filter((c) => c.type === 'EXPENSE') || [];
+    categories?.filter((c) => c.type === TransactionType.EXPENSE) || [];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

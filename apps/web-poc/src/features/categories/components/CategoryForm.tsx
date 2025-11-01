@@ -1,22 +1,25 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useCreateCategoryMutation } from '../../../store/api/categoriesApi';
-import { Button } from '../../../shared/ui/button';
-import { Input } from '../../../shared/ui/input';
-import { Label } from '../../../shared/ui/label';
+
+import { TransactionType } from '@/shared/constants/transaction-types';
+import { useCreateCategoryMutation } from '@/store/api/categoriesApi';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../../shared/ui/select';
-import { useToast } from '../../../shared/hooks/useToast';
+} from '@/shared/ui/select';
+import { useToast } from '@/shared/hooks/useToast';
+import { extractErrorMessage } from '@/shared/utils/api-error';
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Name is required'),
-  type: z.enum(['INCOME', 'EXPENSE']),
+  type: z.nativeEnum(TransactionType),
 });
 
 type CategoryFormData = z.infer<typeof categorySchema>;
@@ -37,7 +40,7 @@ const CategoryForm = ({ onSuccess }: CategoryFormProps) => {
   } = useForm<CategoryFormData>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
-      type: 'EXPENSE',
+      type: TransactionType.EXPENSE,
     },
   });
 
@@ -49,13 +52,14 @@ const CategoryForm = ({ onSuccess }: CategoryFormProps) => {
         description: 'Category created successfully!',
       });
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description:
-          error?.data?.message ||
+        description: extractErrorMessage(
+          error,
           'Failed to create category. Please try again.',
+        ),
       });
     }
   };

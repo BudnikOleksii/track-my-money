@@ -50,7 +50,6 @@ export class CategoriesService {
   ): Promise<CategoryResponseDto> {
     const { name, type, parentCategoryId } = dto;
 
-    // Check for duplicate name
     const existing = await this.categoriesRepository.findCategoryByNameAndType(
       name,
       type,
@@ -63,7 +62,6 @@ export class CategoriesService {
       );
     }
 
-    // Validate parent category if provided
     if (parentCategoryId) {
       await this.categoriesRepository.validateParentCategory(
         parentCategoryId,
@@ -94,7 +92,6 @@ export class CategoriesService {
   ): Promise<CategoryResponseDto> {
     const { name, type } = dto;
 
-    // Check if category exists
     const existing = await this.categoriesRepository.findCategoryById(
       id,
       userId,
@@ -104,7 +101,6 @@ export class CategoriesService {
       throw new NotFoundException('Category not found');
     }
 
-    // Check for duplicate name if name is being updated
     if (name && name !== existing.name) {
       const duplicate =
         await this.categoriesRepository.findCategoryByNameAndType(
@@ -120,14 +116,11 @@ export class CategoriesService {
       }
     }
 
-    // Validate type change
     if (type && type !== existing.type) {
-      // Check if category has subcategories
       if (existing.parentCategoryId) {
         throw new BadRequestException('Cannot change type of a subcategory');
       }
 
-      // Check if category has subcategories with different type
       const categoryWithSubs =
         await this.categoriesRepository.findCategoryWithSubcategories(
           id,
@@ -153,7 +146,6 @@ export class CategoriesService {
   }
 
   async deleteCategory(id: string, userId: string): Promise<void> {
-    // Check if category exists
     const existing = await this.categoriesRepository.findCategoryById(
       id,
       userId,
@@ -163,7 +155,6 @@ export class CategoriesService {
       throw new NotFoundException('Category not found');
     }
 
-    // Check if category has transactions (this checks both category and subcategory transactions)
     const hasTransactions = await this.categoriesRepository.hasTransactions(id);
 
     if (hasTransactions) {
@@ -172,7 +163,6 @@ export class CategoriesService {
       );
     }
 
-    // If this is a parent category, check if any subcategories have transactions
     const categoryWithSubs =
       await this.categoriesRepository.findCategoryWithSubcategories(id, userId);
 
@@ -195,7 +185,6 @@ export class CategoriesService {
     const categoryMap = new Map<string, CategoryResponseDto>();
     const rootCategories: CategoryResponseDto[] = [];
 
-    // First pass: create all category DTOs
     for (const category of categories) {
       const dto: CategoryResponseDto = {
         id: category.id,
@@ -211,7 +200,6 @@ export class CategoriesService {
       categoryMap.set(category.id, dto);
     }
 
-    // Second pass: build nested structure
     for (const category of categories) {
       const dto = categoryMap.get(category.id);
       if (!dto) {
@@ -221,7 +209,6 @@ export class CategoriesService {
       if (category.parentCategoryId) {
         const parent = categoryMap.get(category.parentCategoryId);
         if (parent) {
-          // Create SubcategoryResponse with parentCategoryId as string
           const subcategory: (typeof parent.subcategories)[number] = {
             id: dto.id,
             name: dto.name,

@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
+
 import { cn } from '../utils/cn';
 
 const Table = React.forwardRef<

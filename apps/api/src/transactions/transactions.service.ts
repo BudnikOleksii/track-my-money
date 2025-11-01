@@ -86,14 +86,12 @@ export class TransactionsService {
       throw new BadRequestException('Amount must be a positive number');
     }
 
-    // Validate category exists and type matches
     await this.transactionsRepository.validateCategory(
       categoryId,
       userId,
       type,
     );
 
-    // Validate subcategory if provided
     if (subcategoryId) {
       await this.transactionsRepository.validateSubcategory(
         subcategoryId,
@@ -134,12 +132,10 @@ export class TransactionsService {
       throw new NotFoundException('Transaction not found');
     }
 
-    // Validate amount if provided
     if (dto.amount !== undefined && dto.amount <= 0) {
       throw new BadRequestException('Amount must be a positive number');
     }
 
-    // Re-validate category if changed
     if (dto.categoryId && dto.type) {
       await this.transactionsRepository.validateCategory(
         dto.categoryId,
@@ -154,7 +150,6 @@ export class TransactionsService {
       );
     }
 
-    // Validate subcategory if changed
     if (dto.subcategoryId && (dto.categoryId || existing.categoryId)) {
       const categoryId = dto.categoryId || existing.categoryId;
       await this.transactionsRepository.validateSubcategory(
@@ -164,7 +159,6 @@ export class TransactionsService {
       );
     }
 
-    // Build update data
     const updateData: Prisma.TransactionUpdateInput = {};
 
     if (dto.amount !== undefined) {

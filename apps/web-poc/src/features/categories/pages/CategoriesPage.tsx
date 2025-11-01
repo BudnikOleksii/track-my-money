@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
+
 import { useGetCategoriesQuery } from '../../../store/api/categoriesApi';
 import CategoryList from '../components/CategoryList';
 import CategoryForm from '../components/CategoryForm';
 import { Button } from '../../../shared/ui/button';
-import { Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,

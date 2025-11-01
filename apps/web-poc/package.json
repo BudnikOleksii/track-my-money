@@ -6,8 +6,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
-    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix",
     "type-check": "tsc --noEmit --incremental false"
   },
   "dependencies": {
@@ -22,7 +22,9 @@
     "@radix-ui/react-tabs": "1.1.13",
     "@radix-ui/react-toast": "1.2.15",
     "@reduxjs/toolkit": "2.9.2",
+    "@tailwindcss/postcss": "4.1.16",
     "@track-my-money/api-shared": "workspace:*",
+    "async-mutex": "0.5.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
@@ -44,9 +46,10 @@
     "@types/react-dom": "19.2.2",
     "@vitejs/plugin-react": "5.1.0",
     "autoprefixer": "10.4.21",
+    "eslint": "9.38.0",
     "postcss": "8.5.6",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "4.1.16",
     "typescript": "5.8.2",
-    "vite": "^6.0.7"
+    "vite": "7.1.12"
   }
 }

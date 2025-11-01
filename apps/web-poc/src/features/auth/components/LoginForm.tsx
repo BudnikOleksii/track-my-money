@@ -2,11 +2,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../../store/api/authApi';
-import { Button } from '../../../shared/ui/button';
-import { Input } from '../../../shared/ui/input';
-import { Label } from '../../../shared/ui/label';
-import { useToast } from '../../../shared/hooks/useToast';
+
+import { useLoginMutation } from '@/store/api/authApi';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
+import { useToast } from '@/shared/hooks/useToast';
+import { extractErrorMessage } from '@/shared/utils/api-error';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -36,11 +38,14 @@ const LoginForm = () => {
         description: 'Login successful!',
       });
       navigate('/');
-    } catch (error: any) {
+    } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error?.data?.message || 'Login failed. Please try again.',
+        description: extractErrorMessage(
+          error,
+          'Login failed. Please try again.',
+        ),
       });
     }
   };

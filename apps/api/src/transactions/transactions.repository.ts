@@ -46,8 +46,8 @@ export class TransactionsRepository {
     query: TransactionQuery,
   ): Promise<number> {
     const where = this.buildWhereClause(userId, query);
-    
-return this.prisma.client.transaction.count({ where });
+
+    return this.prisma.client.transaction.count({ where });
   }
 
   async findTransactionById(
@@ -108,7 +108,6 @@ return this.prisma.client.transaction.count({ where });
   }> {
     const where = this.buildWhereClause(userId, query || {});
 
-    // Get currency from first transaction or default to USD
     const firstTransaction = await this.prisma.client.transaction.findFirst({
       where,
       select: { currency: true },

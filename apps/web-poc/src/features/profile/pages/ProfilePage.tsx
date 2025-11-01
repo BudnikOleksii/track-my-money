@@ -1,23 +1,21 @@
-import {
-  useGetProfileQuery,
-  useLogoutMutation,
-} from '../../../store/api/authApi';
+import { User, Mail, LogOut } from 'lucide-react';
+
+import { useGetProfileQuery, useLogoutMutation } from '@/store/api/authApi';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../shared/ui/card';
-import { Button } from '../../../shared/ui/button';
-import { User, Mail, LogOut } from 'lucide-react';
+} from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
 
 const ProfilePage = () => {
-  const { data: user, isLoading } = useGetProfileQuery();
+  const { data: user, isLoading } = useGetProfileQuery(undefined);
   const [logout] = useLogoutMutation();
 
   const handleLogout = async () => {
-    await logout();
+    await logout(undefined);
     window.location.href = '/login';
   };
 

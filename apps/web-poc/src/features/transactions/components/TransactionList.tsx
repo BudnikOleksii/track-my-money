@@ -1,3 +1,9 @@
+import { Edit, Trash2 } from 'lucide-react';
+import { format } from 'date-fns';
+
+import type { TransactionResponseDto } from '@track-my-money/api-shared';
+
+import { TransactionType } from '../../../shared/constants/transaction-types';
 import { useDeleteTransactionMutation } from '../../../store/api/transactionsApi';
 import { useGetCategoriesQuery } from '../../../store/api/categoriesApi';
 import {
@@ -15,12 +21,10 @@ import {
   CardTitle,
 } from '../../../shared/ui/card';
 import { Button } from '../../../shared/ui/button';
-import { Edit, Trash2 } from 'lucide-react';
-import { format } from 'date-fns';
 import { cn } from '../../../shared/utils/cn';
 
 interface TransactionListProps {
-  transactions: any[];
+  transactions: TransactionResponseDto[];
 }
 
 const TransactionList = ({ transactions }: TransactionListProps) => {
@@ -39,6 +43,7 @@ const TransactionList = ({ transactions }: TransactionListProps) => {
 
   const getCategoryName = (categoryId: string) => {
     const category = categories?.find((c) => c.id === categoryId);
+
     return category?.name || 'Unknown';
   };
 
@@ -78,7 +83,7 @@ const TransactionList = ({ transactions }: TransactionListProps) => {
                 <span
                   className={cn(
                     'rounded-full px-2 py-1 text-xs font-medium',
-                    transaction.type === 'INCOME'
+                    transaction.type === TransactionType.INCOME
                       ? 'bg-green-100 text-green-700'
                       : 'bg-red-100 text-red-700',
                   )}
@@ -91,13 +96,13 @@ const TransactionList = ({ transactions }: TransactionListProps) => {
                 <span
                   className={cn(
                     'font-semibold',
-                    transaction.type === 'INCOME'
+                    transaction.type === TransactionType.INCOME
                       ? 'text-green-600'
                       : 'text-red-600',
                   )}
                 >
-                  {transaction.type === 'INCOME' ? '+' : '-'}$
-                  {transaction.amount}
+                  {transaction.type === TransactionType.INCOME ? '+' : '-'}$
+                  {parseFloat(transaction.amount).toFixed(2)}
                 </span>
               </TableCell>
               <TableCell className="max-w-xs truncate">

@@ -45,6 +45,20 @@ export const authApi = createApi({
         }
       },
     }),
+    refresh: builder.mutation<AuthResponseDto, undefined>({
+      query: () => ({
+        url: '/auth/refresh',
+        method: 'POST',
+      }),
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setCredentials(data));
+        } catch {
+          dispatch(logout());
+        }
+      },
+    }),
     logout: builder.mutation<unknown, unknown>({
       query: () => ({
         url: '/auth/logout',
@@ -64,6 +78,7 @@ export const authApi = createApi({
 export const {
   useSignupMutation,
   useLoginMutation,
+  useRefreshMutation,
   useLogoutMutation,
   useGetProfileQuery,
   useLazyGetProfileQuery,
