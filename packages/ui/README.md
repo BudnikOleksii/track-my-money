@@ -251,7 +251,6 @@ A flexible typography component with simplified variants and customizable font w
 - **8 Typography Variants**: Clean, simple typography scale
   - Title (XL, L, M, S, XS)
   - Body (L, M, S)
-  
 - **Font Weight Control**: Optional `fontWeight` prop to override default weight
   - `regular` (400)
   - `medium` (500)
@@ -268,18 +267,16 @@ A flexible typography component with simplified variants and customizable font w
 #### Usage
 
 ```tsx
-import { Typography } from '@track-my-money/ui/components/atoms/typography';
+import { Typography } from '@track-my-money/ui/src/components/atoms/typography/Typography';
 
 const MyComponent = () => (
   <div>
-    <Typography variant="title-xl">
-      Welcome to Track My Money
-    </Typography>
-    
+    <Typography variant="title-xl">Welcome to Track My Money</Typography>
+
     <Typography variant="body-m">
       This is a paragraph with medium body text.
     </Typography>
-    
+
     <Typography variant="title-s" fontWeight="bold">
       Bold Title
     </Typography>
@@ -316,8 +313,8 @@ Override the default HTML element while keeping the variant styles:
 #### With Custom Styling
 
 ```tsx
-<Typography 
-  variant="title-m" 
+<Typography
+  variant="title-m"
   className="my-custom-class"
   style={{ color: 'var(--primary)' }}
 >
@@ -327,16 +324,16 @@ Override the default HTML element while keeping the variant styles:
 
 #### Variant-to-Tag Mapping
 
-| Variant | Default HTML Tag | Default Font Weight |
-|---------|------------------|---------------------|
-| title-xl | `h1` | 500 (medium) |
-| title-l | `h2` | 500 (medium) |
-| title-m | `h3` | 500 (medium) |
-| title-s | `h4` | 500 (medium) |
-| title-xs | `h5` | 500 (medium) |
-| body-l | `p` | 400 (regular) |
-| body-m | `p` | 400 (regular) |
-| body-s | `p` | 400 (regular) |
+| Variant  | Default HTML Tag | Default Font Weight |
+| -------- | ---------------- | ------------------- |
+| title-xl | `h1`             | 500 (medium)        |
+| title-l  | `h2`             | 500 (medium)        |
+| title-m  | `h3`             | 500 (medium)        |
+| title-s  | `h4`             | 500 (medium)        |
+| title-xs | `h5`             | 500 (medium)        |
+| body-l   | `p`              | 400 (regular)       |
+| body-m   | `p`              | 400 (regular)       |
+| body-s   | `p`              | 400 (regular)       |
 
 #### Typography Tokens
 
@@ -350,6 +347,7 @@ All typography tokens are defined in `src/styles/tokens/fonts.scss` and can be c
 ```
 
 Font weight tokens:
+
 ```scss
 --font-weight-regular: 400;
 --font-weight-medium: 500;
@@ -359,6 +357,7 @@ Font weight tokens:
 ```
 
 Each variant has corresponding tokens for:
+
 - `size` - Font size
 - `line-height` - Line height
 - `weight` - Default font weight
@@ -369,6 +368,129 @@ Each variant has corresponding tokens for:
 Title variants automatically scale down on smaller screens using the breakpoint mixins:
 
 - On mobile (< 390px): Title XL and L scale to 87.5%
+
+### Button
+
+A flexible button component with multiple variants and sizes.
+
+#### Features
+
+- **5 Variants**: `primary`, `secondary`, `outline`, `ghost`, `destructive`
+- **3 Sizes**: `sm` (32px), `md` (40px), `lg` (48px)
+- **Accessible**: Proper focus states and keyboard navigation
+- **Hover Effects**: Touch-friendly with `@media (hover: hover)` detection
+- **Disabled State**: Visual feedback with reduced opacity
+
+#### Usage
+
+```tsx
+import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
+
+const MyComponent = () => (
+  <div>
+    <Button variant="primary" size="md">
+      Click me
+    </Button>
+
+    <Button variant="outline" size="lg">
+      Large Outline Button
+    </Button>
+
+    <Button variant="destructive" disabled>
+      Disabled
+    </Button>
+  </div>
+);
+```
+
+#### Variants
+
+| Variant       | Description                  | Colors                                  |
+| ------------- | ---------------------------- | --------------------------------------- |
+| `primary`     | Main action button           | Uses `--primary` and `--on-primary`     |
+| `secondary`   | Secondary actions            | Uses `--secondary` and `--on-secondary` |
+| `outline`     | Low emphasis with border     | Uses `--outline` and `--on-surface`     |
+| `ghost`       | Minimal style, no background | Uses `--on-surface` with hover          |
+| `destructive` | Dangerous actions            | Uses `--error` and `--on-error`         |
+
+### Input
+
+A versatile input component with error state support.
+
+#### Features
+
+- **Error State**: Visual feedback for validation errors
+- **File Input Support**: Styled file upload button
+- **Disabled State**: Clear visual indication
+- **Focus Ring**: Accessible focus indicator
+- **Placeholder Styling**: Consistent placeholder appearance
+
+#### Usage
+
+```tsx
+import { Input } from '@track-my-money/ui/src/components/atoms/input/Input';
+import { Label } from '@track-my-money/ui/src/components/atoms/label/Label';
+
+const MyForm = () => (
+  <div>
+    <Label htmlFor="email" required>
+      Email
+    </Label>
+    <Input id="email" type="email" placeholder="Enter your email" />
+
+    <Label htmlFor="username">Username</Label>
+    <Input
+      id="username"
+      type="text"
+      error
+      placeholder="This field has an error"
+    />
+  </div>
+);
+```
+
+#### Props
+
+| Prop       | Type                  | Default | Description                         |
+| ---------- | --------------------- | ------- | ----------------------------------- |
+| `error`    | `boolean`             | `false` | Shows error styling with red border |
+| `...props` | `InputHTMLAttributes` | -       | All standard input attributes       |
+
+### Label
+
+A semantic label component for form inputs.
+
+#### Features
+
+- **Required Indicator**: Automatic asterisk for required fields
+- **Disabled State**: Matches disabled input styling
+- **Accessibility**: Proper `htmlFor` association with inputs
+
+#### Usage
+
+```tsx
+import { Label } from '@track-my-money/ui/src/components/atoms/label/Label';
+
+const MyForm = () => (
+  <div>
+    <Label htmlFor="field" required>
+      Required Field
+    </Label>
+
+    <Label htmlFor="optional" disabled>
+      Disabled Field
+    </Label>
+  </div>
+);
+```
+
+#### Props
+
+| Prop       | Type                  | Default | Description                    |
+| ---------- | --------------------- | ------- | ------------------------------ |
+| `required` | `boolean`             | `false` | Shows red asterisk after label |
+| `disabled` | `boolean`             | `false` | Shows disabled styling         |
+| `...props` | `LabelHTMLAttributes` | -       | All standard label attributes  |
 
 ## Development
 
