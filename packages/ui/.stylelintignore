@@ -1,0 +1,3 @@
+# Ignore theme token directories
+src/theme/themes/*/tokens/
+src/theme/themes/common/
