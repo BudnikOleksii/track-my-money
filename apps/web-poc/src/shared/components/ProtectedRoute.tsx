@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+
 import { useAppSelector } from '../../store/hooks';
 import { useRefreshMutation } from '../../store/api/authApi';
 import { ROUTES } from '../constants/routes';
@@ -15,20 +16,19 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      if (!user) {
-        try {
-          await refresh().unwrap();
-        } catch {
-          // Refresh failed, will redirect to login
-        } finally {
-          setIsChecking(false);
-        }
+      try {
+        await refresh().unwrap();
+      } catch {
+        // Refresh failed, will redirect to login
+      } finally {
+        setIsChecking(false);
       }
     };
 
     if (!user) {
       checkAuth();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -1,3 +1,6 @@
+import { Edit, Trash2 } from 'lucide-react';
+import { format } from 'date-fns';
+
 import { useDeleteTransactionMutation } from '../../../store/api/transactionsApi';
 import { useGetCategoriesQuery } from '../../../store/api/categoriesApi';
 import {
@@ -15,8 +18,6 @@ import {
   CardTitle,
 } from '../../../shared/ui/card';
 import { Button } from '../../../shared/ui/button';
-import { Edit, Trash2 } from 'lucide-react';
-import { format } from 'date-fns';
 import { cn } from '../../../shared/utils/cn';
 
 interface TransactionListProps {
@@ -39,7 +40,8 @@ const TransactionList = ({ transactions }: TransactionListProps) => {
 
   const getCategoryName = (categoryId: string) => {
     const category = categories?.find((c) => c.id === categoryId);
-    return category?.name || 'Unknown';
+    
+return category?.name || 'Unknown';
   };
 
   if (transactions.length === 0) {

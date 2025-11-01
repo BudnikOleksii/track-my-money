@@ -2,7 +2,6 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './shared/constants/routes';
 import { useAppSelector } from './store/hooks';
-
 import ProtectedRoute from './shared/components/ProtectedRoute';
 import Layout from './shared/components/Layout';
 import LoginPage from './features/auth/pages/LoginPage';
@@ -13,6 +12,7 @@ import ProfilePage from './features/profile/pages/ProfilePage';
 
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAppSelector((state) => state.auth);
+
   return user ? <Navigate to={ROUTES.APP.HOME} replace /> : <>{children}</>;
 };
 

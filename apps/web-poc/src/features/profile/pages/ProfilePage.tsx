@@ -1,3 +1,5 @@
+import { User, Mail, LogOut } from 'lucide-react';
+
 import { useGetProfileQuery, useLogoutMutation } from '@/store/api/authApi';
 import {
   Card,
@@ -7,7 +9,6 @@ import {
   CardTitle,
 } from '@/shared/ui/card';
 import { Button } from '@/shared/ui/button';
-import { User, Mail, LogOut } from 'lucide-react';
 
 const ProfilePage = () => {
   const { data: user, isLoading } = useGetProfileQuery();

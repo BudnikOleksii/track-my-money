@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
+
 import { useGetTransactionsQuery } from '../../../store/api/transactionsApi';
 import TransactionList from '../components/TransactionList';
 import BalanceCard from '../components/BalanceCard';
 import TransactionForm from '../components/TransactionForm';
 import { Button } from '../../../shared/ui/button';
-import { Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,

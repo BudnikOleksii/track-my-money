@@ -45,7 +45,7 @@ export const authApi = createApi({
         }
       },
     }),
-    refresh: builder.mutation<AuthResponseDto, void>({
+    refresh: builder.mutation<AuthResponseDto, undefined>({
       query: () => ({
         url: '/auth/refresh',
         method: 'POST',

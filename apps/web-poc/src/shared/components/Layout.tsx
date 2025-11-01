@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Wallet, Tags, User, LogOut } from 'lucide-react';
+
 import { Button } from '../ui/button';
 import { useLogoutMutation } from '../../store/api/authApi';
 import { Toaster } from './Toaster';
@@ -33,6 +34,7 @@ const Layout = () => {
               {NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
+
                 return (
                   <Link key={item.path} to={item.path}>
                     <Button
