@@ -45,7 +45,9 @@ export class AuthService {
     return config;
   }
 
-  async signup(signupDto: SignupDto): Promise<AuthResponseDto> {
+  async signup(
+    signupDto: SignupDto,
+  ): Promise<AuthResponseDto & { refreshToken: string }> {
     const { email, password, name } = signupDto;
 
     const existingUser = await this.authRepository.findUserByEmail(email);
@@ -86,7 +88,9 @@ export class AuthService {
     };
   }
 
-  async login(loginDto: LoginDto): Promise<AuthResponseDto> {
+  async login(
+    loginDto: LoginDto,
+  ): Promise<AuthResponseDto & { refreshToken: string }> {
     const { email, password } = loginDto;
 
     const user = await this.validateUser(email, password);
@@ -122,7 +126,7 @@ export class AuthService {
 
   async refreshTokens(
     refreshTokenDto: RefreshTokenDto,
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthResponseDto & { refreshToken: string }> {
     const { refreshToken } = refreshTokenDto;
 
     const tokenRecord = await this.validateRefreshToken(refreshToken);

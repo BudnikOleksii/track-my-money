@@ -2,11 +2,12 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../../store/api/authApi';
-import { Button } from '../../../shared/ui/button';
-import { Input } from '../../../shared/ui/input';
-import { Label } from '../../../shared/ui/label';
-import { useToast } from '../../../shared/hooks/useToast';
+
+import { useLoginMutation } from '@/store/api/authApi';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
+import { useToast } from '@/shared/hooks/useToast';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),

@@ -1,18 +1,19 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useCreateCategoryMutation } from '../../../store/api/categoriesApi';
-import { Button } from '../../../shared/ui/button';
-import { Input } from '../../../shared/ui/input';
-import { Label } from '../../../shared/ui/label';
+
+import { useCreateCategoryMutation } from '@/store/api/categoriesApi';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../../shared/ui/select';
-import { useToast } from '../../../shared/hooks/useToast';
+} from '@/shared/ui/select';
+import { useToast } from '@/shared/hooks/useToast';
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Name is required'),

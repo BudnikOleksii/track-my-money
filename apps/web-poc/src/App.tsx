@@ -7,6 +7,7 @@ import Layout from './shared/components/Layout';
 import TransactionsPage from './features/transactions/pages/TransactionsPage';
 import CategoriesPage from './features/categories/pages/CategoriesPage';
 import ProfilePage from './features/profile/pages/ProfilePage';
+import { ROUTES } from './shared/constants/routes';
 
 const App = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -14,15 +15,19 @@ const App = () => {
   return (
     <Routes>
       <Route
-        path="/login"
-        element={user ? <Navigate to="/" replace /> : <LoginPage />}
+        path={ROUTES.AUTH.LOGIN}
+        element={
+          user ? <Navigate to={ROUTES.APP.HOME} replace /> : <LoginPage />
+        }
       />
       <Route
-        path="/signup"
-        element={user ? <Navigate to="/" replace /> : <SignupPage />}
+        path={ROUTES.AUTH.SIGNUP}
+        element={
+          user ? <Navigate to={ROUTES.APP.HOME} replace /> : <SignupPage />
+        }
       />
       <Route
-        path="/"
+        path={ROUTES.APP.HOME}
         element={
           <ProtectedRoute>
             <Layout />

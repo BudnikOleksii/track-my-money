@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
-import LoginForm from '../components/LoginForm';
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../shared/ui/card';
+} from '@/shared/ui/card';
+import { ROUTES } from '@/shared/constants/routes';
+
+import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
   return (
@@ -23,7 +26,7 @@ const LoginPage = () => {
           <div className="mt-4 text-center text-sm">
             Don't have an account?{' '}
             <Link
-              to="/signup"
+              to={ROUTES.AUTH.SIGNUP}
               className="font-medium text-primary underline underline-offset-4"
             >
               Sign up

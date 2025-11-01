@@ -3,6 +3,13 @@ import { Wallet, Tags, User, LogOut } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useLogoutMutation } from '../../store/api/authApi';
 import { Toaster } from './Toaster';
+import { ROUTES } from '../constants/routes';
+
+const NAV_ITEMS = [
+  { path: ROUTES.APP.TRANSACTIONS, label: 'Transactions', icon: Wallet },
+  { path: ROUTES.APP.CATEGORIES, label: 'Categories', icon: Tags },
+  { path: ROUTES.APP.PROFILE, label: 'Profile', icon: User },
+];
 
 const Layout = () => {
   const location = useLocation();
@@ -10,27 +17,20 @@ const Layout = () => {
 
   const handleLogout = async () => {
     await logout();
-    window.location.href = '/login';
+    window.location.href = ROUTES.AUTH.LOGIN;
   };
-
-  const navItems = [
-    { path: '/', label: 'Transactions', icon: Wallet },
-    { path: '/categories', label: 'Categories', icon: Tags },
-    { path: '/profile', label: 'Profile', icon: User },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
       <Toaster />
       <div className="flex h-screen">
-        {/* Sidebar */}
         <aside className="w-64 border-r bg-card">
           <div className="flex h-full flex-col">
             <div className="flex h-16 items-center border-b px-6">
               <h1 className="text-xl font-semibold">Track My Money</h1>
             </div>
             <nav className="flex-1 space-y-1 p-4">
-              {navItems.map((item) => {
+              {NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 return (
@@ -61,7 +61,6 @@ const Layout = () => {
           </div>
         </aside>
 
-        {/* Main content */}
         <main className="flex-1 overflow-auto">
           <Outlet />
         </main>

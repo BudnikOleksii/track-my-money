@@ -1,14 +1,15 @@
-import { useDeleteCategoryMutation } from '../../../store/api/categoriesApi';
+import { Trash2 } from 'lucide-react';
+
+import { useDeleteCategoryMutation } from '@/store/api/categoriesApi';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../../../shared/ui/card';
-import { Button } from '../../../shared/ui/button';
-import { Trash2 } from 'lucide-react';
-import { cn } from '../../../shared/utils/cn';
+} from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
+import { cn } from '@/shared/utils/cn';
 
 interface CategoryListProps {
   categories: any[];
