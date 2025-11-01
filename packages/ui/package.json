@@ -3,25 +3,35 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./*": "./src/*.tsx"
+    "./*": "./src/*/*.tsx",
+    "./styles": "./src/styles/index.css",
+    "./styles/*": "./src/styles/*.css"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint ./ --ext .ts,.tsx --fix",
     "generate:component": "turbo gen react-component",
-    "type-check": "tsc --noEmit --incremental false"
+    "generate:theme": "tsx scripts/generate-theme.ts",
+    "type-check": "tsc --noEmit --incremental false",
+    "stylelint": "stylelint '**/*.{scss,css}'",
+    "stylelint:fix": "stylelint '**/*.{scss,css}' --fix"
   },
   "devDependencies": {
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
+    "@track-my-money/stylelint-config": "workspace:*",
     "@types/node": "22.18.12",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.1.1",
     "eslint": "9.38.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "stylelint": "16.20.0",
+    "tsx": "4.20.6"
   },
   "dependencies": {
+    "clsx": "2.1.1",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "sass": "1.93.3"
   }
 }
