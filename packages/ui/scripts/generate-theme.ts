@@ -66,10 +66,12 @@ const generateTheme = () => {
 
   const paletteCSS = generatePaletteCSS(themeData.palettes);
   writeFileSync(resolve(outputDir, 'palette.scss'), paletteCSS);
+  // eslint-disable-next-line no-console
   console.log('✅ Generated palette.scss');
 
   const themeCSS = generateThemeCSS(themeData.schemes);
   writeFileSync(resolve(outputDir, 'theme.scss'), themeCSS);
+  // eslint-disable-next-line no-console
   console.log('✅ Generated theme.scss');
 };
 
