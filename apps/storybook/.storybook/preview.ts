@@ -1,4 +1,6 @@
-import type { Preview } from '@storybook/nextjs-vite';
+import type { Preview } from '@storybook/react-vite';
+
+import '@track-my-money/ui/src/styles/index.scss';
 
 const preview: Preview = {
   parameters: {
