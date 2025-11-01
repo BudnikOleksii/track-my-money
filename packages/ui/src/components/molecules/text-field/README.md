@@ -46,18 +46,19 @@ import { TextField } from '@track-my-money/ui/src/components/molecules/text-fiel
 
 Extends `InputHTMLAttributes<HTMLInputElement>` with the following additional props:
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | - | Label text displayed above the input |
-| `helperText` | `string` | - | Helper text displayed below the input |
-| `error` | `boolean` | `false` | Shows error state styling |
-| `required` | `boolean` | `false` | Shows asterisk on label and marks field as required |
-| `disabled` | `boolean` | `false` | Disables both label and input |
-| `id` | `string` | auto-generated | ID for the input element |
+| Prop         | Type      | Default        | Description                                         |
+| ------------ | --------- | -------------- | --------------------------------------------------- |
+| `label`      | `string`  | -              | Label text displayed above the input                |
+| `helperText` | `string`  | -              | Helper text displayed below the input               |
+| `error`      | `boolean` | `false`        | Shows error state styling                           |
+| `required`   | `boolean` | `false`        | Shows asterisk on label and marks field as required |
+| `disabled`   | `boolean` | `false`        | Disables both label and input                       |
+| `id`         | `string`  | auto-generated | ID for the input element                            |
 
 ## Comparison with MUI TextField
 
 ### Similarities
+
 - Combines label, input, and helper text in one component
 - Supports error states with visual feedback
 - Shows required field indicators
@@ -65,6 +66,7 @@ Extends `InputHTMLAttributes<HTMLInputElement>` with the following additional pr
 - Includes accessibility features
 
 ### Differences
+
 - Uses atomic components (Label + Input) for better composition
 - Simpler API focused on common use cases
 - Lighter weight with no external UI library dependencies
@@ -74,10 +76,10 @@ Extends `InputHTMLAttributes<HTMLInputElement>` with the following additional pr
 ## Examples
 
 See the Storybook stories for comprehensive examples:
+
 - Basic usage
 - Form validation
 - All input types
 - Error states
 - Disabled states
 - Complete form examples
-

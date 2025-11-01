@@ -142,7 +142,12 @@ export const LongHelperText: Story = {
 export const FormExample: Story = {
   render: () => (
     <form
-      style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: '400px' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        minWidth: '400px',
+      }}
       onSubmit={(e) => {
         e.preventDefault();
         alert('Form submitted!');
@@ -184,7 +189,14 @@ export const FormExample: Story = {
 
 export const ValidationStates: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: '400px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        minWidth: '400px',
+      }}
+    >
       <TextField
         label="Valid Email"
         type="email"
@@ -215,7 +227,14 @@ export const ValidationStates: Story = {
 
 export const AllTypes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: '400px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        minWidth: '400px',
+      }}
+    >
       <TextField label="Text" type="text" placeholder="Text input" />
       <TextField label="Email" type="email" placeholder="email@example.com" />
       <TextField label="Password" type="password" placeholder="Password" />
@@ -226,4 +245,3 @@ export const AllTypes: Story = {
     </div>
   ),
 };
-
