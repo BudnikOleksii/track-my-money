@@ -30,15 +30,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get environment versions
-        id: env
-        uses: ./.github/actions/env-versions
-
       - name: Set up environment
         uses: ./.github/actions/setup-pnpm-node-deps
         with:
-          node_version: ${{ steps.env.outputs.node_version }}
-          pnpm_version: ${{ steps.env.outputs.pnpm_version }}
+          node_version: ${{ needs.init-env.outputs.node_version }}
+          pnpm_version: ${{ needs.init-env.outputs.pnpm_version }}
 
       - name: Run ESLint
         run: |
@@ -51,15 +47,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get environment versions
-        id: env
-        uses: ./.github/actions/env-versions
-
       - name: Set up environment
         uses: ./.github/actions/setup-pnpm-node-deps
         with:
-          node_version: ${{ steps.env.outputs.node_version }}
-          pnpm_version: ${{ steps.env.outputs.pnpm_version }}
+          node_version: ${{ needs.init-env.outputs.node_version }}
+          pnpm_version: ${{ needs.init-env.outputs.pnpm_version }}
 
       - name: Build packages
         run: |
@@ -76,15 +68,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get environment versions
-        id: env
-        uses: ./.github/actions/env-versions
-
       - name: Set up environment
         uses: ./.github/actions/setup-pnpm-node-deps
         with:
-          node_version: ${{ steps.env.outputs.node_version }}
-          pnpm_version: ${{ steps.env.outputs.pnpm_version }}
+          node_version: ${{ needs.init-env.outputs.node_version }}
+          pnpm_version: ${{ needs.init-env.outputs.pnpm_version }}
 
       - name: Run stylelint
         run: |
