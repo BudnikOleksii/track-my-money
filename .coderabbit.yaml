@@ -9,26 +9,26 @@ reviews:
   path_instructions:
     - path: 'apps/api/**/*'
       instructions: |
-        "Confirm that the code adheres to the following:
+        Confirm that the code adheres to the following:
         - NestJS architecture, including modules, services, repositories, and controllers.
         - Dependency injection patterns and service encapsulation.
-        - Integration and unit testing coverage and practices."
+        - Integration and unit testing coverage and practices.
     - path: 'packages/api-shared/**/*'
       instructions: |
-        "Confirm that the code adheres to the following:
+        Confirm that the code adheres to the following:
          - Cross-application DTO-s and entities only.
     - path: 'packages/shared/**/*'
       instructions: |
-        "Confirm that the code adheres to the following:
+        Confirm that the code adheres to the following:
          - Cross-application utility functions, types, and constants.
          - TypeScript best practices to ensure type safety and reusability.
-         - Documentation and examples for library consumers."
+         - Documentation and examples for library consumers.
     - path: 'packages/ui/**/*'
       instructions: |
-        "Confirm that the code adheres to the following:
+        Confirm that the code adheres to the following:
         - Reusability of components across different React or NextJS apps.
         - TypeScript usage for defining props and exporting types.
-        - Effective tree-shaking and bundling practices."
+        - Effective tree-shaking and bundling practices.
   auto_review:
     enabled: true
     drafts: false
