@@ -16,11 +16,13 @@
     "lint:fix": "turbo run lint:fix",
     "stylelint": "turbo run stylelint",
     "stylelint:fix": "turbo run stylelint:fix",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
+    "husky": "9.1.7",
     "prettier": "3.6.2",
     "turbo": "2.5.8"
   },
