@@ -17,9 +17,12 @@
     "stylelint": "turbo run stylelint",
     "stylelint:fix": "turbo run stylelint:fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "commitlint": "commitlint --edit",
     "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/cli": "20.1.0",
+    "@commitlint/config-conventional": "20.0.0",
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "husky": "9.1.7",
@@ -31,17 +34,5 @@
   "engines": {
     "node": "22.15.0",
     "pnpm": "10.10.0"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.scss": [
-      "stylelint --fix"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
-    ]
   }
 }
