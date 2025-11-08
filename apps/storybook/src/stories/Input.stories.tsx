@@ -24,7 +24,16 @@ const meta: Meta<typeof Input> = {
     },
     type: {
       control: 'select',
-      options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search', 'file'],
+      options: [
+        'text',
+        'email',
+        'password',
+        'number',
+        'tel',
+        'url',
+        'search',
+        'file',
+      ],
       description: 'The type of input',
     },
   },
@@ -104,7 +113,14 @@ export const Disabled: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: '300px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        minWidth: '300px',
+      }}
+    >
       <Input placeholder="Default state" />
       <Input defaultValue="With value" />
       <Input error placeholder="Error state" />
@@ -116,7 +132,14 @@ export const AllStates: Story = {
 
 export const AllTypes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: '300px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        minWidth: '300px',
+      }}
+    >
       <Input type="text" placeholder="Text input" />
       <Input type="email" placeholder="email@example.com" />
       <Input type="password" placeholder="Password" />
@@ -128,4 +151,3 @@ export const AllTypes: Story = {
     </div>
   ),
 };
-

@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import {StringValue} from "ms";
+import { StringValue } from 'ms';
 
 import { AuthConfig, authConfigSchema } from './auth.config';
 

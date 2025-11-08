@@ -1,4 +1,4 @@
-@use '../../../styles/mixins' as *;
+@use "../../../styles/mixins" as *;
 
 .input {
   display: flex;
@@ -42,7 +42,7 @@
     opacity: 0.5;
   }
 
-  &[type='file'] {
+  &[type="file"] {
     padding: var(--spacing-2) var(--spacing-3);
 
     font-size: var(--font-body-s-size);
