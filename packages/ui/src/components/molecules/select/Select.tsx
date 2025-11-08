@@ -48,10 +48,11 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 export const SelectScrollUpButton = forwardRef<
   ElementRef<typeof SelectPrimitive.ScrollUpButton>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
->(({ className, ...props }, ref) => (
+>(({ className, 'aria-label': ariaLabel, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
     ref={ref}
     className={cn(styles.scrollButton, className)}
+    aria-label={ariaLabel || 'Scroll up'}
     {...props}
   >
     <svg
@@ -64,6 +65,8 @@ export const SelectScrollUpButton = forwardRef<
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
     >
       <polyline points="18 15 12 9 6 15" />
     </svg>
@@ -74,10 +77,11 @@ SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
 export const SelectScrollDownButton = forwardRef<
   ElementRef<typeof SelectPrimitive.ScrollDownButton>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
->(({ className, ...props }, ref) => (
+>(({ className, 'aria-label': ariaLabel, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
     ref={ref}
     className={cn(styles.scrollButton, className)}
+    aria-label={ariaLabel || 'Scroll down'}
     {...props}
   >
     <svg
@@ -90,6 +94,8 @@ export const SelectScrollDownButton = forwardRef<
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
     >
       <polyline points="6 9 12 15 18 9" />
     </svg>
