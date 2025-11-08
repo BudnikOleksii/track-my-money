@@ -45,7 +45,7 @@ jobs:
           pnpm lint
 
   type-check:
-    needs: [ init-env ]
+    needs: [init-env]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -61,12 +61,16 @@ jobs:
           node_version: ${{ steps.env.outputs.node_version }}
           pnpm_version: ${{ steps.env.outputs.pnpm_version }}
 
+      - name: Build packages
+        run: |
+          pnpm build:packages
+
       - name: Run type-check
         run: |
           pnpm type-check
 
   stylelint:
-    needs: [ init-env ]
+    needs: [init-env]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -85,4 +89,3 @@ jobs:
       - name: Run stylelint
         run: |
           pnpm stylelint
-

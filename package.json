@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "build:packages": "turbo run build --filter='./packages/*'",
     "build:storybook": "turbo run build:storybook",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
