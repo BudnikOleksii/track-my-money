@@ -1,4 +1,1 @@
-pnpm type-check
-pnpm lint
-pnpm stylelint:fix
-pnpm format
+pnpm lint-staged

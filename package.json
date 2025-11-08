@@ -23,6 +23,7 @@
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "husky": "9.1.7",
+    "lint-staged": "16.2.6",
     "prettier": "3.6.2",
     "turbo": "2.5.8"
   },
@@ -30,5 +31,17 @@
   "engines": {
     "node": "22.15.0",
     "pnpm": "10.10.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.scss": [
+      "stylelint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }
