@@ -37,7 +37,7 @@
   "devDependencies": {
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
-    "@types/node": "24.9.2",
+    "@types/node": "24.10.0",
     "eslint": "9.38.0",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
