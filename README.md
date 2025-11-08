@@ -24,7 +24,6 @@ This Turborepo includes the following packages & apps:
 └── packages
     ├── @track-my-money/api-shared                 # Shared `NestJS` resources.
     ├── @track-my-money/eslint-config       # `eslint` configurations (includes `prettier`)
-    ├── @track-my-money/jest-config         # `jest` configurations
     ├── @track-my-money/typescript-config   # `tsconfig.json`s used throughout the monorepo
     └── @track-my-money/ui                  # Shareable stub React component library.
 ```
@@ -69,8 +68,6 @@ pnpm run test
 
 # You can launch e2e testes with `test:e2e`
 pnpm run test:e2e
-
-# See `@track-my-money/jest-config` to customize the behavior.
 ```
 
 #### Lint
