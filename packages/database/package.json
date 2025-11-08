@@ -22,7 +22,7 @@
   "devDependencies": {
     "@track-my-money/typescript-config": "workspace:*",
     "@types/bcrypt": "6.0.0",
-    "@types/node": "24.9.2",
+    "@types/node": "24.10.0",
     "eslint": "9.38.0",
     "prisma": "6.18.0",
     "ts-node": "10.9.2",
