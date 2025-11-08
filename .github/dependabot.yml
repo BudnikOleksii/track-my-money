@@ -1,121 +1,189 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: 'weekly'
+      day: 'monday'
     open-pull-requests-limit: 10
     groups:
-      production-dependencies:
+      eslint-dependencies:
         patterns:
-          - "*"
+          - 'eslint*'
+          - '@eslint/*'
+          - '@typescript-eslint/*'
         update-types:
-          - "minor"
-          - "patch"
-      development-dependencies:
-        dependency-type: "development"
+          - 'minor'
+          - 'patch'
+      typescript-dependencies:
+        patterns:
+          - 'typescript'
+          - '@types/*'
         update-types:
-          - "minor"
-          - "patch"
-
-  - package-ecosystem: "npm"
-    directory: "/apps/api"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-    groups:
+          - 'minor'
+          - 'patch'
+      testing-dependencies:
+        patterns:
+          - 'jest*'
+          - '@jest/*'
+          - 'vitest*'
+          - '@vitest/*'
+          - '@testing-library/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      build-tools:
+        patterns:
+          - 'vite*'
+          - '@vitejs/*'
+          - 'turbo'
+          - 'tsup'
+        update-types:
+          - 'minor'
+          - 'patch'
       nestjs-dependencies:
         patterns:
-          - "@nestjs/*"
+          - '@nestjs/*'
         update-types:
-          - "minor"
-          - "patch"
-
-  - package-ecosystem: "npm"
-    directory: "/apps/storybook"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-    groups:
+          - 'minor'
+          - 'patch'
       storybook-dependencies:
         patterns:
-          - "@storybook/*"
+          - '@storybook/*'
+          - 'storybook'
         update-types:
-          - "minor"
-          - "patch"
-
-  - package-ecosystem: "npm"
-    directory: "/apps/web-poc"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-    groups:
+          - 'minor'
+          - 'patch'
       react-dependencies:
         patterns:
-          - "react"
-          - "react-dom"
-          - "@types/react*"
+          - 'react'
+          - 'react-dom'
+          - '@types/react*'
         update-types:
-          - "minor"
-          - "patch"
-
-  - package-ecosystem: "npm"
-    directory: "/packages/api-shared"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-
-  - package-ecosystem: "npm"
-    directory: "/packages/database"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-    groups:
+          - 'minor'
+          - 'patch'
       prisma-dependencies:
         patterns:
-          - "@prisma/*"
-          - "prisma"
+          - '@prisma/*'
+          - 'prisma'
         update-types:
-          - "minor"
-          - "patch"
+          - 'minor'
+          - 'patch'
+      styling-dependencies:
+        patterns:
+          - 'sass'
+          - 'postcss*'
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'stylelint*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      ui-components:
+        patterns:
+          - '@radix-ui/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      state-management:
+        patterns:
+          - 'redux'
+          - '@reduxjs/toolkit'
+          - 'react-redux'
+        update-types:
+          - 'minor'
+          - 'patch'
+      form-handling:
+        patterns:
+          - '@hookform/*'
+          - 'react-hook-form'
+        update-types:
+          - 'minor'
+          - 'patch'
+      commit-linting:
+        patterns:
+          - '@commitlint/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      ast-tools:
+        patterns:
+          - '@ast-grep/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      nextjs-dependencies:
+        patterns:
+          - '@next/*'
+          - 'next'
+        update-types:
+          - 'minor'
+          - 'patch'
+      utilities:
+        patterns:
+          - 'async-mutex'
+          - 'clsx'
+          - 'date-fns'
+          - 'tailwind-merge'
+          - 'uuid'
+          - 'zod'
+        update-types:
+          - 'minor'
+          - 'patch'
+      backend:
+        patterns:
+          - 'bcrypt'
+          - 'class-transformer'
+          - 'class-validator'
+          - 'cookie-parser'
+          - 'joi'
+          - 'jsonwebtoken'
+          - 'passport'
+          - 'passport-jwt'
+          - 'rxjs'
+          - 'reflect-metadata'
+        update-types:
+          - 'minor'
+          - 'patch'
+      internal-packages:
+        patterns:
+          - '@track-my-money/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      tooling:
+        patterns:
+          - 'autoprefixer'
+          - 'globals'
+          - 'husky'
+          - 'lint-staged'
+          - 'playwright'
+          - 'prettier'
+          - 'source-map-support'
+          - 'supertest'
+          - 'ts-jest'
+          - 'ts-loader'
+          - 'ts-node'
+          - 'tsconfig-paths'
+          - 'tsx'
+        update-types:
+          - 'minor'
+          - 'patch'
+      ui:
+        patterns:
+          - '@chromatic-com/storybook'
+          - '@stylistic/stylelint-config'
+          - 'class-variance-authority'
+          - 'lucide-react'
+          - 'react-router-dom'
+          - 'tailwindcss-animate'
+        update-types:
+          - 'minor'
+          - 'patch'
 
-  - package-ecosystem: "npm"
-    directory: "/packages/eslint-config"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-
-  - package-ecosystem: "npm"
-    directory: "/packages/stylelint-config"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-
-  - package-ecosystem: "npm"
-    directory: "/packages/typescript-config"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-
-  - package-ecosystem: "npm"
-    directory: "/packages/ui"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: 'weekly'
+      day: 'monday'
     open-pull-requests-limit: 5
