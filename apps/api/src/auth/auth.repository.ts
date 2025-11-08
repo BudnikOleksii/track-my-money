@@ -57,8 +57,8 @@ export class AuthRepository {
     data: RefreshTokenCreateData,
   ): Promise<RefreshToken> {
     const { userId, ...restData } = data;
-    
-return this.prisma.client.refreshToken.create({
+
+    return this.prisma.client.refreshToken.create({
       data: {
         ...restData,
         user: { connect: { id: userId } },
@@ -115,8 +115,8 @@ return this.prisma.client.refreshToken.create({
     data: ActivationLinkCreateData,
   ): Promise<ActivationLink> {
     const { userId, ...restData } = data;
-    
-return this.prisma.client.activationLink.create({
+
+    return this.prisma.client.activationLink.create({
       data: {
         ...restData,
         user: { connect: { id: userId } },

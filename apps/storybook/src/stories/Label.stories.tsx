@@ -59,7 +59,9 @@ export const RequiredAndDisabled: Story = {
 
 export const WithInput: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}
+    >
       <Label htmlFor="email">Email</Label>
       <Input id="email" type="email" placeholder="email@example.com" />
     </div>
@@ -68,7 +70,9 @@ export const WithInput: Story = {
 
 export const RequiredWithInput: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}
+    >
       <Label htmlFor="required-email" required>
         Email
       </Label>
@@ -79,23 +83,39 @@ export const RequiredWithInput: Story = {
 
 export const DisabledWithInput: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}
+    >
       <Label htmlFor="disabled-email" disabled>
         Email
       </Label>
-      <Input id="disabled-email" type="email" placeholder="email@example.com" disabled />
+      <Input
+        id="disabled-email"
+        type="email"
+        placeholder="email@example.com"
+        disabled
+      />
     </div>
   ),
 };
 
 export const ErrorWithInput: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', minWidth: '300px' }}
+    >
       <Label htmlFor="error-email" required>
         Email
       </Label>
-      <Input id="error-email" type="email" placeholder="email@example.com" error />
-      <span style={{ fontSize: '12px', color: 'var(--error)', marginTop: '4px' }}>
+      <Input
+        id="error-email"
+        type="email"
+        placeholder="email@example.com"
+        error
+      />
+      <span
+        style={{ fontSize: '12px', color: 'var(--error)', marginTop: '4px' }}
+      >
         Please enter a valid email address
       </span>
     </div>
@@ -104,7 +124,14 @@ export const ErrorWithInput: Story = {
 
 export const FormExample: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', minWidth: '300px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        minWidth: '300px',
+      }}
+    >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Label htmlFor="form-name" required>
           Full Name
@@ -141,4 +168,3 @@ export const AllStates: Story = {
     </div>
   ),
 };
-
