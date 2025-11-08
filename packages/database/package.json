@@ -22,11 +22,11 @@
   "devDependencies": {
     "@track-my-money/typescript-config": "workspace:*",
     "@types/bcrypt": "6.0.0",
-    "@types/node": "24.9.2",
-    "eslint": "9.38.0",
-    "prisma": "6.18.0",
+    "@types/node": "24.10.0",
+    "eslint": "9.39.1",
+    "prisma": "6.19.0",
     "ts-node": "10.9.2",
-    "typescript": "5.8.2"
+    "typescript": "5.9.3"
   },
   "prisma": {
     "seed": "ts-node prisma/seeds/index.ts"
