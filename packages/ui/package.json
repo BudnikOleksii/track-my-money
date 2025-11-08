@@ -15,7 +15,7 @@
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "@track-my-money/stylelint-config": "workspace:*",
-    "@types/node": "24.9.2",
+    "@types/node": "24.10.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.1.1",
     "eslint": "9.38.0",
