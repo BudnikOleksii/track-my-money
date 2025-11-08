@@ -44,7 +44,6 @@
     "@nestjs/schematics": "11.0.9",
     "@nestjs/testing": "11.1.7",
     "@track-my-money/eslint-config": "workspace:*",
-    "@track-my-money/jest-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "@types/bcrypt": "6.0.0",
     "@types/cookie-parser": "^1.4.10",
