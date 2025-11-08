@@ -9,9 +9,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
+  init-env:
     runs-on: ubuntu-latest
+    outputs:
+      node_version: ${{ steps.set-env.outputs.node_version }}
+      pnpm_version: ${{ steps.set-env.outputs.pnpm_version }}
+    steps:
+      - run: echo "Passing environment variables to context"
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - id: set-env
+        uses: ./.github/actions/env-versions
+
+  eslint:
+    needs: [init-env]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,41 +34,55 @@ jobs:
         id: env
         uses: ./.github/actions/env-versions
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up environment
+        uses: ./.github/actions/setup-pnpm-node-deps
         with:
-          node-version: ${{ steps.env.outputs.node_version }}
+          node_version: ${{ steps.env.outputs.node_version }}
+          pnpm_version: ${{ steps.env.outputs.pnpm_version }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ steps.env.outputs.pnpm_version }}
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
+      - name: Run ESLint
         run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+          pnpm lint
 
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+  type-check:
+    needs: [ init-env ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get environment versions
+        id: env
+        uses: ./.github/actions/env-versions
+
+      - name: Set up environment
+        uses: ./.github/actions/setup-pnpm-node-deps
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run lint
-        run: pnpm lint
+          node_version: ${{ steps.env.outputs.node_version }}
+          pnpm_version: ${{ steps.env.outputs.pnpm_version }}
 
       - name: Run type-check
-        run: pnpm type-check
+        run: |
+          pnpm type-check
+
+  stylelint:
+    needs: [ init-env ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get environment versions
+        id: env
+        uses: ./.github/actions/env-versions
+
+      - name: Set up environment
+        uses: ./.github/actions/setup-pnpm-node-deps
+        with:
+          node_version: ${{ steps.env.outputs.node_version }}
+          pnpm_version: ${{ steps.env.outputs.pnpm_version }}
 
       - name: Run stylelint
-        run: pnpm stylelint
+        run: |
+          pnpm stylelint
 
-      - name: Run tests
-        run: pnpm test
