@@ -18,7 +18,7 @@ jobs:
       - run: echo "Passing environment variables to context"
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - id: set-env
         uses: ./.github/actions/env-versions
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up environment
         uses: ./.github/actions/setup-pnpm-node-deps
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up environment
         uses: ./.github/actions/setup-pnpm-node-deps
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up environment
         uses: ./.github/actions/setup-pnpm-node-deps
