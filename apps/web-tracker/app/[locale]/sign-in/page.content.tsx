@@ -10,6 +10,7 @@ import type { LoginDto } from '@track-my-money/api-shared';
 import { Typography } from '@track-my-money/ui/src/components/atoms/typography/Typography';
 import { TextField } from '@track-my-money/ui/src/components/molecules/text-field/TextField';
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
+import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 
 import { useLoginMutation } from '@/app/store/api/auth-api';
 import { ROUTES } from '@/app/shared/constants/routes';
@@ -94,7 +95,7 @@ export const SignInPageContent: FC = () => {
             disabled={isLoading}
             className={styles.submitButton}
           >
-            {isLoading ? 'Loading...' : t('signInButton')}
+            {isLoading ? <Loader size="sm" /> : t('signInButton')}
           </Button>
         </form>
 

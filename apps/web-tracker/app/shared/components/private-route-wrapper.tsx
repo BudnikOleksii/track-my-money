@@ -14,7 +14,7 @@ export const PrivateRouteWrapper: FC<PropsWithChildren> = ({ children }) => {
     const checkAuth = async () => {
       if (!isAuthenticated) {
         try {
-          await refresh(undefined);
+          await refresh(undefined).unwrap();
         } catch {
           router.push('/sign-in');
         }

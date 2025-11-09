@@ -10,9 +10,11 @@ import type { SignupDto } from '@track-my-money/api-shared';
 import { Typography } from '@track-my-money/ui/src/components/atoms/typography/Typography';
 import { TextField } from '@track-my-money/ui/src/components/molecules/text-field/TextField';
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
+import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 
 import { useSignupMutation } from '@/app/store/api/auth-api';
 import { I18N_NAMESPACE } from '@/app/i18n/constants/i18n-namespace';
+import { ROUTES } from '@/app/shared/constants/routes';
 
 import styles from './page.module.scss';
 
@@ -43,7 +45,7 @@ export const SignUpPageContent: FC = () => {
         password: data.password,
       };
       await signup(signupDto).unwrap();
-      router.push('/dashboard');
+      router.push(ROUTES.dashboard);
     } catch {
       setErrorMessage(t('errorGeneric'));
     }
@@ -108,13 +110,13 @@ export const SignUpPageContent: FC = () => {
             disabled={isLoading}
             className={styles.submitButton}
           >
-            {isLoading ? 'Loading...' : t('signUpButton')}
+            {isLoading ? <Loader size="sm" /> : t('signUpButton')}
           </Button>
         </form>
 
         <Typography variant="body-s" className={styles.footer}>
           {t('haveAccount')}{' '}
-          <Link href="/sign-in" className={styles.link}>
+          <Link href={ROUTES.signIn} className={styles.link}>
             {t('signInLink')}
           </Link>
         </Typography>
