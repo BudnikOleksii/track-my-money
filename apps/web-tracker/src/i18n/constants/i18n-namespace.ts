@@ -4,6 +4,7 @@ export const I18N_NAMESPACE = {
   signInPage: 'signInPage',
   signUpPage: 'signUpPage',
   dashboardPage: 'dashboardPage',
+  authShared: 'authShared',
 } as const;
 
 export type I18Namespace = (typeof I18N_NAMESPACE)[keyof typeof I18N_NAMESPACE];

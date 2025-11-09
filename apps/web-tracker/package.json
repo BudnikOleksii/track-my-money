@@ -13,30 +13,32 @@
     "stylelint:fix": "stylelint '**/*.{scss,css}' --fix"
   },
   "dependencies": {
+    "@hookform/resolvers": "5.2.2",
+    "@reduxjs/toolkit": "2.10.1",
+    "@track-my-money/ui": "workspace:*",
+    "async-mutex": "0.5.0",
+    "deepmerge": "4.3.1",
+    "next": "16.0.1",
+    "next-intl": "4.5.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.1",
-    "@track-my-money/ui": "workspace:*",
-    "@reduxjs/toolkit": "2.10.1",
+    "react-hook-form": "7.66.0",
     "react-redux": "9.2.0",
     "redux-persist": "6.0.0",
-    "next-intl": "4.5.0",
-    "deepmerge": "4.3.1",
-    "react-hook-form": "7.66.0",
-    "async-mutex": "0.5.0"
+    "zod": "4.1.12"
   },
   "devDependencies": {
     "@track-my-money/api-shared": "workspace:*",
     "@track-my-money/eslint-config": "workspace:*",
-    "@track-my-money/typescript-config": "workspace:*",
     "@track-my-money/stylelint-config": "workspace:*",
-    "typescript": "5.9.3",
+    "@track-my-money/typescript-config": "workspace:*",
     "@types/node": "24.10.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "9.39.1",
     "eslint-config-next": "16.0.1",
+    "redux-persist-transform-encrypt": "5.1.1",
     "stylelint": "16.25.0",
-    "redux-persist-transform-encrypt": "5.1.1"
+    "typescript": "5.9.3"
   }
 }

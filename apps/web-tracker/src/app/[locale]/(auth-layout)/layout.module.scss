@@ -1,0 +1,35 @@
+@use "@track-my-money/ui/src/styles/breakpoints" as *;
+
+.container {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+
+  padding: var(--spacing-4);
+
+  background-color: var(--background);
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+
+  padding: var(--spacing-6);
+
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadows-2);
+}
+
+@include media-m {
+  .container {
+    padding: var(--spacing-8);
+  }
+
+  .formWrapper {
+    padding: var(--spacing-8);
+  }
+}

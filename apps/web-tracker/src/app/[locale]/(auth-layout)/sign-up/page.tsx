@@ -1,14 +1,21 @@
-import type { Metadata } from 'next';
+import type { Metadata, NextPage } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { I18N_NAMESPACE } from '@/src/i18n/constants/i18n-namespace';
+import { LOCALE_CODE_LIST, LocaleCode } from '@/src/i18n/constants/locale-code';
 
 import { SignUpPageContent } from './page.content';
 
 interface Props {
   params: Promise<{
-    locale: string;
+    locale: LocaleCode;
   }>;
+}
+
+export function generateStaticParams() {
+  return LOCALE_CODE_LIST.map((locale) => ({
+    locale,
+  }));
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
@@ -26,8 +33,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-const SignUpPage = () => {
-  return <SignUpPageContent />;
+const SignUpPage: NextPage<Props> = async (props) => {
+  const params = await props.params;
+  const { locale } = params;
+
+  return <SignUpPageContent locale={locale} />;
 };
 
 export default SignUpPage;
