@@ -1,3 +1,5 @@
+import { ExampleComponent } from '@/app/store/example-usage';
+
 export default function Home() {
-  return <div>TEST</div>;
+  return <ExampleComponent />;
 }

@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.scss';
+import { Poppins, Outfit } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+import './globals.scss';
+import { StoreProvider } from './store/StoreProvider';
+
+const poppins = Poppins({
+  variable: '--default-font-family',
+  weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const outfit = Outfit({
+  variable: '--accent-font-family',
   subsets: ['latin'],
 });
 
@@ -24,10 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.variable} ${outfit.variable} antialiased`}>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );

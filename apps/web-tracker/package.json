@@ -16,7 +16,10 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "next": "16.0.1",
-    "@track-my-money/ui": "workspace:*"
+    "@track-my-money/ui": "workspace:*",
+    "@reduxjs/toolkit": "2.10.1",
+    "react-redux": "9.2.0",
+    "redux-persist": "6.0.0"
   },
   "devDependencies": {
     "@track-my-money/eslint-config": "workspace:*",
@@ -28,6 +31,7 @@
     "@types/react-dom": "19.2.2",
     "eslint": "9.39.1",
     "eslint-config-next": "16.0.1",
-    "stylelint": "16.25.0"
+    "stylelint": "16.25.0",
+    "redux-persist-transform-encrypt": "5.1.1"
   }
 }
