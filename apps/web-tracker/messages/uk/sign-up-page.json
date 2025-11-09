@@ -8,18 +8,9 @@
     "subtitle": "Створіть новий обліковий запис",
     "name": "Ім'я",
     "namePlaceholder": "Введіть ваше ім'я",
-    "email": "Електронна пошта",
-    "emailPlaceholder": "Введіть вашу електронну пошту",
-    "password": "Пароль",
-    "passwordPlaceholder": "Введіть ваш пароль",
     "signUpButton": "Зареєструватися",
     "haveAccount": "Вже є обліковий запис?",
     "signInLink": "Увійти",
-    "errorGeneric": "Сталася помилка. Будь ласка, спробуйте ще раз.",
-    "nameRequired": "Ім'я обов'язкове",
-    "emailRequired": "Електронна пошта обов'язкова",
-    "emailInvalid": "Введіть дійсну електронну пошту",
-    "passwordRequired": "Пароль обов'язковий",
-    "passwordMinLength": "Пароль повинен містити щонайменше 8 символів"
+    "nameMinLength": "Ім'я повинно мати не менше 4 символів"
   }
 }
