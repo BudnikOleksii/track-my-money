@@ -31,7 +31,7 @@ export const SignInForm: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<SignInFormData>({
     resolver: zodResolver(createSignInSchema(tShared)),
   });
 

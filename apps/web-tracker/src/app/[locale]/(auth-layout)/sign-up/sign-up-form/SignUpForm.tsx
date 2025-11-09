@@ -32,7 +32,7 @@ export const SignUpForm: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<SignUpFormData>({
     resolver: zodResolver(createSignUpSchema(t, tShared)),
   });
 

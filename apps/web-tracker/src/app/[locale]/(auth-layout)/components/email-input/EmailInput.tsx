@@ -22,7 +22,6 @@ export const EmailInput = <T extends Record<string, unknown>>({
     <TextField
       label={t('email')}
       type="email"
-      autoComplete="email"
       placeholder={t('emailPlaceholder')}
       error={!!fieldError}
       helperText={fieldError?.message}
