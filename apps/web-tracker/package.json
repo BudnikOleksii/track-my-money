@@ -19,7 +19,9 @@
     "@track-my-money/ui": "workspace:*",
     "@reduxjs/toolkit": "2.10.1",
     "react-redux": "9.2.0",
-    "redux-persist": "6.0.0"
+    "redux-persist": "6.0.0",
+    "next-intl": "4.5.0",
+    "deepmerge": "4.3.1"
   },
   "devDependencies": {
     "@track-my-money/eslint-config": "workspace:*",

@@ -1,0 +1,9 @@
+import { I18N_NAMESPACE, I18Namespace } from './i18n-namespace';
+
+export const LOCALIZATION_MESSAGES_FILE_NAME_BY_NAMESPACE: Record<
+  I18Namespace,
+  string
+> = {
+  [I18N_NAMESPACE.all]: 'all',
+  [I18N_NAMESPACE.homePage]: 'home-page',
+};

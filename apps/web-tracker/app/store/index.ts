@@ -11,17 +11,13 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import exampleReducer from './example-slice';
-
-const rootReducer = combineReducers({
-  example: exampleReducer,
-});
+const rootReducer = combineReducers({});
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['example'],
+  whitelist: [],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
