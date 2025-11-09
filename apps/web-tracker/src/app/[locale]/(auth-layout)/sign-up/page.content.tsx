@@ -1,4 +1,3 @@
-import { type FC } from 'react';
 import { getTranslations } from 'next-intl/server';
 
 import { Typography } from '@track-my-money/ui/src/components/atoms/typography/Typography';
@@ -16,7 +15,7 @@ interface Props {
   locale: LocaleCode;
 }
 
-export const SignUpPageContent: FC<Props> = async ({ locale }) => {
+export const SignUpPageContent = async ({ locale }: Props) => {
   const t = await getTranslations({
     locale,
     namespace: `${I18N_NAMESPACE.signUpPage}.content`,
