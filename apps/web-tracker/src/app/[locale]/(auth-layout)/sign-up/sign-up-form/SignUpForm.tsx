@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
-import type { SignupDto } from '@track-my-money/api-shared';
 import { TextField } from '@track-my-money/ui/src/components/molecules/text-field/TextField';
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
@@ -18,9 +17,9 @@ import { ROUTES } from '@/src/shared/constants/routes';
 import { AuthForm } from '../../components/auth-form/AuthForm';
 import { EmailInput } from '../../components/email-input/EmailInput';
 import { PasswordInput } from '../../components/password-input/PasswordInput';
-import { createSignUpSchema } from './sign-up-form.schema';
+import { createSignUpSchema, SignUpFormData } from './sign-up-form.schema';
 
-import styles from './SignUpForm.module.scss';
+import styles from '../../components/auth-form/AuthForm.module.scss';
 
 export const SignUpForm: FC = () => {
   const t = useTranslations(`${I18N_NAMESPACE.signUpPage}.content`);
@@ -37,19 +36,11 @@ export const SignUpForm: FC = () => {
     resolver: zodResolver(createSignUpSchema(t, tShared)),
   });
 
-  const onSubmit = async (data: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
+  const onSubmit = async (data: SignUpFormData) => {
     try {
       setErrorMessage('');
-      const signupDto: SignupDto = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      };
-      await signup(signupDto).unwrap();
+
+      await signup(data).unwrap();
       router.push(ROUTES.dashboard);
     } catch {
       setErrorMessage(tShared('errorGeneric'));

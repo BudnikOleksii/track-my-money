@@ -22,6 +22,7 @@ export const PasswordInput = <T extends Record<string, unknown>>({
     <TextField
       label={t('password')}
       type="password"
+      autoComplete="new-password"
       placeholder={t('passwordPlaceholder')}
       error={!!fieldError}
       helperText={fieldError?.message}
