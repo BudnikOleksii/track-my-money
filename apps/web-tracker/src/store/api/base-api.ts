@@ -8,10 +8,10 @@ import { Mutex } from 'async-mutex';
 
 import type { AuthResponseDto } from '@track-my-money/api-shared';
 
-import type { RootState } from '@/app/store';
-import { logout, setCredentials } from '@/app/store/slices/auth-slice';
-import { HTTP_STATUS_CODE } from '@/app/constants/http-status-code';
-import { AUTH_API_ROUTE } from '@/app/constants/api-routes';
+import { HTTP_STATUS_CODE } from '@/src/constants/http-status-code';
+import { AUTH_API_ROUTE } from '@/src/constants/api-routes';
+import { logout, setCredentials } from '@/src/store/slices/auth-slice';
+import { RootState } from '@/src/store';
 
 const mutex = new Mutex();
 

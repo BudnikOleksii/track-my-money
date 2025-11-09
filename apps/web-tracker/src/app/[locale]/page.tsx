@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { I18N_NAMESPACE } from '../i18n/constants/i18n-namespace';
+import { I18N_NAMESPACE } from '@/src/i18n/constants/i18n-namespace';
 
 const Home = () => {
   const t = useTranslations(`${I18N_NAMESPACE.homePage}.content`);

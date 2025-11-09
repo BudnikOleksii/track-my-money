@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useState, type FC, type PropsWithChildren } from 'react';
-import { useRouter } from 'next/navigation';
 
-import { useAuth } from '@/app/shared/hooks/use-auth';
+import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
+
+import { useRouter } from '@/src/navigation/navigation';
+import { useAuth } from '@/src/shared/hooks/use-auth';
+import { ROUTES } from '@/src/shared/constants/routes';
 
 export const PrivateRouteWrapper: FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
@@ -16,7 +19,7 @@ export const PrivateRouteWrapper: FC<PropsWithChildren> = ({ children }) => {
         try {
           await refresh(undefined).unwrap();
         } catch {
-          router.push('/sign-in');
+          router.push(ROUTES.signIn);
         }
       }
       setIsChecking(false);
@@ -26,7 +29,7 @@ export const PrivateRouteWrapper: FC<PropsWithChildren> = ({ children }) => {
   }, [isAuthenticated, refresh, router]);
 
   if (isChecking) {
-    return <div>Loading...</div>;
+    return <Loader size="lg" />;
   }
 
   if (!isAuthenticated) {

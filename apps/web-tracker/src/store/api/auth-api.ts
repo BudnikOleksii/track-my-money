@@ -7,7 +7,7 @@ import type {
   UserEntity,
 } from '@track-my-money/api-shared';
 
-import { AUTH_API_ROUTE } from '@/app/constants/api-routes';
+import { AUTH_API_ROUTE } from '@/src/constants/api-routes';
 
 import { baseQuery } from './base-api';
 import { setCredentials, logout } from '../slices/auth-slice';

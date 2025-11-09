@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { LocaleCode } from '@/app/i18n/constants/locale-code';
+import { LocaleCode } from '@/src/i18n/constants/locale-code';
 
 import { DEFAULT_LOCALE_CODE } from '../constants/default-locale-code';
 import { LocalizationMessages } from '../types/localization-messages';
