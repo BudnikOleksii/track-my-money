@@ -1,0 +1,12 @@
+---
+globs: ['**/*.tsx']
+alwaysApply: true
+---
+
+- Write semantic HTML to improve accessibility and SEO.
+- Use SCSS modules for styling, avoiding inline styles.
+- Prioritize accessibility by using ARIA roles and attributes.
+- Use UI components from @track-my-money/ui if possible.
+- Use <Image> component in next.js apps, <img> with alt attribute for react apps.
+- Use <form> for forms, with appropriate input types and labels.
+- Avoid using deprecated elements (e.g., <font>, <center>).

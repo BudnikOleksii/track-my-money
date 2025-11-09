@@ -1,0 +1,11 @@
+---
+globs: ['**/*.css', '**/*.scss']
+alwaysApply: true
+---
+
+- Use Flexbox and Grid for layout.
+- Use CSS custom properties (variables) for consistent theming. All available variables are in ./packages/ui/src/styles/tokens folder.
+- Use mobile-first approach for responsive design.
+- Use media queries mixins to create responsive layouts from ./packages/ui/src/styles/_breakpoints.scss file.
+- Avoid !important; use specificity to manage styles.
+- Use focus styles to indicate focus state.

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { I18N_NAMESPACE } from '../i18n/constants/i18n-namespace';
 
 const Home = () => {
-  const t = useTranslations(I18N_NAMESPACE.homePage);
+  const t = useTranslations(`${I18N_NAMESPACE.homePage}.content`);
   const tAll = useTranslations(I18N_NAMESPACE.all);
 
   return (

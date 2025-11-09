@@ -1,0 +1,109 @@
+@use "@track-my-money/ui/src/styles/breakpoints" as *;
+
+.container {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+
+  padding: var(--spacing-4);
+
+  background-color: var(--background);
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+
+  padding: var(--spacing-6);
+
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadows-2);
+}
+
+.header {
+  margin-bottom: var(--spacing-6);
+
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 var(--spacing-2) 0;
+
+  font-size: var(--font-title-l-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--on-surface);
+}
+
+.subtitle {
+  margin: 0;
+
+  font-size: var(--font-body-l-size);
+  color: var(--on-surface-variant);
+}
+
+.form {
+  display: flex;
+
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.submitButton {
+  width: 100%;
+
+  margin-top: var(--spacing-2);
+}
+
+.error {
+  padding: var(--spacing-3);
+
+  font-size: var(--font-body-s-size);
+  text-align: center;
+  color: var(--on-error-container);
+
+  background-color: var(--error-container);
+  border-radius: var(--radius-md);
+}
+
+.footer {
+  margin-top: var(--spacing-6);
+
+  font-size: var(--font-body-s-size);
+  text-align: center;
+  color: var(--on-surface-variant);
+}
+
+.link {
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  color: var(--primary);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+
+    border-radius: var(--radius-sm);
+  }
+}
+
+@include media-m {
+  .container {
+    padding: var(--spacing-8);
+  }
+
+  .formWrapper {
+    padding: var(--spacing-8);
+  }
+
+  .title {
+    font-size: var(--font-title-xl-size);
+  }
+}
