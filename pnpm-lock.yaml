@@ -524,9 +524,6 @@ importers:
       eslint-plugin-no-barrel-files:
         specifier: ^1.2.2
         version: 1.2.2(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
-      eslint-plugin-only-warn:
-        specifier: 1.1.0
-        version: 1.1.0
       eslint-plugin-react:
         specifier: 7.37.5
         version: 7.37.5(eslint@9.39.1(jiti@2.6.1))
@@ -4297,10 +4294,6 @@ packages:
 
   eslint-plugin-no-barrel-files@1.2.2:
     resolution: {integrity: sha512-DF2bnHuEHClmL1+maBO5TD2HnnRsLj8J69FFtVkjObkELyjCXaWBsk+URJkqBpdOWURlL+raGX9AEpWCAiOV0g==}
-
-  eslint-plugin-only-warn@1.1.0:
-    resolution: {integrity: sha512-2tktqUAT+Q3hCAU0iSf4xAN1k9zOpjK5WO8104mB0rT/dGhOa09582HN5HlbxNbPRZ0THV7nLGvzugcNOSjzfA==}
-    engines: {node: '>=6'}
 
   eslint-plugin-react-hooks@7.0.1:
     resolution: {integrity: sha512-O0d0m04evaNzEPoSW+59Mezf8Qt0InfgGIBJnpC0h3NH/WjUAR7BIKUfysC6todmtiZ/A0oUVS8Gce0WhBrHsA==}
@@ -11423,8 +11416,6 @@ snapshots:
       - eslint
       - supports-color
       - typescript
-
-  eslint-plugin-only-warn@1.1.0: {}
 
   eslint-plugin-react-hooks@7.0.1(eslint@9.39.1(jiti@2.6.1)):
     dependencies:

@@ -2,7 +2,6 @@ import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import turboPlugin from 'eslint-plugin-turbo';
 import tseslint from 'typescript-eslint';
-import onlyWarn from 'eslint-plugin-only-warn';
 import importPlugin from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
 
@@ -27,7 +26,6 @@ export const config = [
   },
   {
     plugins: {
-      onlyWarn,
       'unused-imports': unusedImports,
       import: importPlugin,
     },
