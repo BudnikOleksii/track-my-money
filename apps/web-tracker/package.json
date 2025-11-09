@@ -21,9 +21,12 @@
     "react-redux": "9.2.0",
     "redux-persist": "6.0.0",
     "next-intl": "4.5.0",
-    "deepmerge": "4.3.1"
+    "deepmerge": "4.3.1",
+    "react-hook-form": "7.66.0",
+    "async-mutex": "0.5.0"
   },
   "devDependencies": {
+    "@track-my-money/api-shared": "workspace:*",
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "@track-my-money/stylelint-config": "workspace:*",
