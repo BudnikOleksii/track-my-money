@@ -23,7 +23,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const makeStore = () => {
-  return configureStore({
+  const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -32,11 +32,14 @@ export const makeStore = () => {
         },
       }),
   });
+
+  const persistor = persistStore(store);
+
+  return { store, persistor };
 };
 
-export const store = makeStore();
-export const persistor = persistStore(store);
+const { store } = makeStore();
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type AppStore = ReturnType<typeof makeStore>;
+export type AppStore = typeof store;

@@ -6,22 +6,20 @@ import { DEFAULT_LOCALE_CODE } from '../constants/default-locale-code';
 import { LocalizationMessages } from '../types/localization-messages';
 import { LOCALIZATION_MESSAGES_FILE_NAME_BY_NAMESPACE } from '../constants/localization-messages-file-name-by-namespace';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const withCache = <T extends (...args: any[]) => any>(fn: T) => {
-  const cache: Record<LocaleCode, LocalizationMessages> = {} as Record<
-    LocaleCode,
-    LocalizationMessages
-  >;
+  const cache = new Map<string, LocalizationMessages>();
 
   return async (...args: Parameters<T>) => {
     const key = JSON.stringify(args);
-    const cachedResult = cache[key as LocaleCode];
+    const cachedResult = cache.get(key);
 
     if (cachedResult) {
       return cachedResult;
     }
 
     const result = await fn(...args);
-    cache[key as LocaleCode] = result;
+    cache.set(key, result);
 
     return result;
   };
