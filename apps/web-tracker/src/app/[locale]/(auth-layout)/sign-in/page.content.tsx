@@ -2,9 +2,7 @@
 
 import { type FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 import type { LoginDto } from '@track-my-money/api-shared';
 import { Typography } from '@track-my-money/ui/src/components/atoms/typography/Typography';
@@ -12,9 +10,11 @@ import { TextField } from '@track-my-money/ui/src/components/molecules/text-fiel
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 
-import { useLoginMutation } from '@/app/store/api/auth-api';
-import { ROUTES } from '@/app/shared/constants/routes';
-import { I18N_NAMESPACE } from '@/app/i18n/constants/i18n-namespace';
+import { useRouter } from '@/src/navigation/navigation';
+import { I18N_NAMESPACE } from '@/src/i18n/constants/i18n-namespace';
+import { useLoginMutation } from '@/src/store/api/auth-api';
+import { ROUTES } from '@/src/shared/constants/routes';
+import { NavigationLink } from '@/src/shared/components/navigation-link/NavigationLink';
 
 import styles from './page.module.scss';
 
@@ -101,9 +101,9 @@ export const SignInPageContent: FC = () => {
 
         <Typography variant="body-s" className={styles.footer}>
           {t('noAccount')}{' '}
-          <Link href={ROUTES.signUp} className={styles.link}>
+          <NavigationLink href={ROUTES.signUp} className={styles.link}>
             {t('signUpLink')}
-          </Link>
+          </NavigationLink>
         </Typography>
       </div>
     </div>

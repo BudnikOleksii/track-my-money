@@ -5,8 +5,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { FC, PropsWithChildren } from 'react';
 
 import '../globals.scss';
-import { StoreProvider } from '../store/StoreProvider';
-import { NextIntlUseClientFallbackProvider } from '../providers/NextIntlUseClientFallbackProvider';
+import { NextIntlUseClientFallbackProvider } from '@/src/providers/NextIntlUseClientFallbackProvider';
+import { StoreProvider } from '@/src/store/StoreProvider';
 
 const poppins = Poppins({
   variable: '--default-font-family',

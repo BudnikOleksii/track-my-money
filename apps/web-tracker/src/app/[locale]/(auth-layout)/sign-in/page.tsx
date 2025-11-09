@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { I18N_NAMESPACE } from '@/app/i18n/constants/i18n-namespace';
+import { I18N_NAMESPACE } from '@/src/i18n/constants/i18n-namespace';
 
 import { SignInPageContent } from './page.content';
 

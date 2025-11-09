@@ -1,16 +1,16 @@
 'use client';
 
 import { type FC } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { Typography } from '@track-my-money/ui/src/components/atoms/typography/Typography';
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 
-import { PrivateRouteWrapper } from '@/app/shared/components/private-route-wrapper';
-import { useAuth } from '@/app/shared/hooks/use-auth';
-import { ROUTES } from '@/app/shared/constants/routes';
-import { I18N_NAMESPACE } from '@/app/i18n/constants/i18n-namespace';
+import { useRouter } from '@/src/navigation/navigation';
+import { I18N_NAMESPACE } from '@/src/i18n/constants/i18n-namespace';
+import { useAuth } from '@/src/shared/hooks/use-auth';
+import { ROUTES } from '@/src/shared/constants/routes';
+import { PrivateRouteWrapper } from '@/src/shared/components/private-route-wrapper/PrivateRouteWrapper';
 
 import styles from './page.module.scss';
 

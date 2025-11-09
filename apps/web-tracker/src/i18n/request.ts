@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
 
-import { checkIsLocaleCode } from '@/app/i18n/constants/locale-code';
+import { checkIsLocaleCode } from '@/src/i18n/constants/locale-code';
 
 import { getMessagesByLocale } from './utils/get-messages-by-locale';
 import { onTranslateError } from './utils/on-translate-error';

@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 
-import { routing } from './app/navigation/navigation';
+import { routing } from '@/src/navigation/navigation';
 
-export const middleware = (request: NextRequest) => {
+export const proxy = (request: NextRequest) => {
   const handleI18nRouting = createIntlMiddleware(routing);
   const response = handleI18nRouting(request);
 
