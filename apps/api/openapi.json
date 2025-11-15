@@ -1,0 +1,1684 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "API is running"
+          }
+        },
+        "summary": "Health check endpoint",
+        "tags": ["app"]
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "operationId": "AuthController_signup",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "User with this email already exists"
+          }
+        },
+        "summary": "Register a new user",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "summary": "Login user",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Token successfully refreshed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Refresh token not provided"
+          },
+          "401": {
+            "description": "Invalid refresh token"
+          }
+        },
+        "summary": "Refresh access token",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User successfully logged out"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Logout user",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/logout-all": {
+      "post": {
+        "operationId": "AuthController_logoutAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User successfully logged out from all devices"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Logout user from all devices",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/profile": {
+      "get": {
+        "operationId": "AuthController_getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserEntity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get current user profile",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/verify-email/{activationLinkId}": {
+      "get": {
+        "operationId": "AuthController_verifyEmail",
+        "parameters": [
+          {
+            "name": "activationLinkId",
+            "required": true,
+            "in": "path",
+            "description": "Activation link ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email successfully verified"
+          },
+          "400": {
+            "description": "Invalid or expired activation link"
+          }
+        },
+        "summary": "Verify user email",
+        "tags": ["auth"]
+      }
+    },
+    "/auth/resend-activation": {
+      "post": {
+        "operationId": "AuthController_resendActivation",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Activation link sent successfully"
+          },
+          "400": {
+            "description": "Email is already verified"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Resend activation email",
+        "tags": ["auth"]
+      }
+    },
+    "/categories": {
+      "get": {
+        "operationId": "CategoriesController_getCategories",
+        "parameters": [
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by transaction type",
+            "schema": {
+              "enum": ["INCOME", "EXPENSE"],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get all categories",
+        "tags": ["categories"]
+      },
+      "post": {
+        "operationId": "CategoriesController_createCategory",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryResponseDto"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Category with this name already exists"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Create a new category",
+        "tags": ["categories"]
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "operationId": "CategoriesController_getCategoryById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Category ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get category by ID",
+        "tags": ["categories"]
+      },
+      "patch": {
+        "operationId": "CategoriesController_updateCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Category ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid update request"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Update category",
+        "tags": ["categories"]
+      },
+      "delete": {
+        "operationId": "CategoriesController_deleteCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Category ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Category successfully deleted"
+          },
+          "400": {
+            "description": "Cannot delete category with associated transactions"
+          },
+          "404": {
+            "description": "Category not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Delete category",
+        "tags": ["categories"]
+      }
+    },
+    "/transactions": {
+      "get": {
+        "operationId": "TransactionsController_getTransactions",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "minimum": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Sort field",
+            "schema": {
+              "example": "date",
+              "type": "string",
+              "enum": ["date", "amount", "createdAt"]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "description": "Sort order",
+            "schema": {
+              "example": "desc",
+              "type": "string",
+              "enum": ["asc", "desc"]
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by transaction type",
+            "schema": {
+              "example": "EXPENSE",
+              "type": "string",
+              "enum": ["INCOME", "EXPENSE"]
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by category ID",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "subcategoryId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by subcategory ID",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174001",
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "description": "Start date filter (ISO date string)",
+            "schema": {
+              "example": "2024-01-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "description": "End date filter (ISO date string)",
+            "schema": {
+              "example": "2024-01-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "description": "Filter by currency",
+            "schema": {
+              "example": "USD",
+              "type": "string",
+              "enum": [
+                "UAH",
+                "USD",
+                "EUR",
+                "GBP",
+                "JPY",
+                "CAD",
+                "AUD",
+                "CHF",
+                "CNY",
+                "SEK",
+                "NOK",
+                "DKK",
+                "PLN",
+                "CZK",
+                "HUF",
+                "RON",
+                "BGN",
+                "HRK",
+                "RUB",
+                "BRL",
+                "MXN",
+                "INR",
+                "KRW",
+                "SGD",
+                "HKD",
+                "NZD",
+                "ZAR",
+                "TRY",
+                "ILS",
+                "AED",
+                "SAR",
+                "QAR",
+                "KWD",
+                "BHD",
+                "OMR",
+                "JOD",
+                "LBP",
+                "EGP",
+                "MAD",
+                "TND",
+                "DZD",
+                "LYD",
+                "SDG",
+                "ETB",
+                "KES",
+                "UGX",
+                "TZS",
+                "ZMW",
+                "BWP",
+                "SZL",
+                "LSL",
+                "NAD",
+                "MUR",
+                "SCR",
+                "KMF",
+                "DJF",
+                "ERN",
+                "SOS",
+                "SSP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get all transactions",
+        "tags": ["transactions"]
+      },
+      "post": {
+        "operationId": "TransactionsController_createTransaction",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid transaction data"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Create a new transaction",
+        "tags": ["transactions"]
+      }
+    },
+    "/transactions/balance": {
+      "get": {
+        "operationId": "TransactionsController_getBalance",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "minimum": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Sort field",
+            "schema": {
+              "example": "date",
+              "type": "string",
+              "enum": ["date", "amount", "createdAt"]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "description": "Sort order",
+            "schema": {
+              "example": "desc",
+              "type": "string",
+              "enum": ["asc", "desc"]
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by transaction type",
+            "schema": {
+              "example": "EXPENSE",
+              "type": "string",
+              "enum": ["INCOME", "EXPENSE"]
+            }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by category ID",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          },
+          {
+            "name": "subcategoryId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by subcategory ID",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174001",
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "description": "Start date filter (ISO date string)",
+            "schema": {
+              "example": "2024-01-01",
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "description": "End date filter (ISO date string)",
+            "schema": {
+              "example": "2024-01-31",
+              "type": "string"
+            }
+          },
+          {
+            "name": "currency",
+            "required": false,
+            "in": "query",
+            "description": "Filter by currency",
+            "schema": {
+              "example": "USD",
+              "type": "string",
+              "enum": [
+                "UAH",
+                "USD",
+                "EUR",
+                "GBP",
+                "JPY",
+                "CAD",
+                "AUD",
+                "CHF",
+                "CNY",
+                "SEK",
+                "NOK",
+                "DKK",
+                "PLN",
+                "CZK",
+                "HUF",
+                "RON",
+                "BGN",
+                "HRK",
+                "RUB",
+                "BRL",
+                "MXN",
+                "INR",
+                "KRW",
+                "SGD",
+                "HKD",
+                "NZD",
+                "ZAR",
+                "TRY",
+                "ILS",
+                "AED",
+                "SAR",
+                "QAR",
+                "KWD",
+                "BHD",
+                "OMR",
+                "JOD",
+                "LBP",
+                "EGP",
+                "MAD",
+                "TND",
+                "DZD",
+                "LYD",
+                "SDG",
+                "ETB",
+                "KES",
+                "UGX",
+                "TZS",
+                "ZMW",
+                "BWP",
+                "SZL",
+                "LSL",
+                "NAD",
+                "MUR",
+                "SCR",
+                "KMF",
+                "DJF",
+                "ERN",
+                "SOS",
+                "SSP"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Balance summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BalanceResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get balance summary",
+        "tags": ["transactions"]
+      }
+    },
+    "/transactions/{id}": {
+      "get": {
+        "operationId": "TransactionsController_getTransactionById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Transaction ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Get transaction by ID",
+        "tags": ["transactions"]
+      },
+      "patch": {
+        "operationId": "TransactionsController_updateTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Transaction ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid update request"
+          },
+          "404": {
+            "description": "Transaction not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Update transaction",
+        "tags": ["transactions"]
+      },
+      "delete": {
+        "operationId": "TransactionsController_deleteTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Transaction ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Transaction successfully deleted"
+          },
+          "404": {
+            "description": "Transaction not found"
+          }
+        },
+        "security": [
+          {
+            "JWT-auth": []
+          }
+        ],
+        "summary": "Delete transaction",
+        "tags": ["transactions"]
+      }
+    }
+  },
+  "info": {
+    "title": "Track My Money API",
+    "description": "API documentation for Track My Money application",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "categories",
+      "description": "Category management endpoints"
+    },
+    {
+      "name": "transactions",
+      "description": "Transaction management endpoints"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "JWT-auth": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "JWT",
+        "description": "Enter JWT token",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "SignupDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "User password (minimum 8 characters)",
+            "minLength": 8
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe",
+            "description": "User full name"
+          }
+        },
+        "required": ["email", "password", "name"]
+      },
+      "UserEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "isEmailVerified": {
+            "type": "boolean"
+          },
+          "country": {
+            "type": "object",
+            "nullable": true
+          },
+          "baseCurrency": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role",
+          "isEmailVerified",
+          "country",
+          "baseCurrency",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "AuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+            "description": "JWT access token"
+          },
+          "user": {
+            "description": "User information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserEntity"
+              }
+            ]
+          }
+        },
+        "required": ["accessToken", "user"]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123",
+            "description": "User password"
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "SubcategoryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "parentCategoryId": {
+            "type": "string"
+          },
+          "subcategories": {
+            "example": [],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "userId",
+          "parentCategoryId",
+          "subcategories",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CategoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"]
+          },
+          "userId": {
+            "type": "string"
+          },
+          "parentCategoryId": {
+            "type": "object"
+          },
+          "subcategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubcategoryResponse"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "userId",
+          "subcategories",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Food",
+            "description": "Category name"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"],
+            "example": "EXPENSE",
+            "description": "Transaction type"
+          },
+          "parentCategoryId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "Parent category ID (for subcategories)"
+          }
+        },
+        "required": ["name", "type"]
+      },
+      "UpdateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Food & Dining",
+            "description": "Category name"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"],
+            "example": "EXPENSE",
+            "description": "Transaction type"
+          }
+        }
+      },
+      "TransactionResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "note": {
+            "type": "object"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "UAH",
+              "USD",
+              "EUR",
+              "GBP",
+              "JPY",
+              "CAD",
+              "AUD",
+              "CHF",
+              "CNY",
+              "SEK",
+              "NOK",
+              "DKK",
+              "PLN",
+              "CZK",
+              "HUF",
+              "RON",
+              "BGN",
+              "HRK",
+              "RUB",
+              "BRL",
+              "MXN",
+              "INR",
+              "KRW",
+              "SGD",
+              "HKD",
+              "NZD",
+              "ZAR",
+              "TRY",
+              "ILS",
+              "AED",
+              "SAR",
+              "QAR",
+              "KWD",
+              "BHD",
+              "OMR",
+              "JOD",
+              "LBP",
+              "EGP",
+              "MAD",
+              "TND",
+              "DZD",
+              "LYD",
+              "SDG",
+              "ETB",
+              "KES",
+              "UGX",
+              "TZS",
+              "ZMW",
+              "BWP",
+              "SZL",
+              "LSL",
+              "NAD",
+              "MUR",
+              "SCR",
+              "KMF",
+              "DJF",
+              "ERN",
+              "SOS",
+              "SSP"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"]
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "subcategoryId": {
+            "type": "object"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "amount",
+          "date",
+          "description",
+          "currency",
+          "type",
+          "categoryId",
+          "userId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "PaginationDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number"
+          },
+          "page": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          },
+          "hasPrevPage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "limit",
+          "totalPages",
+          "hasNextPage",
+          "hasPrevPage"
+        ]
+      },
+      "TransactionListResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionResponseDto"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationDto"
+          }
+        },
+        "required": ["data", "pagination"]
+      },
+      "BalanceResponseDto": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "string"
+          },
+          "income": {
+            "type": "string"
+          },
+          "expenses": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "UAH",
+              "USD",
+              "EUR",
+              "GBP",
+              "JPY",
+              "CAD",
+              "AUD",
+              "CHF",
+              "CNY",
+              "SEK",
+              "NOK",
+              "DKK",
+              "PLN",
+              "CZK",
+              "HUF",
+              "RON",
+              "BGN",
+              "HRK",
+              "RUB",
+              "BRL",
+              "MXN",
+              "INR",
+              "KRW",
+              "SGD",
+              "HKD",
+              "NZD",
+              "ZAR",
+              "TRY",
+              "ILS",
+              "AED",
+              "SAR",
+              "QAR",
+              "KWD",
+              "BHD",
+              "OMR",
+              "JOD",
+              "LBP",
+              "EGP",
+              "MAD",
+              "TND",
+              "DZD",
+              "LYD",
+              "SDG",
+              "ETB",
+              "KES",
+              "UGX",
+              "TZS",
+              "ZMW",
+              "BWP",
+              "SZL",
+              "LSL",
+              "NAD",
+              "MUR",
+              "SCR",
+              "KMF",
+              "DJF",
+              "ERN",
+              "SOS",
+              "SSP"
+            ]
+          },
+          "transactionCount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "balance",
+          "income",
+          "expenses",
+          "currency",
+          "transactionCount"
+        ]
+      },
+      "CreateTransactionDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "example": 100.5,
+            "description": "Transaction amount"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-15T00:00:00.000Z",
+            "description": "Transaction date"
+          },
+          "description": {
+            "type": "string",
+            "example": "Grocery shopping",
+            "description": "Transaction description"
+          },
+          "note": {
+            "type": "string",
+            "example": "Weekly groceries",
+            "description": "Additional notes"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "UAH",
+              "USD",
+              "EUR",
+              "GBP",
+              "JPY",
+              "CAD",
+              "AUD",
+              "CHF",
+              "CNY",
+              "SEK",
+              "NOK",
+              "DKK",
+              "PLN",
+              "CZK",
+              "HUF",
+              "RON",
+              "BGN",
+              "HRK",
+              "RUB",
+              "BRL",
+              "MXN",
+              "INR",
+              "KRW",
+              "SGD",
+              "HKD",
+              "NZD",
+              "ZAR",
+              "TRY",
+              "ILS",
+              "AED",
+              "SAR",
+              "QAR",
+              "KWD",
+              "BHD",
+              "OMR",
+              "JOD",
+              "LBP",
+              "EGP",
+              "MAD",
+              "TND",
+              "DZD",
+              "LYD",
+              "SDG",
+              "ETB",
+              "KES",
+              "UGX",
+              "TZS",
+              "ZMW",
+              "BWP",
+              "SZL",
+              "LSL",
+              "NAD",
+              "MUR",
+              "SCR",
+              "KMF",
+              "DJF",
+              "ERN",
+              "SOS",
+              "SSP"
+            ],
+            "example": "USD",
+            "description": "Transaction currency"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"],
+            "example": "EXPENSE",
+            "description": "Transaction type"
+          },
+          "categoryId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "Category ID"
+          },
+          "subcategoryId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174001",
+            "description": "Subcategory ID"
+          }
+        },
+        "required": ["amount", "date", "description", "type", "categoryId"]
+      },
+      "UpdateTransactionDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "example": 150.75,
+            "description": "Transaction amount"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-20T00:00:00.000Z",
+            "description": "Transaction date"
+          },
+          "description": {
+            "type": "string",
+            "example": "Updated description",
+            "description": "Transaction description"
+          },
+          "note": {
+            "type": "string",
+            "example": "Updated notes",
+            "description": "Additional notes"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "UAH",
+              "USD",
+              "EUR",
+              "GBP",
+              "JPY",
+              "CAD",
+              "AUD",
+              "CHF",
+              "CNY",
+              "SEK",
+              "NOK",
+              "DKK",
+              "PLN",
+              "CZK",
+              "HUF",
+              "RON",
+              "BGN",
+              "HRK",
+              "RUB",
+              "BRL",
+              "MXN",
+              "INR",
+              "KRW",
+              "SGD",
+              "HKD",
+              "NZD",
+              "ZAR",
+              "TRY",
+              "ILS",
+              "AED",
+              "SAR",
+              "QAR",
+              "KWD",
+              "BHD",
+              "OMR",
+              "JOD",
+              "LBP",
+              "EGP",
+              "MAD",
+              "TND",
+              "DZD",
+              "LYD",
+              "SDG",
+              "ETB",
+              "KES",
+              "UGX",
+              "TZS",
+              "ZMW",
+              "BWP",
+              "SZL",
+              "LSL",
+              "NAD",
+              "MUR",
+              "SCR",
+              "KMF",
+              "DJF",
+              "ERN",
+              "SOS",
+              "SSP"
+            ],
+            "example": "USD",
+            "description": "Transaction currency"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"],
+            "example": "EXPENSE",
+            "description": "Transaction type"
+          },
+          "categoryId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000",
+            "description": "Category ID"
+          },
+          "subcategoryId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174001",
+            "description": "Subcategory ID"
+          }
+        }
+      }
+    }
+  }
+}

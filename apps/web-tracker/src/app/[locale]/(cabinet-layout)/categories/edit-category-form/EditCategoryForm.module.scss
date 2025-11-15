@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.errorText {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+}
+
+.error {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs);
+  background-color: var(--color-error-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.success {
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs);
+  background-color: var(--color-success-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  justify-content: flex-end;
+}
+
+.submitButton {
+  min-width: 100px;
+}

@@ -13,6 +13,12 @@ reviews:
         - NestJS architecture, including modules, services, repositories, and controllers.
         - Dependency injection patterns and service encapsulation.
         - Integration and unit testing coverage and practices.
+    - path: 'apps/web-tracker/**/*'
+      instructions: |
+        "Confirm that the code adheres to the following:
+        - NextJS best practices, including file structure, API routes, and static generation methods.
+        - Efficient state management and server-side rendering techniques.
+        - Optimal use of TypeScript for component and utility type safety."
     - path: 'packages/api-shared/**/*'
       instructions: |
         Confirm that the code adheres to the following:
