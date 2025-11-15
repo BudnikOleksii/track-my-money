@@ -5,6 +5,8 @@ import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { AppConfigService } from './config';
 
+const ALLOWED_ORIGINS = ['http://localhost:3000'];
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -22,7 +24,16 @@ async function bootstrap() {
 
   app.enableCors({
     credentials: true,
-    origin: true,
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
+      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
   });
 
   await app.listen(configService.app.port, configService.app.host);
