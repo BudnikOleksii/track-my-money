@@ -18,6 +18,10 @@ import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 import { Label } from '@track-my-money/ui/src/components/atoms/label/Label';
 
 import { TransactionType } from '@/src/constants/transaction-type';
+import type {
+  CreateCategoryDto,
+  CreateCategoryDtoTypeEnum,
+} from '@/src/api/generated/Api';
 import {
   useCreateCategoryMutation,
   useGetCategoriesQuery,
@@ -45,12 +49,12 @@ export const CreateCategoryForm: FC = () => {
     control,
     formState: { errors },
     reset,
-  } = useForm<CreateCategoryFormData>({
+  } = useForm({
     resolver: zodResolver(createCategorySchema(t, tShared)),
     defaultValues: {
       name: '',
-      type: 'INCOME',
-      parentCategoryId: '',
+      type: TransactionType.INCOME,
+      parentCategoryId: undefined,
     },
   });
 
@@ -59,9 +63,9 @@ export const CreateCategoryForm: FC = () => {
       setErrorMessage('');
       setSuccessMessage('');
 
-      const submitData = {
+      const submitData: CreateCategoryDto = {
         name: data.name,
-        type: data.type,
+        type: data.type as CreateCategoryDtoTypeEnum,
         ...(data.parentCategoryId
           ? { parentCategoryId: data.parentCategoryId }
           : {}),
@@ -122,7 +126,7 @@ export const CreateCategoryForm: FC = () => {
           control={control}
           render={({ field }) => (
             <Select
-              value={field.value || ''}
+              value={field.value ?? ''}
               onValueChange={(value) =>
                 field.onChange(value === '' ? undefined : value)
               }

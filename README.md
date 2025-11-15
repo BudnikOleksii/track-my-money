@@ -86,6 +86,19 @@ pnpm run lint
 pnpm format
 ```
 
+#### Generate API Documentation and Types
+
+```bash
+# Generate both OpenAPI spec and TypeScript types
+pnpm run generate:api
+
+# Or generate them separately:
+pnpm --filter api generate:openapi
+pnpm --filter web-tracker generate:api-types
+```
+
+For detailed information about API generation, see [API_GENERATION.md](./apps/api/API_GENERATION.md).
+
 ### Remote Caching
 
 > [!TIP]

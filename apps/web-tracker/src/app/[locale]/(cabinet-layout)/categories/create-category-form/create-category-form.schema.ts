@@ -8,14 +8,11 @@ export const createCategorySchema = (
 ) =>
   z.object({
     name: z.string().min(1, t('nameRequired')),
-    type: z.enum(
-      Object.values(TransactionType) as [string, ...string[]],
-      t('typeRequired'),
-    ),
+    type: z.enum(Object.values(TransactionType), t('typeRequired')),
     parentCategoryId: z
       .union([z.string().uuid(tShared('invalidUuid')), z.literal('')])
-      .optional()
-      .transform((val) => (val === '' ? undefined : val)),
+      .transform((val) => (val === '' ? undefined : val))
+      .optional(),
   });
 
 export type CreateCategoryFormData = z.infer<

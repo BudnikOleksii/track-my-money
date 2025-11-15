@@ -11,7 +11,7 @@
     "lint:fix": "eslint ./ --ext .ts,.tsx --fix",
     "stylelint": "stylelint '**/*.{scss,css}'",
     "stylelint:fix": "stylelint '**/*.{scss,css}' --fix",
-    "generate:api-types": "swagger-typescript-api -p ../../api/openapi.json -o ./src/api/generated -n Api.ts --http-client-type fetch --generate-client --generate-route-types --generate-responses --extract-request-params --extract-request-body --extract-enums --enum-names-as-values --generate-union-enums --single-http-client --clean-output"
+    "generate:api-types": "ts-node --project tsconfig.node.json scripts/generate-api-types.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
@@ -40,6 +40,8 @@
     "eslint-config-next": "16.0.1",
     "redux-persist-transform-encrypt": "5.1.1",
     "stylelint": "16.25.0",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "4.2.0",
     "typescript": "5.9.3"
   }
 }
