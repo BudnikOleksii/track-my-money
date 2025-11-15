@@ -15,14 +15,9 @@ import {
   RefreshToken,
   ActivationLink,
 } from '@track-my-money/database';
-import {
-  SignupDto,
-  LoginDto,
-  RefreshTokenDto,
-  AuthResponseDto,
-  UserEntity,
-} from '@track-my-money/api-shared';
 
+import { SignupDto, LoginDto, RefreshTokenDto, AuthResponseDto } from './dto';
+import { UserEntity } from './entities/user.entity';
 import { EmailService } from '../email/email.service';
 import { AuthConfig } from '../config/auth.config';
 import { AuthRepository } from './auth.repository';

@@ -11,21 +11,25 @@ import {
   Res,
   BadRequestException,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { Throttle } from '@nestjs/throttler';
 
-import {
-  SignupDto,
-  LoginDto,
-  AuthResponseDto,
-  UserEntity,
-} from '@track-my-money/api-shared';
-
+import { SignupDto, LoginDto, AuthResponseDto } from './dto';
+import { UserEntity } from './entities/user.entity';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { Public } from './decorators/public.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   private readonly REFRESH_TOKEN_COOKIE = 'refreshToken';
@@ -47,8 +51,19 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle({ default: { limit: 3, ttl: 3600000 } }) // 3 requests per hour
+  @Throttle({ default: { limit: 3, ttl: 3600000 } })
   @Post('signup')
+  @ApiOperation({ summary: 'Register a new user' })
+  @ApiBody({ type: SignupDto })
+  @ApiResponse({
+    status: 201,
+    description: 'User successfully registered',
+    type: AuthResponseDto,
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'User with this email already exists',
+  })
   async signup(
     @Body() signupDto: SignupDto,
     @Res({ passthrough: true }) res: Response,
@@ -64,9 +79,17 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle({ default: { limit: 5, ttl: 60000 } }) // 5 requests per minute
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Login user' })
+  @ApiBody({ type: LoginDto })
+  @ApiResponse({
+    status: 200,
+    description: 'User successfully logged in',
+    type: AuthResponseDto,
+  })
+  @ApiResponse({ status: 401, description: 'Invalid credentials' })
   async login(
     @Body() loginDto: LoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -82,9 +105,17 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle({ default: { limit: 10, ttl: 60000 } }) // 10 requests per minute
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Refresh access token' })
+  @ApiResponse({
+    status: 200,
+    description: 'Token successfully refreshed',
+    type: AuthResponseDto,
+  })
+  @ApiResponse({ status: 400, description: 'Refresh token not provided' })
+  @ApiResponse({ status: 401, description: 'Invalid refresh token' })
   async refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
@@ -108,6 +139,9 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ summary: 'Logout user' })
+  @ApiResponse({ status: 200, description: 'User successfully logged out' })
   async logout(
     @CurrentUser() user: UserEntity,
     @Req() req: Request,
@@ -127,6 +161,12 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('logout-all')
   @HttpCode(HttpStatus.OK)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ summary: 'Logout user from all devices' })
+  @ApiResponse({
+    status: 200,
+    description: 'User successfully logged out from all devices',
+  })
   async logoutAll(
     @CurrentUser() user: UserEntity,
     @Res({ passthrough: true }) res: Response,
@@ -140,6 +180,9 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ summary: 'Get current user profile' })
+  @ApiResponse({ status: 200, description: 'User profile', type: UserEntity })
   async getProfile(@CurrentUser() user: UserEntity): Promise<UserEntity> {
     return user;
   }
@@ -147,6 +190,13 @@ export class AuthController {
   @Public()
   @Get('verify-email/:activationLinkId')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Verify user email' })
+  @ApiParam({ name: 'activationLinkId', description: 'Activation link ID' })
+  @ApiResponse({ status: 200, description: 'Email successfully verified' })
+  @ApiResponse({
+    status: 400,
+    description: 'Invalid or expired activation link',
+  })
   async verifyEmail(
     @Param('activationLinkId') activationLinkId: string,
   ): Promise<{ message: string }> {
@@ -156,9 +206,16 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Throttle({ default: { limit: 3, ttl: 3600000 } }) // 3 requests per hour
+  @Throttle({ default: { limit: 3, ttl: 3600000 } })
   @Post('resend-activation')
   @HttpCode(HttpStatus.OK)
+  @ApiBearerAuth('JWT-auth')
+  @ApiOperation({ summary: 'Resend activation email' })
+  @ApiResponse({
+    status: 200,
+    description: 'Activation link sent successfully',
+  })
+  @ApiResponse({ status: 400, description: 'Email is already verified' })
   async resendActivation(
     @CurrentUser() user: UserEntity,
   ): Promise<{ message: string }> {

@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 
 import { Transaction, Prisma, Currency } from '@track-my-money/database';
+
 import {
   CreateTransactionDto,
   UpdateTransactionDto,
@@ -12,8 +13,7 @@ import {
   TransactionQueryDto,
   TransactionListResponseDto,
   BalanceResponseDto,
-} from '@track-my-money/api-shared';
-
+} from './dto';
 import { TransactionsRepository } from './transactions.repository';
 
 @Injectable()

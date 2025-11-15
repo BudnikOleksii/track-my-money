@@ -16,8 +16,8 @@ import {
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 import { Label } from '@track-my-money/ui/src/components/atoms/label/Label';
-import { TransactionType } from '@track-my-money/api-shared';
 
+import { TransactionType } from '@/src/constants/transaction-type';
 import {
   useCreateCategoryMutation,
   useGetCategoriesQuery,

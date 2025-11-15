@@ -1,12 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
+import { TransactionType } from '@/src/constants/transaction-type';
 import type {
   CreateCategoryDto,
   UpdateCategoryDto,
   CategoryResponseDto,
-  TransactionType,
-} from '@track-my-money/api-shared';
-
+} from '@/src/api/generated/Api';
 import { CATEGORIES_API_ROUTE } from '@/src/constants/api-routes';
 
 import { baseQuery } from './base-api';

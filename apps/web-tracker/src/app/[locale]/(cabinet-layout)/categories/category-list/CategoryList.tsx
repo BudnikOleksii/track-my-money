@@ -18,9 +18,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@track-my-money/ui/src/components/molecules/dialog/Dialog';
-import { TransactionType } from '@track-my-money/api-shared';
-import type { CategoryResponseDto } from '@track-my-money/api-shared';
 
+import { TransactionType } from '@/src/constants/transaction-type';
+import type { CategoryResponseDto } from '@/src/api/generated/Api';
 import {
   useGetCategoriesQuery,
   useDeleteCategoryMutation,

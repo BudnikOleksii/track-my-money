@@ -10,7 +10,8 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint ./ --ext .ts,.tsx --fix",
     "stylelint": "stylelint '**/*.{scss,css}'",
-    "stylelint:fix": "stylelint '**/*.{scss,css}' --fix"
+    "stylelint:fix": "stylelint '**/*.{scss,css}' --fix",
+    "generate:api-types": "swagger-typescript-api -p ../../api/openapi.json -o ./src/api/generated -n Api.ts --http-client-type fetch --generate-client --generate-route-types --generate-responses --extract-request-params --extract-request-body --extract-enums --enum-names-as-values --generate-union-enums --single-http-client --clean-output"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
@@ -28,8 +29,8 @@
     "zod": "4.1.12"
   },
   "devDependencies": {
-    "@track-my-money/api-shared": "workspace:*",
     "@track-my-money/eslint-config": "workspace:*",
+    "swagger-typescript-api": "13.2.16",
     "@track-my-money/stylelint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "@types/node": "24.10.0",

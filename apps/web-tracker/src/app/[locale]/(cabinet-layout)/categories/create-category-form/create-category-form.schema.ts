@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { TransactionType } from '@track-my-money/api-shared';
+import { TransactionType } from '@/src/constants/transaction-type';
 
 export const createCategorySchema = (
   t: (key: string) => string,
@@ -8,7 +8,10 @@ export const createCategorySchema = (
 ) =>
   z.object({
     name: z.string().min(1, t('nameRequired')),
-    type: z.enum(TransactionType, t('typeRequired')),
+    type: z.enum(
+      Object.values(TransactionType) as [string, ...string[]],
+      t('typeRequired'),
+    ),
     parentCategoryId: z
       .union([z.string().uuid(tShared('invalidUuid')), z.literal('')])
       .optional()
