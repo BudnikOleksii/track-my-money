@@ -17,12 +17,12 @@
     "type-check": "tsc --noEmit --incremental false"
   },
   "dependencies": {
-    "@nestjs/common": "11.1.8",
+    "@nestjs/common": "11.1.9",
     "@nestjs/config": "4.0.2",
-    "@nestjs/core": "11.1.8",
+    "@nestjs/core": "11.1.9",
     "@nestjs/jwt": "11.0.1",
     "@nestjs/passport": "11.0.5",
-    "@nestjs/platform-express": "11.1.8",
+    "@nestjs/platform-express": "11.1.9",
     "@nestjs/throttler": "6.4.0",
     "@track-my-money/api-shared": "workspace:*",
     "@track-my-money/database": "workspace:*",
@@ -40,9 +40,9 @@
   },
   "devDependencies": {
     "@jest/globals": "30.2.0",
-    "@nestjs/cli": "11.0.10",
+    "@nestjs/cli": "11.0.12",
     "@nestjs/schematics": "11.0.9",
-    "@nestjs/testing": "11.1.8",
+    "@nestjs/testing": "11.1.9",
     "@track-my-money/eslint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "@types/bcrypt": "6.0.0",
