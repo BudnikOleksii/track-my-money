@@ -17,7 +17,7 @@ import {
 } from '@track-my-money/database';
 
 import { SignupDto, LoginDto, RefreshTokenDto, AuthResponseDto } from './dto';
-import { UserEntity } from './entities/user.entity';
+import { UserDto } from './dto/user.dto';
 import { EmailService } from '../email/email.service';
 import { AuthConfig } from '../config/auth.config';
 import { AuthRepository } from './auth.repository';
@@ -303,7 +303,7 @@ export class AuthService {
     await this.authRepository.deleteExpiredRefreshTokensByUserId(userId);
   }
 
-  private mapUserToEntity(user: User): UserEntity {
+  private mapUserToEntity(user: User): UserDto {
     return {
       id: user.id,
       email: user.email,

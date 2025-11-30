@@ -28,7 +28,7 @@ import {
   TransactionListResponseDto,
   BalanceResponseDto,
 } from './dto';
-import { UserEntity } from '../auth/entities/user.entity';
+import { UserDto } from '../auth/dto/user.dto';
 import { TransactionsService } from './transactions.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
@@ -48,7 +48,7 @@ export class TransactionsController {
     type: TransactionListResponseDto,
   })
   async getTransactions(
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
     @Query() query: TransactionQueryDto,
   ): Promise<TransactionListResponseDto> {
     return this.transactionsService.getTransactions(user.id, query);
@@ -62,7 +62,7 @@ export class TransactionsController {
     type: BalanceResponseDto,
   })
   async getBalance(
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
     @Query() query?: TransactionQueryDto,
   ): Promise<BalanceResponseDto> {
     return this.transactionsService.getBalance(user.id, query);
@@ -79,7 +79,7 @@ export class TransactionsController {
   @ApiResponse({ status: 404, description: 'Transaction not found' })
   async getTransactionById(
     @Param('id') id: string,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<TransactionResponseDto> {
     return this.transactionsService.getTransactionById(id, user.id);
   }
@@ -95,7 +95,7 @@ export class TransactionsController {
   @ApiResponse({ status: 400, description: 'Invalid transaction data' })
   async createTransaction(
     @Body() createTransactionDto: CreateTransactionDto,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<TransactionResponseDto> {
     return this.transactionsService.createTransaction(
       user.id,
@@ -117,7 +117,7 @@ export class TransactionsController {
   async updateTransaction(
     @Param('id') id: string,
     @Body() updateTransactionDto: UpdateTransactionDto,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<TransactionResponseDto> {
     return this.transactionsService.updateTransaction(
       id,
@@ -134,7 +134,7 @@ export class TransactionsController {
   @ApiResponse({ status: 404, description: 'Transaction not found' })
   async deleteTransaction(
     @Param('id') id: string,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<void> {
     return this.transactionsService.deleteTransaction(id, user.id);
   }

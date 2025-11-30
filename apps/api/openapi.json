@@ -152,7 +152,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserEntity"
+                  "$ref": "#/components/schemas/UserDto"
                 }
               }
             }
@@ -990,19 +990,22 @@
           },
           "password": {
             "type": "string",
-            "example": "password123",
+            "example": "MyS3cur3P@ssw0rd!",
             "description": "User password (minimum 8 characters)",
-            "minLength": 8
+            "minLength": 8,
+            "maxLength": 128
           },
           "name": {
             "type": "string",
             "example": "John Doe",
-            "description": "User full name"
+            "description": "User full name",
+            "minLength": 1,
+            "maxLength": 100
           }
         },
         "required": ["email", "password", "name"]
       },
-      "UserEntity": {
+      "UserDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -1060,7 +1063,7 @@
             "description": "User information",
             "allOf": [
               {
-                "$ref": "#/components/schemas/UserEntity"
+                "$ref": "#/components/schemas/UserDto"
               }
             ]
           }
@@ -1077,7 +1080,7 @@
           },
           "password": {
             "type": "string",
-            "example": "password123",
+            "example": "MyS3cur3P@ssw0rd!",
             "description": "User password"
           }
         },
@@ -1093,7 +1096,8 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": ["INCOME", "EXPENSE"]
           },
           "userId": {
             "type": "string"

@@ -23,7 +23,7 @@ import { Request, Response } from 'express';
 import { Throttle } from '@nestjs/throttler';
 
 import { SignupDto, LoginDto, AuthResponseDto } from './dto';
-import { UserEntity } from './entities/user.entity';
+import { UserDto } from './dto/user.dto';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { Public } from './decorators/public.decorator';
@@ -143,7 +143,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Logout user' })
   @ApiResponse({ status: 200, description: 'User successfully logged out' })
   async logout(
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ): Promise<{ message: string }> {
@@ -168,7 +168,7 @@ export class AuthController {
     description: 'User successfully logged out from all devices',
   })
   async logoutAll(
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<{ message: string }> {
     await this.authService.logoutAll(user.id);
@@ -182,8 +182,8 @@ export class AuthController {
   @Get('profile')
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({ summary: 'Get current user profile' })
-  @ApiResponse({ status: 200, description: 'User profile', type: UserEntity })
-  async getProfile(@CurrentUser() user: UserEntity): Promise<UserEntity> {
+  @ApiResponse({ status: 200, description: 'User profile', type: UserDto })
+  async getProfile(@CurrentUser() user: UserDto): Promise<UserDto> {
     return user;
   }
 
@@ -217,7 +217,7 @@ export class AuthController {
   })
   @ApiResponse({ status: 400, description: 'Email is already verified' })
   async resendActivation(
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<{ message: string }> {
     await this.authService.resendActivationLink(user.id);
 

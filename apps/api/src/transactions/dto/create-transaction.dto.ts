@@ -1,6 +1,5 @@
 import {
   IsEnum,
-  IsNotEmpty,
   IsOptional,
   IsString,
   IsUUID,
@@ -14,7 +13,6 @@ import { TransactionType, Currency } from '@track-my-money/database';
 
 export class CreateTransactionDto {
   @ApiProperty({ example: 100.5, description: 'Transaction amount' })
-  @IsNotEmpty()
   @IsPositive()
   @Type(() => Number)
   amount: number;
@@ -23,7 +21,6 @@ export class CreateTransactionDto {
     example: '2024-01-15T00:00:00.000Z',
     description: 'Transaction date',
   })
-  @IsNotEmpty()
   @Type(() => Date)
   date: Date;
 

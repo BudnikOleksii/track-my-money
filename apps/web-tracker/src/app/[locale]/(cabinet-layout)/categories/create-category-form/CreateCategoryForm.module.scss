@@ -1,32 +1,38 @@
 .form {
   display: flex;
+
   flex-direction: column;
   gap: var(--spacing-md);
 }
 
 .field {
   display: flex;
+
   flex-direction: column;
   gap: var(--spacing-xs);
 }
 
 .errorText {
-  color: var(--color-error);
   font-size: var(--font-size-sm);
+  color: var(--color-error);
 }
 
 .error {
-  color: var(--color-error);
-  font-size: var(--font-size-sm);
   padding: var(--spacing-xs);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+
   background-color: var(--color-error-light);
   border-radius: var(--border-radius-sm);
 }
 
 .success {
-  color: var(--color-success);
-  font-size: var(--font-size-sm);
   padding: var(--spacing-xs);
+
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+
   background-color: var(--color-success-light);
   border-radius: var(--border-radius-sm);
 }

@@ -49,7 +49,7 @@ export const CreateCategoryForm: FC = () => {
     control,
     formState: { errors },
     reset,
-  } = useForm({
+  } = useForm<CreateCategoryFormData>({
     resolver: zodResolver(createCategorySchema(t, tShared)),
     defaultValues: {
       name: '',

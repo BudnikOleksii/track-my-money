@@ -28,7 +28,7 @@ import {
   UpdateCategoryDto,
   CategoryResponseDto,
 } from './dto';
-import { UserEntity } from '../auth/entities/user.entity';
+import { UserDto } from '../auth/dto/user.dto';
 import { CategoriesService } from './categories.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
@@ -54,7 +54,7 @@ export class CategoriesController {
     type: [CategoryResponseDto],
   })
   async getCategories(
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
     @Query('type') type?: TransactionType,
   ): Promise<CategoryResponseDto[]> {
     return this.categoriesService.getCategories(user.id, type);
@@ -71,7 +71,7 @@ export class CategoriesController {
   @ApiResponse({ status: 404, description: 'Category not found' })
   async getCategoryById(
     @Param('id') id: string,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<CategoryResponseDto> {
     return this.categoriesService.getCategoryById(id, user.id);
   }
@@ -90,7 +90,7 @@ export class CategoriesController {
   })
   async createCategory(
     @Body() createCategoryDto: CreateCategoryDto,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<CategoryResponseDto> {
     return this.categoriesService.createCategory(user.id, createCategoryDto);
   }
@@ -109,7 +109,7 @@ export class CategoriesController {
   async updateCategory(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<CategoryResponseDto> {
     return this.categoriesService.updateCategory(
       id,
@@ -130,7 +130,7 @@ export class CategoriesController {
   })
   async deleteCategory(
     @Param('id') id: string,
-    @CurrentUser() user: UserEntity,
+    @CurrentUser() user: UserDto,
   ): Promise<void> {
     return this.categoriesService.deleteCategory(id, user.id);
   }

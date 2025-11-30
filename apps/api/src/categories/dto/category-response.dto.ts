@@ -9,8 +9,8 @@ export class SubcategoryResponse {
   @ApiProperty()
   name: string;
 
-  @ApiProperty()
-  type: string;
+  @ApiProperty({ enum: TransactionType })
+  type: TransactionType;
 
   @ApiProperty()
   userId: string;
@@ -18,7 +18,11 @@ export class SubcategoryResponse {
   @ApiProperty()
   parentCategoryId: string;
 
-  @ApiProperty({ type: [String], example: [] })
+  @ApiProperty({
+    type: [String],
+    example: [],
+    description: 'Always empty for subcategories',
+  })
   subcategories: never[];
 
   @ApiProperty()

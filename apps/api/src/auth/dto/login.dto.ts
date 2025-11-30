@@ -9,7 +9,7 @@ export class LoginDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: 'password123', description: 'User password' })
+  @ApiProperty({ example: 'MyS3cur3P@ssw0rd!', description: 'User password' })
   @IsString()
   password: string;
 }
