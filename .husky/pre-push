@@ -1,2 +1,3 @@
 pnpm type-check
+pnpm stylelint
 pnpm test
