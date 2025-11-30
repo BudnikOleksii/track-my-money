@@ -20,7 +20,7 @@
     "@types/react-dom": "19.1.1",
     "eslint": "9.39.1",
     "typescript": "5.9.3",
-    "stylelint": "16.25.0",
+    "stylelint": "16.26.1",
     "tsx": "4.20.6"
   },
   "dependencies": {
@@ -36,6 +36,6 @@
     "clsx": "2.1.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "sass": "1.93.3"
+    "sass": "1.94.2"
   }
 }
