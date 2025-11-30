@@ -1,2 +1,4 @@
-pnpm type-check
+#!/bin/sh
+set -e
+pnpm type-check & pnpm stylelint & wait
 pnpm test

@@ -3,8 +3,10 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 
 import { Transaction, Prisma, Currency } from '@track-my-money/database';
+
 import {
   CreateTransactionDto,
   UpdateTransactionDto,
@@ -12,8 +14,7 @@ import {
   TransactionQueryDto,
   TransactionListResponseDto,
   BalanceResponseDto,
-} from '@track-my-money/api-shared';
-
+} from './dto';
 import { TransactionsRepository } from './transactions.repository';
 
 @Injectable()
@@ -122,7 +123,6 @@ export class TransactionsService {
     userId: string,
     dto: UpdateTransactionDto,
   ): Promise<TransactionResponseDto> {
-    // Check if transaction exists
     const existing = await this.transactionsRepository.findTransactionById(
       id,
       userId,
@@ -218,19 +218,8 @@ export class TransactionsService {
   }
 
   private mapToResponseDto(transaction: Transaction): TransactionResponseDto {
-    return {
-      id: transaction.id,
-      amount: transaction.amount.toString(),
-      date: transaction.date,
-      description: transaction.description,
-      note: transaction.note,
-      currency: transaction.currency,
-      type: transaction.type,
-      categoryId: transaction.categoryId,
-      subcategoryId: transaction.subcategoryId,
-      userId: transaction.userId,
-      createdAt: transaction.createdAt,
-      updatedAt: transaction.updatedAt,
-    };
+    return plainToInstance(TransactionResponseDto, transaction, {
+      excludeExtraneousValues: true,
+    });
   }
 }

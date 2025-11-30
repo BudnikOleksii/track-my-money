@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
-import { UserRole } from '@track-my-money/api-shared';
+import { UserRole } from '@track-my-money/database';
 
 @Injectable()
 export class RolesGuard implements CanActivate {

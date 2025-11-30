@@ -7,3 +7,9 @@ export const AUTH_API_ROUTE = {
   logout: `${BASE_AUTH_API_ROUTE}/logout`,
   profile: `${BASE_AUTH_API_ROUTE}/profile`,
 } as const;
+
+export const BASE_CATEGORIES_API_ROUTE = '/categories';
+
+export const CATEGORIES_API_ROUTE = {
+  list: BASE_CATEGORIES_API_ROUTE,
+} as const;

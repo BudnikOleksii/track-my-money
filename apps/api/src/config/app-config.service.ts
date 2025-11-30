@@ -11,6 +11,7 @@ export class AppConfigService {
 
   get app(): AppConfig {
     const config = this.configService.get<AppConfig>('app');
+
     if (!config) {
       throw new Error('App configuration is not available');
     }
@@ -20,6 +21,7 @@ export class AppConfigService {
 
   get database(): DatabaseConfig {
     const config = this.configService.get<DatabaseConfig>('database');
+
     if (!config) {
       throw new Error('Database configuration is not available');
     }
@@ -29,6 +31,7 @@ export class AppConfigService {
 
   get auth(): AuthConfig {
     const config = this.configService.get<AuthConfig>('auth');
+
     if (!config) {
       throw new Error('Auth configuration is not available');
     }

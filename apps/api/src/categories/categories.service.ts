@@ -6,12 +6,12 @@ import {
 } from '@nestjs/common';
 
 import { Category, TransactionType } from '@track-my-money/database';
+
 import {
   CreateCategoryDto,
   UpdateCategoryDto,
   CategoryResponseDto,
-} from '@track-my-money/api-shared';
-
+} from './dto';
 import { CategoriesRepository } from './categories.repository';
 
 @Injectable()

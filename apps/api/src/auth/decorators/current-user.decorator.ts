@@ -1,9 +1,9 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-import { UserEntity } from '@track-my-money/api-shared';
+import { UserDto } from '../dto/user.dto';
 
 export const CurrentUser = createParamDecorator(
-  (_data: unknown, ctx: ExecutionContext): UserEntity => {
+  (_data: unknown, ctx: ExecutionContext): UserDto => {
     const request = ctx.switchToHttp().getRequest();
 
     return request.user;

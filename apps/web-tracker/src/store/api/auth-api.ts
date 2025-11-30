@@ -5,8 +5,7 @@ import type {
   LoginDto,
   AuthResponseDto,
   UserEntity,
-} from '@track-my-money/api-shared';
-
+} from '@/src/api/generated/Api';
 import { AUTH_API_ROUTE } from '@/src/constants/api-routes';
 
 import { baseQuery } from './base-api';

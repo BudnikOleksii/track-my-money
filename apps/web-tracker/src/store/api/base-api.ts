@@ -6,8 +6,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
 
-import type { AuthResponseDto } from '@track-my-money/api-shared';
-
+import type { AuthResponseDto } from '@/src/api/generated/Api';
 import { HTTP_STATUS_CODE } from '@/src/constants/http-status-code';
 import { AUTH_API_ROUTE } from '@/src/constants/api-routes';
 import { logout, setCredentials } from '@/src/store/slices/auth-slice';

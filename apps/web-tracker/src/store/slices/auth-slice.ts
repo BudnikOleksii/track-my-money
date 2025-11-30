@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { UserEntity } from '@track-my-money/api-shared';
+import type { UserEntity } from '@/src/api/generated/Api';
 
 export interface AuthState {
   user: UserEntity | null;

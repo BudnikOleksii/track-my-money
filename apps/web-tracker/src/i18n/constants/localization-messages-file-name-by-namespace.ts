@@ -10,4 +10,5 @@ export const LOCALIZATION_MESSAGES_FILE_NAME_BY_NAMESPACE: Record<
   [I18N_NAMESPACE.signUpPage]: 'sign-up-page',
   [I18N_NAMESPACE.dashboardPage]: 'dashboard-page',
   [I18N_NAMESPACE.authShared]: 'auth-shared',
+  [I18N_NAMESPACE.categoriesPage]: 'categories-page',
 };
