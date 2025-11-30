@@ -33,7 +33,7 @@
     "swagger-typescript-api": "13.2.16",
     "@track-my-money/stylelint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
-    "@types/node": "24.10.0",
+    "@types/node": "24.10.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "9.39.1",
