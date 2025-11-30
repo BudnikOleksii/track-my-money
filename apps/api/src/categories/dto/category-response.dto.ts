@@ -45,7 +45,7 @@ export class CategoryResponseDto {
   @ApiProperty()
   userId: string;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ type: String, nullable: true })
   parentCategoryId: string | null;
 
   @ApiProperty({ type: [SubcategoryResponse] })

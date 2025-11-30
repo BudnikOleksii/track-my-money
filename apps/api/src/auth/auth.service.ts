@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { plainToInstance } from 'class-transformer';
 
 import {
   UserRole,
@@ -79,7 +80,7 @@ export class AuthService {
     return {
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,
-      user: this.mapUserToEntity(user),
+      user: this.mapUserToDto(user),
     };
   }
 
@@ -115,7 +116,7 @@ export class AuthService {
     return {
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,
-      user: this.mapUserToEntity(user),
+      user: this.mapUserToDto(user),
     };
   }
 
@@ -153,7 +154,7 @@ export class AuthService {
     return {
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,
-      user: this.mapUserToEntity(user),
+      user: this.mapUserToDto(user),
     };
   }
 
@@ -303,17 +304,7 @@ export class AuthService {
     await this.authRepository.deleteExpiredRefreshTokensByUserId(userId);
   }
 
-  private mapUserToEntity(user: User): UserDto {
-    return {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-      isEmailVerified: user.isEmailVerified,
-      country: user.country ?? null,
-      baseCurrency: user.baseCurrency,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
+  private mapUserToDto(user: User): UserDto {
+    return plainToInstance(UserDto, user, { excludeExtraneousValues: true });
   }
 }
