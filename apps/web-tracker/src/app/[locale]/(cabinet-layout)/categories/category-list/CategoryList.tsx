@@ -19,7 +19,7 @@ import {
   DialogTitle,
 } from '@track-my-money/ui/src/components/molecules/dialog/Dialog';
 
-import { TransactionType } from '@/src/constants/transaction-type';
+import { TransactionType } from '@/src/api/generated/Api';
 import type { CategoryResponseDto } from '@/src/api/generated/Api';
 import {
   useGetCategoriesQuery,

@@ -1,24 +1,26 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import type {
-  SignupDto,
+  RegisterDto,
   LoginDto,
   AuthResponseDto,
-  UserEntity,
+  UserResponseDto,
+  UpdateUserDto,
 } from '@/src/api/generated/Api';
-import { AUTH_API_ROUTE } from '@/src/constants/api-routes';
+import { AUTH_API_ROUTE, USERS_API_ROUTE } from '@/src/constants/api-routes';
 
 import { baseQuery } from './base-api';
 import { setCredentials, logout } from '../slices/auth-slice';
+import type { RootState } from '../index';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery,
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    signup: builder.mutation<AuthResponseDto, SignupDto>({
+    signup: builder.mutation<AuthResponseDto, RegisterDto>({
       query: (body) => ({
-        url: AUTH_API_ROUTE.signup,
+        url: AUTH_API_ROUTE.register,
         method: 'POST',
         body,
       }),
@@ -69,9 +71,43 @@ export const authApi = createApi({
         dispatch(logout());
       },
     }),
-    getProfile: builder.query<UserEntity, unknown>({
-      query: () => AUTH_API_ROUTE.profile,
+    getProfile: builder.query<UserResponseDto, unknown>({
+      query: () => USERS_API_ROUTE.me,
       providesTags: ['User'],
+    }),
+    updateProfile: builder.mutation<UserResponseDto, UpdateUserDto>({
+      query: (body) => ({
+        url: USERS_API_ROUTE.me,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['User'],
+      async onQueryStarted(_arg, { dispatch, queryFulfilled, getState }) {
+        try {
+          const { data } = await queryFulfilled;
+          const state = getState() as RootState;
+          const currentAuth = state.auth;
+          if (currentAuth?.accessToken) {
+            dispatch(
+              setCredentials({
+                user: data,
+                accessToken: currentAuth.accessToken,
+              }),
+            );
+          }
+        } catch {
+          // Handle error
+        }
+      },
+    }),
+    logoutAll: builder.mutation<unknown, unknown>({
+      query: () => ({
+        url: AUTH_API_ROUTE.logoutAll,
+        method: 'POST',
+      }),
+      async onQueryStarted(_arg, { dispatch }) {
+        dispatch(logout());
+      },
     }),
   }),
 });
@@ -83,4 +119,6 @@ export const {
   useLogoutMutation,
   useGetProfileQuery,
   useLazyGetProfileQuery,
+  useUpdateProfileMutation,
+  useLogoutAllMutation,
 } = authApi;

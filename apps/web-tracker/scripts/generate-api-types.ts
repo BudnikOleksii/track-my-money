@@ -1,15 +1,20 @@
 import { generateApi } from 'swagger-typescript-api';
 import { join } from 'path';
 
-const openApiPath = join(__dirname, '../../api/openapi.json');
+// TODO: get from .env
+const apiUrl = 'http://localhost:8080/api/v1';
+
+if (!apiUrl) {
+  console.error('Api URL not specified');
+  process.exit(1);
+}
+
 const outputPath = join(__dirname, '../src/api/generated');
 
 generateApi({
   output: outputPath,
-  input: openApiPath,
-  httpClientType: 'fetch',
-  generateClient: true,
-  generateRouteTypes: true,
+  url: `${apiUrl}/openapi.json`,
+  generateClient: false,
   generateResponses: true,
   toJS: false,
   extractRequestParams: true,
@@ -17,11 +22,9 @@ generateApi({
   extractEnums: true,
   unwrapResponseData: false,
   defaultResponseAsSuccess: false,
-  singleHttpClient: true,
   cleanOutput: true,
   enumNamesAsValues: true,
   moduleNameFirstTag: false,
-  generateUnionEnums: true,
   extraTemplates: [],
   hooks: {
     onFormatTypeName: (typeName) => {

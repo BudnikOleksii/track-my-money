@@ -41,7 +41,7 @@ export const DashboardPageContent: FC = () => {
 
           <div className={styles.welcomeSection}>
             <Typography variant="title-m" className={styles.welcomeTitle}>
-              {t('welcome')}, {user?.name}!
+              {t('welcome')}, {user?.email}!
             </Typography>
           </div>
 
@@ -49,14 +49,6 @@ export const DashboardPageContent: FC = () => {
             <Typography variant="title-s" className={styles.infoTitle}>
               {t('userInfo')}
             </Typography>
-            <div className={styles.infoRow}>
-              <Typography variant="body-m" className={styles.infoLabel}>
-                {t('name')}:
-              </Typography>
-              <Typography variant="body-m" className={styles.infoValue}>
-                {user?.name}
-              </Typography>
-            </div>
             <div className={styles.infoRow}>
               <Typography variant="body-m" className={styles.infoLabel}>
                 {t('email')}:

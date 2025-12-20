@@ -17,11 +17,8 @@ import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 import { Label } from '@track-my-money/ui/src/components/atoms/label/Label';
 
-import { TransactionType } from '@/src/constants/transaction-type';
-import type {
-  CreateCategoryDto,
-  CreateCategoryDtoTypeEnum,
-} from '@/src/api/generated/Api';
+import { TransactionType } from '@/src/api/generated/Api';
+import type { CreateCategoryDto } from '@/src/api/generated/Api';
 import {
   useCreateCategoryMutation,
   useGetCategoriesQuery,
@@ -63,9 +60,11 @@ export const CreateCategoryForm: FC = () => {
       setErrorMessage('');
       setSuccessMessage('');
 
+      // TODO: fix types, parentCategoryId is object in schema, fix on backend
+      // @ts-expect-error - parentCategoryId is object in schema
       const submitData: CreateCategoryDto = {
         name: data.name,
-        type: data.type as CreateCategoryDtoTypeEnum,
+        type: data.type,
         ...(data.parentCategoryId
           ? { parentCategoryId: data.parentCategoryId }
           : {}),
