@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@track-my-money/eslint-config": "workspace:*",
-    "swagger-typescript-api": "13.2.16",
     "@track-my-money/stylelint-config": "workspace:*",
     "@track-my-money/typescript-config": "workspace:*",
     "@types/node": "24.10.0",
@@ -40,6 +39,7 @@
     "eslint-config-next": "16.0.1",
     "redux-persist-transform-encrypt": "5.1.1",
     "stylelint": "16.25.0",
+    "swagger-typescript-api": "13.2.16",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.9.3"

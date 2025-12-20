@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { TransactionType } from '@/src/constants/transaction-type';
+import { TransactionType } from '@/src/api/generated/Api';
 
 export const createCategorySchema = (
   t: (key: string) => string,

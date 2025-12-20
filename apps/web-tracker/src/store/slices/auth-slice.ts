@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { UserEntity } from '@/src/api/generated/Api';
+import type { UserResponseDto } from '@/src/api/generated/Api';
 
 export interface AuthState {
-  user: UserEntity | null;
+  user: UserResponseDto | null;
   accessToken: string | null;
 }
 
@@ -19,7 +19,7 @@ const authSlice = createSlice({
     setCredentials: (
       state,
       action: PayloadAction<{
-        user: UserEntity;
+        user: UserResponseDto;
         accessToken: string;
       }>,
     ) => {
@@ -30,7 +30,7 @@ const authSlice = createSlice({
       state.user = null;
       state.accessToken = null;
     },
-    updateUser: (state, action: PayloadAction<UserEntity>) => {
+    updateUser: (state, action: PayloadAction<UserResponseDto>) => {
       state.user = action.payload;
     },
   },

@@ -17,7 +17,7 @@ import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 import { Label } from '@track-my-money/ui/src/components/atoms/label/Label';
 
-import { TransactionType } from '@/src/constants/transaction-type';
+import { TransactionType } from '@/src/api/generated/Api';
 import {
   useUpdateCategoryMutation,
   useGetCategoryByIdQuery,
@@ -73,7 +73,13 @@ export const EditCategoryForm: FC<Props> = ({
       setErrorMessage('');
       setSuccessMessage('');
 
-      await updateCategory({ id: categoryId, data }).unwrap();
+      await updateCategory({
+        id: categoryId,
+        data: {
+          name: data.name,
+          type: data.type,
+        },
+      }).unwrap();
       setSuccessMessage(t('updateSuccess'));
       if (onSuccess) {
         setTimeout(() => {

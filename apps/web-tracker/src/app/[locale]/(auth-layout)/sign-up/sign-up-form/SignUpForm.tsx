@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
-import { TextField } from '@track-my-money/ui/src/components/molecules/text-field/TextField';
 import { Button } from '@track-my-money/ui/src/components/atoms/button/Button';
 import { Loader } from '@track-my-money/ui/src/components/atoms/loader/Loader';
 
@@ -33,7 +32,7 @@ export const SignUpForm: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpFormData>({
-    resolver: zodResolver(createSignUpSchema(t, tShared)),
+    resolver: zodResolver(createSignUpSchema(tShared)),
   });
 
   const onSubmit = async (data: SignUpFormData) => {
@@ -49,15 +48,6 @@ export const SignUpForm: FC = () => {
 
   return (
     <AuthForm onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        label={t('name')}
-        type="text"
-        placeholder={t('namePlaceholder')}
-        error={!!errors.name}
-        helperText={errors.name?.message}
-        {...register('name')}
-      />
-
       <EmailInput register={register} name="email" fieldError={errors.email} />
 
       <PasswordInput

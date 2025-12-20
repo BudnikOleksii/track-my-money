@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { TransactionType } from '@/src/constants/transaction-type';
+import { TransactionType } from '@/src/api/generated/Api';
 import type {
   CreateCategoryDto,
   UpdateCategoryDto,
@@ -43,7 +43,7 @@ export const categoriesApi = createApi({
     >({
       query: ({ id, data }) => ({
         url: `${CATEGORIES_API_ROUTE.list}/${id}`,
-        method: 'PATCH',
+        method: 'PUT',
         body: data,
       }),
       invalidatesTags: (_result, _error, { id }) => [

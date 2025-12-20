@@ -64,3 +64,6 @@ pnpm-debug.log*
 
 *storybook.log
 storybook-static
+
+# Cursor plans
+.cursor/plans

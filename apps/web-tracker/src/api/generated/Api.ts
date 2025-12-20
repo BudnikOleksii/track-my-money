@@ -10,47 +10,516 @@
  * ---------------------------------------------------------------
  */
 
-export interface SignupDto {
+export enum TransactionStatisticsGroupBy {
+  Category = 'category',
+  Currency = 'currency',
+  Month = 'month',
+  Year = 'year',
+}
+
+/** Transaction type */
+export enum TransactionType {
+  EXPENSE = 'EXPENSE',
+  INCOME = 'INCOME',
+}
+
+/** User role */
+export enum UserRole {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+}
+
+/** Base currency code */
+export enum CurrencyCode {
+  AED = 'AED',
+  AFN = 'AFN',
+  ALL = 'ALL',
+  AMD = 'AMD',
+  ANG = 'ANG',
+  AOA = 'AOA',
+  ARS = 'ARS',
+  AUD = 'AUD',
+  AWG = 'AWG',
+  AZN = 'AZN',
+  BAM = 'BAM',
+  BBD = 'BBD',
+  BDT = 'BDT',
+  BGN = 'BGN',
+  BHD = 'BHD',
+  BIF = 'BIF',
+  BMD = 'BMD',
+  BND = 'BND',
+  BOB = 'BOB',
+  BRL = 'BRL',
+  BSD = 'BSD',
+  BTN = 'BTN',
+  BWP = 'BWP',
+  BYN = 'BYN',
+  BZD = 'BZD',
+  CAD = 'CAD',
+  CDF = 'CDF',
+  CHF = 'CHF',
+  CLP = 'CLP',
+  CNY = 'CNY',
+  COP = 'COP',
+  CRC = 'CRC',
+  CUP = 'CUP',
+  CVE = 'CVE',
+  CZK = 'CZK',
+  DJF = 'DJF',
+  DKK = 'DKK',
+  DOP = 'DOP',
+  DZD = 'DZD',
+  EGP = 'EGP',
+  ERN = 'ERN',
+  ETB = 'ETB',
+  EUR = 'EUR',
+  FJD = 'FJD',
+  FKP = 'FKP',
+  GBP = 'GBP',
+  GEL = 'GEL',
+  GHS = 'GHS',
+  GIP = 'GIP',
+  GMD = 'GMD',
+  GNF = 'GNF',
+  GTQ = 'GTQ',
+  GYD = 'GYD',
+  HKD = 'HKD',
+  HNL = 'HNL',
+  HRK = 'HRK',
+  HTG = 'HTG',
+  HUF = 'HUF',
+  IDR = 'IDR',
+  ILS = 'ILS',
+  INR = 'INR',
+  IQD = 'IQD',
+  IRR = 'IRR',
+  ISK = 'ISK',
+  JMD = 'JMD',
+  JOD = 'JOD',
+  JPY = 'JPY',
+  KES = 'KES',
+  KGS = 'KGS',
+  KHR = 'KHR',
+  KMF = 'KMF',
+  KPW = 'KPW',
+  KRW = 'KRW',
+  KWD = 'KWD',
+  KYD = 'KYD',
+  KZT = 'KZT',
+  LAK = 'LAK',
+  LBP = 'LBP',
+  LKR = 'LKR',
+  LRD = 'LRD',
+  LSL = 'LSL',
+  LYD = 'LYD',
+  MAD = 'MAD',
+  MDL = 'MDL',
+  MGA = 'MGA',
+  MKD = 'MKD',
+  MMK = 'MMK',
+  MNT = 'MNT',
+  MOP = 'MOP',
+  MRU = 'MRU',
+  MUR = 'MUR',
+  MVR = 'MVR',
+  MWK = 'MWK',
+  MXN = 'MXN',
+  MYR = 'MYR',
+  MZN = 'MZN',
+  NAD = 'NAD',
+  NGN = 'NGN',
+  NIO = 'NIO',
+  NOK = 'NOK',
+  NPR = 'NPR',
+  NZD = 'NZD',
+  OMR = 'OMR',
+  PAB = 'PAB',
+  PEN = 'PEN',
+  PGK = 'PGK',
+  PHP = 'PHP',
+  PKR = 'PKR',
+  PLN = 'PLN',
+  PYG = 'PYG',
+  QAR = 'QAR',
+  RON = 'RON',
+  RSD = 'RSD',
+  RUB = 'RUB',
+  RWF = 'RWF',
+  SAR = 'SAR',
+  SBD = 'SBD',
+  SCR = 'SCR',
+  SDG = 'SDG',
+  SEK = 'SEK',
+  SGD = 'SGD',
+  SHP = 'SHP',
+  SLE = 'SLE',
+  SLL = 'SLL',
+  SOS = 'SOS',
+  SRD = 'SRD',
+  SSP = 'SSP',
+  STN = 'STN',
+  SYP = 'SYP',
+  SZL = 'SZL',
+  THB = 'THB',
+  TJS = 'TJS',
+  TMT = 'TMT',
+  TND = 'TND',
+  TOP = 'TOP',
+  TRY = 'TRY',
+  TTD = 'TTD',
+  TWD = 'TWD',
+  TZS = 'TZS',
+  UAH = 'UAH',
+  UGX = 'UGX',
+  USD = 'USD',
+  UYU = 'UYU',
+  UZS = 'UZS',
+  VES = 'VES',
+  VND = 'VND',
+  VUV = 'VUV',
+  WST = 'WST',
+  XAF = 'XAF',
+  XCD = 'XCD',
+  XDR = 'XDR',
+  XOF = 'XOF',
+  XPF = 'XPF',
+  YER = 'YER',
+  ZAR = 'ZAR',
+  ZMW = 'ZMW',
+  ZWL = 'ZWL',
+}
+
+/** Country code */
+export enum CountryCode {
+  AD = 'AD',
+  AE = 'AE',
+  AF = 'AF',
+  AG = 'AG',
+  AI = 'AI',
+  AL = 'AL',
+  AM = 'AM',
+  AO = 'AO',
+  AQ = 'AQ',
+  AR = 'AR',
+  AS = 'AS',
+  AT = 'AT',
+  AU = 'AU',
+  AW = 'AW',
+  AX = 'AX',
+  AZ = 'AZ',
+  BA = 'BA',
+  BB = 'BB',
+  BD = 'BD',
+  BE = 'BE',
+  BF = 'BF',
+  BG = 'BG',
+  BH = 'BH',
+  BI = 'BI',
+  BJ = 'BJ',
+  BL = 'BL',
+  BM = 'BM',
+  BN = 'BN',
+  BO = 'BO',
+  BQ = 'BQ',
+  BR = 'BR',
+  BS = 'BS',
+  BT = 'BT',
+  BV = 'BV',
+  BW = 'BW',
+  BY = 'BY',
+  BZ = 'BZ',
+  CA = 'CA',
+  CC = 'CC',
+  CD = 'CD',
+  CF = 'CF',
+  CG = 'CG',
+  CH = 'CH',
+  CI = 'CI',
+  CK = 'CK',
+  CL = 'CL',
+  CM = 'CM',
+  CN = 'CN',
+  CO = 'CO',
+  CR = 'CR',
+  CU = 'CU',
+  CV = 'CV',
+  CW = 'CW',
+  CX = 'CX',
+  CY = 'CY',
+  CZ = 'CZ',
+  DE = 'DE',
+  DJ = 'DJ',
+  DK = 'DK',
+  DM = 'DM',
+  DO = 'DO',
+  DZ = 'DZ',
+  EC = 'EC',
+  EE = 'EE',
+  EG = 'EG',
+  EH = 'EH',
+  ER = 'ER',
+  ES = 'ES',
+  ET = 'ET',
+  FI = 'FI',
+  FJ = 'FJ',
+  FK = 'FK',
+  FM = 'FM',
+  FO = 'FO',
+  FR = 'FR',
+  GA = 'GA',
+  GB = 'GB',
+  GD = 'GD',
+  GE = 'GE',
+  GF = 'GF',
+  GG = 'GG',
+  GH = 'GH',
+  GI = 'GI',
+  GL = 'GL',
+  GM = 'GM',
+  GN = 'GN',
+  GP = 'GP',
+  GQ = 'GQ',
+  GR = 'GR',
+  GS = 'GS',
+  GT = 'GT',
+  GU = 'GU',
+  GW = 'GW',
+  GY = 'GY',
+  HK = 'HK',
+  HM = 'HM',
+  HN = 'HN',
+  HR = 'HR',
+  HT = 'HT',
+  HU = 'HU',
+  ID = 'ID',
+  IE = 'IE',
+  IL = 'IL',
+  IM = 'IM',
+  IN = 'IN',
+  IO = 'IO',
+  IQ = 'IQ',
+  IR = 'IR',
+  IS = 'IS',
+  IT = 'IT',
+  JE = 'JE',
+  JM = 'JM',
+  JO = 'JO',
+  JP = 'JP',
+  KE = 'KE',
+  KG = 'KG',
+  KH = 'KH',
+  KI = 'KI',
+  KM = 'KM',
+  KN = 'KN',
+  KP = 'KP',
+  KR = 'KR',
+  KW = 'KW',
+  KY = 'KY',
+  KZ = 'KZ',
+  LA = 'LA',
+  LB = 'LB',
+  LC = 'LC',
+  LI = 'LI',
+  LK = 'LK',
+  LR = 'LR',
+  LS = 'LS',
+  LT = 'LT',
+  LU = 'LU',
+  LV = 'LV',
+  LY = 'LY',
+  MA = 'MA',
+  MC = 'MC',
+  MD = 'MD',
+  ME = 'ME',
+  MF = 'MF',
+  MG = 'MG',
+  MH = 'MH',
+  MK = 'MK',
+  ML = 'ML',
+  MM = 'MM',
+  MN = 'MN',
+  MO = 'MO',
+  MP = 'MP',
+  MQ = 'MQ',
+  MR = 'MR',
+  MS = 'MS',
+  MT = 'MT',
+  MU = 'MU',
+  MV = 'MV',
+  MW = 'MW',
+  MX = 'MX',
+  MY = 'MY',
+  MZ = 'MZ',
+  NA = 'NA',
+  NC = 'NC',
+  NE = 'NE',
+  NF = 'NF',
+  NG = 'NG',
+  NI = 'NI',
+  NL = 'NL',
+  NO = 'NO',
+  NP = 'NP',
+  NR = 'NR',
+  NU = 'NU',
+  NZ = 'NZ',
+  OM = 'OM',
+  PA = 'PA',
+  PE = 'PE',
+  PF = 'PF',
+  PG = 'PG',
+  PH = 'PH',
+  PK = 'PK',
+  PL = 'PL',
+  PM = 'PM',
+  PN = 'PN',
+  PR = 'PR',
+  PS = 'PS',
+  PT = 'PT',
+  PW = 'PW',
+  PY = 'PY',
+  QA = 'QA',
+  RE = 'RE',
+  RO = 'RO',
+  RS = 'RS',
+  RU = 'RU',
+  RW = 'RW',
+  SA = 'SA',
+  SB = 'SB',
+  SC = 'SC',
+  SD = 'SD',
+  SE = 'SE',
+  SG = 'SG',
+  SH = 'SH',
+  SI = 'SI',
+  SJ = 'SJ',
+  SK = 'SK',
+  SL = 'SL',
+  SM = 'SM',
+  SN = 'SN',
+  SO = 'SO',
+  SR = 'SR',
+  SS = 'SS',
+  ST = 'ST',
+  SV = 'SV',
+  SX = 'SX',
+  SY = 'SY',
+  SZ = 'SZ',
+  TC = 'TC',
+  TD = 'TD',
+  TF = 'TF',
+  TG = 'TG',
+  TH = 'TH',
+  TJ = 'TJ',
+  TK = 'TK',
+  TL = 'TL',
+  TM = 'TM',
+  TN = 'TN',
+  TO = 'TO',
+  TR = 'TR',
+  TT = 'TT',
+  TV = 'TV',
+  TW = 'TW',
+  TZ = 'TZ',
+  UA = 'UA',
+  UG = 'UG',
+  UM = 'UM',
+  US = 'US',
+  UY = 'UY',
+  UZ = 'UZ',
+  VA = 'VA',
+  VC = 'VC',
+  VE = 'VE',
+  VG = 'VG',
+  VI = 'VI',
+  VN = 'VN',
+  VU = 'VU',
+  WF = 'WF',
+  WS = 'WS',
+  YE = 'YE',
+  YT = 'YT',
+  ZA = 'ZA',
+  ZM = 'ZM',
+  ZW = 'ZW',
+}
+
+export interface RegisterDto {
   /**
    * User email address
    * @example "user@example.com"
    */
   email: string;
   /**
-   * User password (minimum 8 characters)
+   * User password
    * @minLength 8
-   * @example "password123"
+   * @example "SecurePass123!"
    */
   password: string;
   /**
-   * User full name
-   * @example "John Doe"
+   * Country code
+   * @example "US"
    */
-  name: string;
+  countryCode?: CountryCode;
+  /**
+   * Base currency code
+   * @example "USD"
+   */
+  baseCurrencyCode?: CurrencyCode;
 }
 
-export interface UserEntity {
+export interface UserResponseDto {
+  /**
+   * User ID
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
+   */
   id: string;
+  /**
+   * User email address
+   * @example "user@example.com"
+   */
   email: string;
-  name: string;
-  role: string;
-  isEmailVerified: boolean;
-  country: object | null;
-  baseCurrency: string;
-  /** @format date-time */
+  /**
+   * Whether the email is verified
+   * @example true
+   */
+  emailVerified: boolean;
+  /**
+   * Country code
+   * @example "US"
+   */
+  countryCode: CountryCode | null;
+  /**
+   * Base currency code
+   * @example "USD"
+   */
+  baseCurrencyCode: CurrencyCode | null;
+  /**
+   * User role
+   * @example "USER"
+   */
+  role: UserRole;
+  /**
+   * Creation date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
   createdAt: string;
-  /** @format date-time */
+  /**
+   * Last update date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
   updatedAt: string;
 }
 
-export interface AuthResponseDto {
+export interface VerifyEmailDto {
   /**
-   * JWT access token
-   * @example "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+   * Email verification token
+   * @example "abc123def456ghi789"
    */
-  accessToken: string;
-  /** User information */
-  user: UserEntity;
+  token: string;
 }
 
 export interface LoginDto {
@@ -66,2155 +535,373 @@ export interface LoginDto {
   password: string;
 }
 
-export interface SubcategoryResponse {
-  id: string;
-  name: string;
-  type: string;
-  userId: string;
-  parentCategoryId: string;
-  /** @example [] */
-  subcategories: string[];
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
+export interface AuthResponseDto {
+  /**
+   * JWT access token
+   * @example "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+   */
+  accessToken: string;
+  /** User information */
+  user: UserResponseDto;
 }
 
-export interface CategoryResponseDto {
-  id: string;
-  name: string;
-  type: CategoryResponseDtoTypeEnum;
-  userId: string;
-  parentCategoryId?: object;
-  subcategories: SubcategoryResponse[];
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
+export interface UpdateUserDto {
+  /**
+   * Country code
+   * @example "US"
+   */
+  countryCode?: CountryCode;
+  /**
+   * Base currency code
+   * @example "USD"
+   */
+  baseCurrencyCode?: CurrencyCode;
+}
+
+export interface UpdateRoleDto {
+  /**
+   * User role
+   * @example "USER"
+   */
+  role: UserRole;
 }
 
 export interface CreateCategoryDto {
   /**
    * Category name
-   * @example "Food"
+   * @minLength 1
+   * @maxLength 100
+   * @example "Groceries"
    */
   name: string;
   /**
    * Transaction type
    * @example "EXPENSE"
    */
-  type: CreateCategoryDtoTypeEnum;
+  type: TransactionType;
   /**
    * Parent category ID (for subcategories)
+   * @format uuid
    * @example "123e4567-e89b-12d3-a456-426614174000"
    */
-  parentCategoryId?: string;
+  parentCategoryId?: object;
+}
+
+export interface CategoryResponseDto {
+  /**
+   * Category ID
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
+   */
+  id: string;
+  /**
+   * Category name
+   * @example "Groceries"
+   */
+  name: string;
+  /**
+   * Transaction type
+   * @example "EXPENSE"
+   */
+  type: TransactionType;
+  /**
+   * Parent category ID
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
+   */
+  parentCategoryId: object | null;
+  /** Parent category */
+  parentCategory: CategoryResponseDto | null;
+  /** Subcategories */
+  subcategories: CategoryResponseDto[];
+  /**
+   * Creation date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  createdAt: string;
+  /**
+   * Last update date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  updatedAt: string;
 }
 
 export interface UpdateCategoryDto {
   /**
    * Category name
-   * @example "Food & Dining"
+   * @minLength 1
+   * @maxLength 100
+   * @example "Groceries"
    */
-  name?: string;
+  name: string;
   /**
    * Transaction type
    * @example "EXPENSE"
    */
-  type?: UpdateCategoryDtoTypeEnum;
-}
-
-export interface TransactionResponseDto {
-  id: string;
-  amount: string;
-  /** @format date-time */
-  date: string;
-  description: string;
-  note?: object;
-  currency: TransactionResponseDtoCurrencyEnum;
-  type: TransactionResponseDtoTypeEnum;
-  categoryId: string;
-  subcategoryId?: object;
-  userId: string;
-  /** @format date-time */
-  createdAt: string;
-  /** @format date-time */
-  updatedAt: string;
-}
-
-export interface PaginationDto {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPrevPage: boolean;
-}
-
-export interface TransactionListResponseDto {
-  data: TransactionResponseDto[];
-  pagination: PaginationDto;
-}
-
-export interface BalanceResponseDto {
-  balance: string;
-  income: string;
-  expenses: string;
-  currency: BalanceResponseDtoCurrencyEnum;
-  transactionCount: number;
+  type: TransactionType;
+  /**
+   * Parent category ID (for subcategories)
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
+   */
+  parentCategoryId?: object;
 }
 
 export interface CreateTransactionDto {
   /**
-   * Transaction amount
-   * @example 100.5
-   */
-  amount: number;
-  /**
-   * Transaction date
-   * @format date-time
-   * @example "2024-01-15T00:00:00.000Z"
-   */
-  date: string;
-  /**
-   * Transaction description
-   * @example "Grocery shopping"
-   */
-  description: string;
-  /**
-   * Additional notes
-   * @example "Weekly groceries"
-   */
-  note?: string;
-  /**
-   * Transaction currency
-   * @example "USD"
-   */
-  currency?: CreateTransactionDtoCurrencyEnum;
-  /**
-   * Transaction type
-   * @example "EXPENSE"
-   */
-  type: CreateTransactionDtoTypeEnum;
-  /**
    * Category ID
+   * @format uuid
    * @example "123e4567-e89b-12d3-a456-426614174000"
    */
   categoryId: string;
   /**
-   * Subcategory ID
-   * @example "123e4567-e89b-12d3-a456-426614174001"
+   * Transaction type
+   * @example "EXPENSE"
    */
-  subcategoryId?: string;
-}
-
-export interface UpdateTransactionDto {
+  type: TransactionType;
   /**
-   * Transaction amount
-   * @example 150.75
+   * Transaction amount as a positive number
+   * @example 100.5
    */
-  amount?: number;
+  amount: number;
+  /**
+   * Currency code
+   * @example "USD"
+   */
+  currencyCode: CurrencyCode;
   /**
    * Transaction date
    * @format date-time
-   * @example "2024-01-20T00:00:00.000Z"
+   * @example "2024-01-01T00:00:00.000Z"
    */
-  date?: string;
+  date: string;
   /**
    * Transaction description
-   * @example "Updated description"
+   * @maxLength 500
+   * @example "Grocery shopping at supermarket"
    */
-  description?: string;
+  description?: object;
+}
+
+export interface TransactionResponseDto {
   /**
-   * Additional notes
-   * @example "Updated notes"
+   * Transaction ID
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
    */
-  note?: string;
+  id: string;
   /**
-   * Transaction currency
-   * @example "USD"
+   * Category ID
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
    */
-  currency?: UpdateTransactionDtoCurrencyEnum;
+  categoryId: string;
   /**
    * Transaction type
    * @example "EXPENSE"
    */
-  type?: UpdateTransactionDtoTypeEnum;
+  type: TransactionType;
   /**
-   * Category ID
-   * @example "123e4567-e89b-12d3-a456-426614174000"
+   * Transaction amount
+   * @example "100.50"
    */
-  categoryId?: string;
+  amount: string;
   /**
-   * Subcategory ID
-   * @example "123e4567-e89b-12d3-a456-426614174001"
+   * Currency code
+   * @example "USD"
    */
-  subcategoryId?: string;
+  currencyCode: CurrencyCode;
+  /**
+   * Transaction date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  date: string;
+  /**
+   * Transaction description
+   * @example "Grocery shopping at supermarket"
+   */
+  description: object | null;
+  /**
+   * Creation date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  createdAt: string;
+  /**
+   * Last update date
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  updatedAt: string;
+  /** Category information */
+  category: CategoryResponseDto;
 }
 
-export type CategoryResponseDtoTypeEnum = 'INCOME' | 'EXPENSE';
-
-/**
- * Transaction type
- * @example "EXPENSE"
- */
-export type CreateCategoryDtoTypeEnum = 'INCOME' | 'EXPENSE';
-
-/**
- * Transaction type
- * @example "EXPENSE"
- */
-export type UpdateCategoryDtoTypeEnum = 'INCOME' | 'EXPENSE';
-
-export type TransactionResponseDtoCurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-export type TransactionResponseDtoTypeEnum = 'INCOME' | 'EXPENSE';
-
-export type BalanceResponseDtoCurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-/**
- * Transaction currency
- * @example "USD"
- */
-export type CreateTransactionDtoCurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-/**
- * Transaction type
- * @example "EXPENSE"
- */
-export type CreateTransactionDtoTypeEnum = 'INCOME' | 'EXPENSE';
-
-/**
- * Transaction currency
- * @example "USD"
- */
-export type UpdateTransactionDtoCurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-/**
- * Transaction type
- * @example "EXPENSE"
- */
-export type UpdateTransactionDtoTypeEnum = 'INCOME' | 'EXPENSE';
-
-export interface AuthControllerVerifyEmailParams {
-  /** Activation link ID */
-  activationLinkId: string;
+export interface PaginatedResponseDto {
+  data: any[][];
+  /** Total number of items */
+  total: number;
+  /** Current page number */
+  page: number;
+  /** Items per page */
+  limit: number;
 }
 
-export interface CategoriesControllerGetCategoriesParams {
+export interface TransactionStatisticsGroupDataDto {
+  /**
+   * Group key (category name, currency, month, or year)
+   * @example "Groceries"
+   */
+  key: string;
+  /**
+   * Total amount for this group
+   * @example "1250.75"
+   */
+  totalAmount: string;
+  /**
+   * Number of transactions in this group
+   * @example 45
+   */
+  transactionCount: number;
+}
+
+export interface TransactionStatisticsDateRangeDto {
+  /**
+   * Start date of the range
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  from: string | null;
+  /**
+   * End date of the range
+   * @format date-time
+   * @example "2024-12-31T23:59:59.999Z"
+   */
+  to: string | null;
+}
+
+export interface TransactionStatisticsResponseDto {
+  /**
+   * Total amount across all transactions
+   * @example "12500.50"
+   */
+  totalAmount: string;
+  /**
+   * Total number of transactions
+   * @example 150
+   */
+  transactionCount: number;
+  /** Grouped statistics data */
+  groupedData: TransactionStatisticsGroupDataDto[];
+  /** Date range used for statistics */
+  dateRange: TransactionStatisticsDateRangeDto;
+}
+
+export type UpdateTransactionDto = object;
+
+export interface UsersControllerGetUserByIdParams {
+  /** User UUID */
+  id: string;
+}
+
+export interface UsersControllerUpdateUserRoleParams {
+  /** User UUID */
+  id: string;
+}
+
+export interface CategoriesControllerFindAllParams {
   /** Filter by transaction type */
-  type?: TypeEnum;
+  type?: TransactionType;
 }
 
-/** Filter by transaction type */
-export type TypeEnum = 'INCOME' | 'EXPENSE';
-
-/** Filter by transaction type */
-export type CategoriesControllerGetCategoriesParams1TypeEnum =
-  | 'INCOME'
-  | 'EXPENSE';
-
-export interface CategoriesControllerGetCategoryByIdParams {
-  /** Category ID */
+export interface CategoriesControllerFindOneParams {
+  /** Category UUID */
   id: string;
 }
 
-export interface CategoriesControllerUpdateCategoryParams {
-  /** Category ID */
+export interface CategoriesControllerUpdateParams {
+  /** Category UUID */
   id: string;
 }
 
-export interface CategoriesControllerDeleteCategoryParams {
-  /** Category ID */
+export interface CategoriesControllerRemoveParams {
+  /** Category UUID */
   id: string;
 }
 
-export interface TransactionsControllerGetTransactionsParams {
+export interface TransactionsControllerFindAllParams {
   /**
-   * Page number
+   * Start date (ISO 8601)
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
+   */
+  dateFrom?: string;
+  /**
+   * End date (ISO 8601)
+   * @format date-time
+   * @example "2024-12-31T23:59:59.999Z"
+   */
+  dateTo?: string;
+  /** Filter by transaction type */
+  type?: TransactionType;
+  /**
+   * Filter by category ID
+   * @format uuid
+   * @example "123e4567-e89b-12d3-a456-426614174000"
+   */
+  categoryId?: string;
+  /** Filter by currency code */
+  currencyCode?: CurrencyCode;
+  /**
+   * Page number (default: 1)
    * @min 1
    * @example 1
    */
   page?: number;
   /**
-   * Items per page
+   * Items per page (default: 10)
    * @min 1
    * @max 100
    * @example 10
    */
   limit?: number;
-  /**
-   * Sort field
-   * @example "date"
-   */
-  sortBy?: SortByEnum;
-  /**
-   * Sort order
-   * @example "desc"
-   */
-  sortOrder?: SortOrderEnum;
-  /**
-   * Filter by transaction type
-   * @example "EXPENSE"
-   */
-  type?: TypeEnum1;
-  /**
-   * Filter by category ID
-   * @example "123e4567-e89b-12d3-a456-426614174000"
-   */
-  categoryId?: string;
-  /**
-   * Filter by subcategory ID
-   * @example "123e4567-e89b-12d3-a456-426614174001"
-   */
-  subcategoryId?: string;
-  /**
-   * Start date filter (ISO date string)
-   * @example "2024-01-01"
-   */
-  startDate?: string;
-  /**
-   * End date filter (ISO date string)
-   * @example "2024-01-31"
-   */
-  endDate?: string;
-  /**
-   * Filter by currency
-   * @example "USD"
-   */
-  currency?: CurrencyEnum;
 }
 
-/**
- * Sort field
- * @example "date"
- */
-export type SortByEnum = 'date' | 'amount' | 'createdAt';
-
-/**
- * Sort order
- * @example "desc"
- */
-export type SortOrderEnum = 'asc' | 'desc';
-
-/**
- * Filter by transaction type
- * @example "EXPENSE"
- */
-export type TypeEnum1 = 'INCOME' | 'EXPENSE';
-
-/**
- * Filter by currency
- * @example "USD"
- */
-export type CurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-/**
- * Sort field
- * @example "date"
- */
-export type TransactionsControllerGetTransactionsParams1SortByEnum =
-  | 'date'
-  | 'amount'
-  | 'createdAt';
-
-/**
- * Sort order
- * @example "desc"
- */
-export type TransactionsControllerGetTransactionsParams1SortOrderEnum =
-  | 'asc'
-  | 'desc';
-
-/**
- * Filter by transaction type
- * @example "EXPENSE"
- */
-export type TransactionsControllerGetTransactionsParams1TypeEnum =
-  | 'INCOME'
-  | 'EXPENSE';
-
-/**
- * Filter by currency
- * @example "USD"
- */
-export type TransactionsControllerGetTransactionsParams1CurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-export interface TransactionsControllerGetBalanceParams {
+export interface TransactionsControllerGetStatisticsParams {
   /**
-   * Page number
-   * @min 1
-   * @example 1
+   * Start date (ISO 8601)
+   * @format date-time
+   * @example "2024-01-01T00:00:00.000Z"
    */
-  page?: number;
+  dateFrom?: string;
   /**
-   * Items per page
-   * @min 1
-   * @max 100
-   * @example 10
+   * End date (ISO 8601)
+   * @format date-time
+   * @example "2024-12-31T23:59:59.999Z"
    */
-  limit?: number;
-  /**
-   * Sort field
-   * @example "date"
-   */
-  sortBy?: SortByEnum1;
-  /**
-   * Sort order
-   * @example "desc"
-   */
-  sortOrder?: SortOrderEnum1;
-  /**
-   * Filter by transaction type
-   * @example "EXPENSE"
-   */
-  type?: TypeEnum2;
-  /**
-   * Filter by category ID
-   * @example "123e4567-e89b-12d3-a456-426614174000"
-   */
-  categoryId?: string;
-  /**
-   * Filter by subcategory ID
-   * @example "123e4567-e89b-12d3-a456-426614174001"
-   */
-  subcategoryId?: string;
-  /**
-   * Start date filter (ISO date string)
-   * @example "2024-01-01"
-   */
-  startDate?: string;
-  /**
-   * End date filter (ISO date string)
-   * @example "2024-01-31"
-   */
-  endDate?: string;
-  /**
-   * Filter by currency
-   * @example "USD"
-   */
-  currency?: CurrencyEnum1;
+  dateTo?: string;
+  /** Filter by transaction type */
+  type?: TransactionType;
+  /** Filter by currency */
+  currencyCode?: CurrencyCode;
+  /** Group statistics by */
+  groupBy?: TransactionStatisticsGroupBy;
 }
 
-/**
- * Sort field
- * @example "date"
- */
-export type SortByEnum1 = 'date' | 'amount' | 'createdAt';
-
-/**
- * Sort order
- * @example "desc"
- */
-export type SortOrderEnum1 = 'asc' | 'desc';
-
-/**
- * Filter by transaction type
- * @example "EXPENSE"
- */
-export type TypeEnum2 = 'INCOME' | 'EXPENSE';
-
-/**
- * Filter by currency
- * @example "USD"
- */
-export type CurrencyEnum1 =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-/**
- * Sort field
- * @example "date"
- */
-export type TransactionsControllerGetBalanceParams1SortByEnum =
-  | 'date'
-  | 'amount'
-  | 'createdAt';
-
-/**
- * Sort order
- * @example "desc"
- */
-export type TransactionsControllerGetBalanceParams1SortOrderEnum =
-  | 'asc'
-  | 'desc';
-
-/**
- * Filter by transaction type
- * @example "EXPENSE"
- */
-export type TransactionsControllerGetBalanceParams1TypeEnum =
-  | 'INCOME'
-  | 'EXPENSE';
-
-/**
- * Filter by currency
- * @example "USD"
- */
-export type TransactionsControllerGetBalanceParams1CurrencyEnum =
-  | 'UAH'
-  | 'USD'
-  | 'EUR'
-  | 'GBP'
-  | 'JPY'
-  | 'CAD'
-  | 'AUD'
-  | 'CHF'
-  | 'CNY'
-  | 'SEK'
-  | 'NOK'
-  | 'DKK'
-  | 'PLN'
-  | 'CZK'
-  | 'HUF'
-  | 'RON'
-  | 'BGN'
-  | 'HRK'
-  | 'RUB'
-  | 'BRL'
-  | 'MXN'
-  | 'INR'
-  | 'KRW'
-  | 'SGD'
-  | 'HKD'
-  | 'NZD'
-  | 'ZAR'
-  | 'TRY'
-  | 'ILS'
-  | 'AED'
-  | 'SAR'
-  | 'QAR'
-  | 'KWD'
-  | 'BHD'
-  | 'OMR'
-  | 'JOD'
-  | 'LBP'
-  | 'EGP'
-  | 'MAD'
-  | 'TND'
-  | 'DZD'
-  | 'LYD'
-  | 'SDG'
-  | 'ETB'
-  | 'KES'
-  | 'UGX'
-  | 'TZS'
-  | 'ZMW'
-  | 'BWP'
-  | 'SZL'
-  | 'LSL'
-  | 'NAD'
-  | 'MUR'
-  | 'SCR'
-  | 'KMF'
-  | 'DJF'
-  | 'ERN'
-  | 'SOS'
-  | 'SSP';
-
-export interface TransactionsControllerGetTransactionByIdParams {
-  /** Transaction ID */
+export interface TransactionsControllerFindOneParams {
+  /** Transaction UUID */
   id: string;
 }
 
-export interface TransactionsControllerUpdateTransactionParams {
-  /** Transaction ID */
+export interface TransactionsControllerUpdateParams {
+  /** Transaction UUID */
   id: string;
 }
 
-export interface TransactionsControllerDeleteTransactionParams {
-  /** Transaction ID */
+export interface TransactionsControllerRemoveParams {
+  /** Transaction UUID */
   id: string;
-}
-
-export namespace Auth {
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerSignup
-   * @summary Register a new user
-   * @request POST:/auth/signup
-   * @response `201` `AuthResponseDto` User successfully registered
-   * @response `409` `void` User with this email already exists
-   */
-  export namespace AuthControllerSignup {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = SignupDto;
-    export type RequestHeaders = {};
-    export type ResponseBody = AuthResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerLogin
-   * @summary Login user
-   * @request POST:/auth/login
-   * @response `200` `AuthResponseDto` User successfully logged in
-   * @response `401` `void` Invalid credentials
-   */
-  export namespace AuthControllerLogin {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = LoginDto;
-    export type RequestHeaders = {};
-    export type ResponseBody = AuthResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerRefresh
-   * @summary Refresh access token
-   * @request POST:/auth/refresh
-   * @response `200` `AuthResponseDto` Token successfully refreshed
-   * @response `400` `void` Refresh token not provided
-   * @response `401` `void` Invalid refresh token
-   */
-  export namespace AuthControllerRefresh {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = AuthResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerLogout
-   * @summary Logout user
-   * @request POST:/auth/logout
-   * @secure
-   * @response `200` `void` User successfully logged out
-   */
-  export namespace AuthControllerLogout {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerLogoutAll
-   * @summary Logout user from all devices
-   * @request POST:/auth/logout-all
-   * @secure
-   * @response `200` `void` User successfully logged out from all devices
-   */
-  export namespace AuthControllerLogoutAll {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerGetProfile
-   * @summary Get current user profile
-   * @request GET:/auth/profile
-   * @secure
-   * @response `200` `UserEntity` User profile
-   */
-  export namespace AuthControllerGetProfile {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UserEntity;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerVerifyEmail
-   * @summary Verify user email
-   * @request GET:/auth/verify-email/{activationLinkId}
-   * @response `200` `void` Email successfully verified
-   * @response `400` `void` Invalid or expired activation link
-   */
-  export namespace AuthControllerVerifyEmail {
-    export type RequestParams = {
-      /** Activation link ID */
-      activationLinkId: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-
-  /**
-   * No description
-   * @tags auth
-   * @name AuthControllerResendActivation
-   * @summary Resend activation email
-   * @request POST:/auth/resend-activation
-   * @secure
-   * @response `200` `void` Activation link sent successfully
-   * @response `400` `void` Email is already verified
-   */
-  export namespace AuthControllerResendActivation {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-}
-
-export namespace Categories {
-  /**
-   * No description
-   * @tags categories
-   * @name CategoriesControllerGetCategories
-   * @summary Get all categories
-   * @request GET:/categories
-   * @secure
-   * @response `200` `(CategoryResponseDto)[]` List of categories
-   */
-  export namespace CategoriesControllerGetCategories {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      /** Filter by transaction type */
-      type?: CategoriesControllerGetCategoriesParams1TypeEnum;
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = CategoryResponseDto[];
-  }
-
-  /**
-   * No description
-   * @tags categories
-   * @name CategoriesControllerCreateCategory
-   * @summary Create a new category
-   * @request POST:/categories
-   * @secure
-   * @response `201` `CategoryResponseDto` Category successfully created
-   * @response `409` `void` Category with this name already exists
-   */
-  export namespace CategoriesControllerCreateCategory {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = CreateCategoryDto;
-    export type RequestHeaders = {};
-    export type ResponseBody = CategoryResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags categories
-   * @name CategoriesControllerGetCategoryById
-   * @summary Get category by ID
-   * @request GET:/categories/{id}
-   * @secure
-   * @response `200` `CategoryResponseDto` Category details
-   * @response `404` `void` Category not found
-   */
-  export namespace CategoriesControllerGetCategoryById {
-    export type RequestParams = {
-      /** Category ID */
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = CategoryResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags categories
-   * @name CategoriesControllerUpdateCategory
-   * @summary Update category
-   * @request PATCH:/categories/{id}
-   * @secure
-   * @response `200` `CategoryResponseDto` Category successfully updated
-   * @response `400` `void` Invalid update request
-   * @response `404` `void` Category not found
-   */
-  export namespace CategoriesControllerUpdateCategory {
-    export type RequestParams = {
-      /** Category ID */
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = UpdateCategoryDto;
-    export type RequestHeaders = {};
-    export type ResponseBody = CategoryResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags categories
-   * @name CategoriesControllerDeleteCategory
-   * @summary Delete category
-   * @request DELETE:/categories/{id}
-   * @secure
-   * @response `204` `void` Category successfully deleted
-   * @response `400` `void` Cannot delete category with associated transactions
-   * @response `404` `void` Category not found
-   */
-  export namespace CategoriesControllerDeleteCategory {
-    export type RequestParams = {
-      /** Category ID */
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-}
-
-export namespace Transactions {
-  /**
-   * No description
-   * @tags transactions
-   * @name TransactionsControllerGetTransactions
-   * @summary Get all transactions
-   * @request GET:/transactions
-   * @secure
-   * @response `200` `TransactionListResponseDto` List of transactions
-   */
-  export namespace TransactionsControllerGetTransactions {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      /**
-       * Page number
-       * @min 1
-       * @example 1
-       */
-      page?: number;
-      /**
-       * Items per page
-       * @min 1
-       * @max 100
-       * @example 10
-       */
-      limit?: number;
-      /**
-       * Sort field
-       * @example "date"
-       */
-      sortBy?: TransactionsControllerGetTransactionsParams1SortByEnum;
-      /**
-       * Sort order
-       * @example "desc"
-       */
-      sortOrder?: TransactionsControllerGetTransactionsParams1SortOrderEnum;
-      /**
-       * Filter by transaction type
-       * @example "EXPENSE"
-       */
-      type?: TransactionsControllerGetTransactionsParams1TypeEnum;
-      /**
-       * Filter by category ID
-       * @example "123e4567-e89b-12d3-a456-426614174000"
-       */
-      categoryId?: string;
-      /**
-       * Filter by subcategory ID
-       * @example "123e4567-e89b-12d3-a456-426614174001"
-       */
-      subcategoryId?: string;
-      /**
-       * Start date filter (ISO date string)
-       * @example "2024-01-01"
-       */
-      startDate?: string;
-      /**
-       * End date filter (ISO date string)
-       * @example "2024-01-31"
-       */
-      endDate?: string;
-      /**
-       * Filter by currency
-       * @example "USD"
-       */
-      currency?: TransactionsControllerGetTransactionsParams1CurrencyEnum;
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = TransactionListResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags transactions
-   * @name TransactionsControllerCreateTransaction
-   * @summary Create a new transaction
-   * @request POST:/transactions
-   * @secure
-   * @response `201` `TransactionResponseDto` Transaction successfully created
-   * @response `400` `void` Invalid transaction data
-   */
-  export namespace TransactionsControllerCreateTransaction {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = CreateTransactionDto;
-    export type RequestHeaders = {};
-    export type ResponseBody = TransactionResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags transactions
-   * @name TransactionsControllerGetBalance
-   * @summary Get balance summary
-   * @request GET:/transactions/balance
-   * @secure
-   * @response `200` `BalanceResponseDto` Balance summary
-   */
-  export namespace TransactionsControllerGetBalance {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      /**
-       * Page number
-       * @min 1
-       * @example 1
-       */
-      page?: number;
-      /**
-       * Items per page
-       * @min 1
-       * @max 100
-       * @example 10
-       */
-      limit?: number;
-      /**
-       * Sort field
-       * @example "date"
-       */
-      sortBy?: TransactionsControllerGetBalanceParams1SortByEnum;
-      /**
-       * Sort order
-       * @example "desc"
-       */
-      sortOrder?: TransactionsControllerGetBalanceParams1SortOrderEnum;
-      /**
-       * Filter by transaction type
-       * @example "EXPENSE"
-       */
-      type?: TransactionsControllerGetBalanceParams1TypeEnum;
-      /**
-       * Filter by category ID
-       * @example "123e4567-e89b-12d3-a456-426614174000"
-       */
-      categoryId?: string;
-      /**
-       * Filter by subcategory ID
-       * @example "123e4567-e89b-12d3-a456-426614174001"
-       */
-      subcategoryId?: string;
-      /**
-       * Start date filter (ISO date string)
-       * @example "2024-01-01"
-       */
-      startDate?: string;
-      /**
-       * End date filter (ISO date string)
-       * @example "2024-01-31"
-       */
-      endDate?: string;
-      /**
-       * Filter by currency
-       * @example "USD"
-       */
-      currency?: TransactionsControllerGetBalanceParams1CurrencyEnum;
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = BalanceResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags transactions
-   * @name TransactionsControllerGetTransactionById
-   * @summary Get transaction by ID
-   * @request GET:/transactions/{id}
-   * @secure
-   * @response `200` `TransactionResponseDto` Transaction details
-   * @response `404` `void` Transaction not found
-   */
-  export namespace TransactionsControllerGetTransactionById {
-    export type RequestParams = {
-      /** Transaction ID */
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = TransactionResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags transactions
-   * @name TransactionsControllerUpdateTransaction
-   * @summary Update transaction
-   * @request PATCH:/transactions/{id}
-   * @secure
-   * @response `200` `TransactionResponseDto` Transaction successfully updated
-   * @response `400` `void` Invalid update request
-   * @response `404` `void` Transaction not found
-   */
-  export namespace TransactionsControllerUpdateTransaction {
-    export type RequestParams = {
-      /** Transaction ID */
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = UpdateTransactionDto;
-    export type RequestHeaders = {};
-    export type ResponseBody = TransactionResponseDto;
-  }
-
-  /**
-   * No description
-   * @tags transactions
-   * @name TransactionsControllerDeleteTransaction
-   * @summary Delete transaction
-   * @request DELETE:/transactions/{id}
-   * @secure
-   * @response `204` `void` Transaction successfully deleted
-   * @response `404` `void` Transaction not found
-   */
-  export namespace TransactionsControllerDeleteTransaction {
-    export type RequestParams = {
-      /** Transaction ID */
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-}
-
-export type QueryParamsType = Record<string | number, any>;
-export type ResponseFormat = keyof Omit<Body, 'body' | 'bodyUsed'>;
-
-export interface FullRequestParams extends Omit<RequestInit, 'body'> {
-  /** set parameter to `true` for call `securityWorker` for this request */
-  secure?: boolean;
-  /** request path */
-  path: string;
-  /** content type of request body */
-  type?: ContentType;
-  /** query params */
-  query?: QueryParamsType;
-  /** format of response (i.e. response.json() -> format: "json") */
-  format?: ResponseFormat;
-  /** request body */
-  body?: unknown;
-  /** base url */
-  baseUrl?: string;
-  /** request cancellation token */
-  cancelToken?: CancelToken;
-}
-
-export type RequestParams = Omit<
-  FullRequestParams,
-  'body' | 'method' | 'query' | 'path'
->;
-
-export interface ApiConfig<SecurityDataType = unknown> {
-  baseUrl?: string;
-  baseApiParams?: Omit<RequestParams, 'baseUrl' | 'cancelToken' | 'signal'>;
-  securityWorker?: (
-    securityData: SecurityDataType | null,
-  ) => Promise<RequestParams | void> | RequestParams | void;
-  customFetch?: typeof fetch;
-}
-
-export interface HttpResponse<D extends unknown, E extends unknown = unknown>
-  extends Response {
-  data: D;
-  error: E;
-}
-
-type CancelToken = Symbol | string | number;
-
-export enum ContentType {
-  Json = 'application/json',
-  JsonApi = 'application/vnd.api+json',
-  FormData = 'multipart/form-data',
-  UrlEncoded = 'application/x-www-form-urlencoded',
-  Text = 'text/plain',
-}
-
-export class HttpClient<SecurityDataType = unknown> {
-  public baseUrl: string = '';
-  private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
-  private abortControllers = new Map<CancelToken, AbortController>();
-  private customFetch = (...fetchParams: Parameters<typeof fetch>) =>
-    fetch(...fetchParams);
-
-  private baseApiParams: RequestParams = {
-    credentials: 'same-origin',
-    headers: {},
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-  };
-
-  constructor(apiConfig: ApiConfig<SecurityDataType> = {}) {
-    Object.assign(this, apiConfig);
-  }
-
-  public setSecurityData = (data: SecurityDataType | null) => {
-    this.securityData = data;
-  };
-
-  protected encodeQueryParam(key: string, value: any) {
-    const encodedKey = encodeURIComponent(key);
-    return `${encodedKey}=${encodeURIComponent(typeof value === 'number' ? value : `${value}`)}`;
-  }
-
-  protected addQueryParam(query: QueryParamsType, key: string) {
-    return this.encodeQueryParam(key, query[key]);
-  }
-
-  protected addArrayQueryParam(query: QueryParamsType, key: string) {
-    const value = query[key];
-    return value.map((v: any) => this.encodeQueryParam(key, v)).join('&');
-  }
-
-  protected toQueryString(rawQuery?: QueryParamsType): string {
-    const query = rawQuery || {};
-    const keys = Object.keys(query).filter(
-      (key) => 'undefined' !== typeof query[key],
-    );
-    return keys
-      .map((key) =>
-        Array.isArray(query[key])
-          ? this.addArrayQueryParam(query, key)
-          : this.addQueryParam(query, key),
-      )
-      .join('&');
-  }
-
-  protected addQueryParams(rawQuery?: QueryParamsType): string {
-    const queryString = this.toQueryString(rawQuery);
-    return queryString ? `?${queryString}` : '';
-  }
-
-  private contentFormatters: Record<ContentType, (input: any) => any> = {
-    [ContentType.Json]: (input: any) =>
-      input !== null && (typeof input === 'object' || typeof input === 'string')
-        ? JSON.stringify(input)
-        : input,
-    [ContentType.JsonApi]: (input: any) =>
-      input !== null && (typeof input === 'object' || typeof input === 'string')
-        ? JSON.stringify(input)
-        : input,
-    [ContentType.Text]: (input: any) =>
-      input !== null && typeof input !== 'string'
-        ? JSON.stringify(input)
-        : input,
-    [ContentType.FormData]: (input: any) => {
-      if (input instanceof FormData) {
-        return input;
-      }
-
-      return Object.keys(input || {}).reduce((formData, key) => {
-        const property = input[key];
-        formData.append(
-          key,
-          property instanceof Blob
-            ? property
-            : typeof property === 'object' && property !== null
-              ? JSON.stringify(property)
-              : `${property}`,
-        );
-        return formData;
-      }, new FormData());
-    },
-    [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
-  };
-
-  protected mergeRequestParams(
-    params1: RequestParams,
-    params2?: RequestParams,
-  ): RequestParams {
-    return {
-      ...this.baseApiParams,
-      ...params1,
-      ...(params2 || {}),
-      headers: {
-        ...(this.baseApiParams.headers || {}),
-        ...(params1.headers || {}),
-        ...((params2 && params2.headers) || {}),
-      },
-    };
-  }
-
-  protected createAbortSignal = (
-    cancelToken: CancelToken,
-  ): AbortSignal | undefined => {
-    if (this.abortControllers.has(cancelToken)) {
-      const abortController = this.abortControllers.get(cancelToken);
-      if (abortController) {
-        return abortController.signal;
-      }
-      return void 0;
-    }
-
-    const abortController = new AbortController();
-    this.abortControllers.set(cancelToken, abortController);
-    return abortController.signal;
-  };
-
-  public abortRequest = (cancelToken: CancelToken) => {
-    const abortController = this.abortControllers.get(cancelToken);
-
-    if (abortController) {
-      abortController.abort();
-      this.abortControllers.delete(cancelToken);
-    }
-  };
-
-  public request = async <T = any, E = any>({
-    body,
-    secure,
-    path,
-    type,
-    query,
-    format,
-    baseUrl,
-    cancelToken,
-    ...params
-  }: FullRequestParams): Promise<HttpResponse<T, E>> => {
-    const secureParams =
-      ((typeof secure === 'boolean' ? secure : this.baseApiParams.secure) &&
-        this.securityWorker &&
-        (await this.securityWorker(this.securityData))) ||
-      {};
-    const requestParams = this.mergeRequestParams(params, secureParams);
-    const queryString = query && this.toQueryString(query);
-    const payloadFormatter = this.contentFormatters[type || ContentType.Json];
-    const responseFormat = format || requestParams.format;
-
-    return this.customFetch(
-      `${baseUrl || this.baseUrl || ''}${path}${queryString ? `?${queryString}` : ''}`,
-      {
-        ...requestParams,
-        headers: {
-          ...(requestParams.headers || {}),
-          ...(type && type !== ContentType.FormData
-            ? { 'Content-Type': type }
-            : {}),
-        },
-        signal:
-          (cancelToken
-            ? this.createAbortSignal(cancelToken)
-            : requestParams.signal) || null,
-        body:
-          typeof body === 'undefined' || body === null
-            ? null
-            : payloadFormatter(body),
-      },
-    ).then(async (response) => {
-      const r = response as HttpResponse<T, E>;
-      r.data = null as unknown as T;
-      r.error = null as unknown as E;
-
-      const responseToParse = responseFormat ? response.clone() : response;
-      const data = !responseFormat
-        ? r
-        : await responseToParse[responseFormat]()
-            .then((data) => {
-              if (r.ok) {
-                r.data = data;
-              } else {
-                r.error = data;
-              }
-              return r;
-            })
-            .catch((e) => {
-              r.error = e;
-              return r;
-            });
-
-      if (cancelToken) {
-        this.abortControllers.delete(cancelToken);
-      }
-
-      if (!response.ok) throw data;
-      return data;
-    });
-  };
-}
-
-/**
- * @title Track My Money API
- * @version 1.0
- * @contact
- *
- * API documentation for Track My Money application
- */
-export class Api<SecurityDataType extends unknown> {
-  http: HttpClient<SecurityDataType>;
-
-  constructor(http: HttpClient<SecurityDataType>) {
-    this.http = http;
-  }
-
-  /**
-   * No description
-   *
-   * @tags app
-   * @name AppControllerGetHello
-   * @summary Health check endpoint
-   * @request GET:/
-   * @response `200` `void` API is running
-   */
-  appControllerGetHello = (params: RequestParams = {}) =>
-    this.http.request<void, any>({
-      path: `/`,
-      method: 'GET',
-      ...params,
-    });
-
-  auth = {
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerSignup
-     * @summary Register a new user
-     * @request POST:/auth/signup
-     * @response `201` `AuthResponseDto` User successfully registered
-     * @response `409` `void` User with this email already exists
-     */
-    authControllerSignup: (data: SignupDto, params: RequestParams = {}) =>
-      this.http.request<AuthResponseDto, void>({
-        path: `/auth/signup`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerLogin
-     * @summary Login user
-     * @request POST:/auth/login
-     * @response `200` `AuthResponseDto` User successfully logged in
-     * @response `401` `void` Invalid credentials
-     */
-    authControllerLogin: (data: LoginDto, params: RequestParams = {}) =>
-      this.http.request<AuthResponseDto, void>({
-        path: `/auth/login`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerRefresh
-     * @summary Refresh access token
-     * @request POST:/auth/refresh
-     * @response `200` `AuthResponseDto` Token successfully refreshed
-     * @response `400` `void` Refresh token not provided
-     * @response `401` `void` Invalid refresh token
-     */
-    authControllerRefresh: (params: RequestParams = {}) =>
-      this.http.request<AuthResponseDto, void>({
-        path: `/auth/refresh`,
-        method: 'POST',
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerLogout
-     * @summary Logout user
-     * @request POST:/auth/logout
-     * @secure
-     * @response `200` `void` User successfully logged out
-     */
-    authControllerLogout: (params: RequestParams = {}) =>
-      this.http.request<void, any>({
-        path: `/auth/logout`,
-        method: 'POST',
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerLogoutAll
-     * @summary Logout user from all devices
-     * @request POST:/auth/logout-all
-     * @secure
-     * @response `200` `void` User successfully logged out from all devices
-     */
-    authControllerLogoutAll: (params: RequestParams = {}) =>
-      this.http.request<void, any>({
-        path: `/auth/logout-all`,
-        method: 'POST',
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerGetProfile
-     * @summary Get current user profile
-     * @request GET:/auth/profile
-     * @secure
-     * @response `200` `UserEntity` User profile
-     */
-    authControllerGetProfile: (params: RequestParams = {}) =>
-      this.http.request<UserEntity, any>({
-        path: `/auth/profile`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerVerifyEmail
-     * @summary Verify user email
-     * @request GET:/auth/verify-email/{activationLinkId}
-     * @response `200` `void` Email successfully verified
-     * @response `400` `void` Invalid or expired activation link
-     */
-    authControllerVerifyEmail: (
-      { activationLinkId, ...query }: AuthControllerVerifyEmailParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<void, void>({
-        path: `/auth/verify-email/${activationLinkId}`,
-        method: 'GET',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags auth
-     * @name AuthControllerResendActivation
-     * @summary Resend activation email
-     * @request POST:/auth/resend-activation
-     * @secure
-     * @response `200` `void` Activation link sent successfully
-     * @response `400` `void` Email is already verified
-     */
-    authControllerResendActivation: (params: RequestParams = {}) =>
-      this.http.request<void, void>({
-        path: `/auth/resend-activation`,
-        method: 'POST',
-        secure: true,
-        ...params,
-      }),
-  };
-  categories = {
-    /**
-     * No description
-     *
-     * @tags categories
-     * @name CategoriesControllerGetCategories
-     * @summary Get all categories
-     * @request GET:/categories
-     * @secure
-     * @response `200` `(CategoryResponseDto)[]` List of categories
-     */
-    categoriesControllerGetCategories: (
-      query: CategoriesControllerGetCategoriesParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<CategoryResponseDto[], any>({
-        path: `/categories`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags categories
-     * @name CategoriesControllerCreateCategory
-     * @summary Create a new category
-     * @request POST:/categories
-     * @secure
-     * @response `201` `CategoryResponseDto` Category successfully created
-     * @response `409` `void` Category with this name already exists
-     */
-    categoriesControllerCreateCategory: (
-      data: CreateCategoryDto,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<CategoryResponseDto, void>({
-        path: `/categories`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags categories
-     * @name CategoriesControllerGetCategoryById
-     * @summary Get category by ID
-     * @request GET:/categories/{id}
-     * @secure
-     * @response `200` `CategoryResponseDto` Category details
-     * @response `404` `void` Category not found
-     */
-    categoriesControllerGetCategoryById: (
-      { id, ...query }: CategoriesControllerGetCategoryByIdParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<CategoryResponseDto, void>({
-        path: `/categories/${id}`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags categories
-     * @name CategoriesControllerUpdateCategory
-     * @summary Update category
-     * @request PATCH:/categories/{id}
-     * @secure
-     * @response `200` `CategoryResponseDto` Category successfully updated
-     * @response `400` `void` Invalid update request
-     * @response `404` `void` Category not found
-     */
-    categoriesControllerUpdateCategory: (
-      { id, ...query }: CategoriesControllerUpdateCategoryParams,
-      data: UpdateCategoryDto,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<CategoryResponseDto, void>({
-        path: `/categories/${id}`,
-        method: 'PATCH',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags categories
-     * @name CategoriesControllerDeleteCategory
-     * @summary Delete category
-     * @request DELETE:/categories/{id}
-     * @secure
-     * @response `204` `void` Category successfully deleted
-     * @response `400` `void` Cannot delete category with associated transactions
-     * @response `404` `void` Category not found
-     */
-    categoriesControllerDeleteCategory: (
-      { id, ...query }: CategoriesControllerDeleteCategoryParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<void, void>({
-        path: `/categories/${id}`,
-        method: 'DELETE',
-        secure: true,
-        ...params,
-      }),
-  };
-  transactions = {
-    /**
-     * No description
-     *
-     * @tags transactions
-     * @name TransactionsControllerGetTransactions
-     * @summary Get all transactions
-     * @request GET:/transactions
-     * @secure
-     * @response `200` `TransactionListResponseDto` List of transactions
-     */
-    transactionsControllerGetTransactions: (
-      query: TransactionsControllerGetTransactionsParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<TransactionListResponseDto, any>({
-        path: `/transactions`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags transactions
-     * @name TransactionsControllerCreateTransaction
-     * @summary Create a new transaction
-     * @request POST:/transactions
-     * @secure
-     * @response `201` `TransactionResponseDto` Transaction successfully created
-     * @response `400` `void` Invalid transaction data
-     */
-    transactionsControllerCreateTransaction: (
-      data: CreateTransactionDto,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<TransactionResponseDto, void>({
-        path: `/transactions`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags transactions
-     * @name TransactionsControllerGetBalance
-     * @summary Get balance summary
-     * @request GET:/transactions/balance
-     * @secure
-     * @response `200` `BalanceResponseDto` Balance summary
-     */
-    transactionsControllerGetBalance: (
-      query: TransactionsControllerGetBalanceParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<BalanceResponseDto, any>({
-        path: `/transactions/balance`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags transactions
-     * @name TransactionsControllerGetTransactionById
-     * @summary Get transaction by ID
-     * @request GET:/transactions/{id}
-     * @secure
-     * @response `200` `TransactionResponseDto` Transaction details
-     * @response `404` `void` Transaction not found
-     */
-    transactionsControllerGetTransactionById: (
-      { id, ...query }: TransactionsControllerGetTransactionByIdParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<TransactionResponseDto, void>({
-        path: `/transactions/${id}`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags transactions
-     * @name TransactionsControllerUpdateTransaction
-     * @summary Update transaction
-     * @request PATCH:/transactions/{id}
-     * @secure
-     * @response `200` `TransactionResponseDto` Transaction successfully updated
-     * @response `400` `void` Invalid update request
-     * @response `404` `void` Transaction not found
-     */
-    transactionsControllerUpdateTransaction: (
-      { id, ...query }: TransactionsControllerUpdateTransactionParams,
-      data: UpdateTransactionDto,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<TransactionResponseDto, void>({
-        path: `/transactions/${id}`,
-        method: 'PATCH',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags transactions
-     * @name TransactionsControllerDeleteTransaction
-     * @summary Delete transaction
-     * @request DELETE:/transactions/{id}
-     * @secure
-     * @response `204` `void` Transaction successfully deleted
-     * @response `404` `void` Transaction not found
-     */
-    transactionsControllerDeleteTransaction: (
-      { id, ...query }: TransactionsControllerDeleteTransactionParams,
-      params: RequestParams = {},
-    ) =>
-      this.http.request<void, void>({
-        path: `/transactions/${id}`,
-        method: 'DELETE',
-        secure: true,
-        ...params,
-      }),
-  };
 }
