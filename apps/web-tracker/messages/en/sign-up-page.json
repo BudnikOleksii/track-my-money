@@ -10,7 +10,6 @@
     "namePlaceholder": "Enter your name",
     "signUpButton": "Sign Up",
     "haveAccount": "Already have an account?",
-    "signInLink": "Sign in",
-    "nameMinLength": "Name should be at least 4 characters"
+    "signInLink": "Sign in"
   }
 }

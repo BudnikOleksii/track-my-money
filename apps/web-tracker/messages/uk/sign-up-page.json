@@ -10,7 +10,6 @@
     "namePlaceholder": "Введіть ваше ім'я",
     "signUpButton": "Зареєструватися",
     "haveAccount": "Вже є обліковий запис?",
-    "signInLink": "Увійти",
-    "nameMinLength": "Ім'я повинно мати не менше 4 символів"
+    "signInLink": "Увійти"
   }
 }
