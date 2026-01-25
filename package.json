@@ -19,8 +19,7 @@
     "stylelint:fix": "turbo run stylelint:fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "commitlint": "commitlint --edit",
-    "prepare": "husky",
-    "generate:api": "pnpm --filter api generate:openapi && pnpm --filter web-tracker generate:api-types"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "20.1.0",

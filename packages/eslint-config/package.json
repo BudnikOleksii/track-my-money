@@ -7,7 +7,6 @@
     "./base": "./base.js",
     "./library": "./library.js",
     "./next-js": "./next.js",
-    "./nest-js": "./nest.js",
     "./prettier-base": "./prettier-base.js",
     "./react-internal": "./react-internal.js"
   },
