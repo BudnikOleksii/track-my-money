@@ -16,8 +16,8 @@
     "@track-my-money/typescript-config": "workspace:*",
     "@track-my-money/stylelint-config": "workspace:*",
     "@types/node": "24.10.0",
-    "@types/react": "19.2.2",
-    "@types/react-dom": "19.1.1",
+    "@types/react": "19.2.9",
+    "@types/react-dom": "19.2.3",
     "eslint": "9.39.2",
     "typescript": "5.9.3",
     "stylelint": "16.25.0",
@@ -34,8 +34,8 @@
     "@radix-ui/react-tabs": "1.1.13",
     "@radix-ui/react-toast": "1.2.15",
     "clsx": "2.1.1",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "sass": "1.93.3"
   }
 }
