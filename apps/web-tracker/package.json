@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
-    "@reduxjs/toolkit": "2.10.1",
+    "@reduxjs/toolkit": "2.11.2",
     "@track-my-money/ui": "workspace:*",
     "async-mutex": "0.5.0",
     "deepmerge": "4.3.1",
