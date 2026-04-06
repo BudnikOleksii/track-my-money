@@ -19,7 +19,7 @@
     "@track-my-money/ui": "workspace:*",
     "async-mutex": "0.5.0",
     "deepmerge": "4.3.1",
-    "next": "16.0.10",
+    "next": "16.1.7",
     "next-intl": "4.5.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
