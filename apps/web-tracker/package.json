@@ -36,7 +36,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "9.39.2",
-    "eslint-config-next": "16.1.0",
+    "eslint-config-next": "16.2.3",
     "redux-persist-transform-encrypt": "5.1.1",
     "stylelint": "16.25.0",
     "swagger-typescript-api": "13.2.16",
